@@ -3,7 +3,7 @@ import { IoIosBriefcase } from "react-icons/io";
 import { LuUsers } from "react-icons/lu";
 import { LuNetwork } from "react-icons/lu";
 import { HiNewspaper } from "react-icons/hi2";
-import { IoIosSettings } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
 
 
 export const sidebarLinks = [
@@ -41,9 +41,9 @@ export const sidebarLinks = [
       title: "User",
       list: [
         {
-          title: "Settings",
-          path: "/settings",
-          icon: <IoIosSettings />,
+          title: "Profile",
+          path: "/profile",
+          icon: <FaUserCircle />,
         },
       ],
     },
