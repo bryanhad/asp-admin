@@ -6,7 +6,6 @@ export default function Loading({ className }: { className?: string }) {
             <div
                 className={`dark:text-text-soft-dark rounded-full text-text-soft animate-spin ${className}`}
             >
-                <AiOutlineLoading3Quarters />
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import { fetchPositionsPageAmount } from "@/lib/data"
 import AddForm from "@/ui/form/AddForm"
+import AddPositionForm from "@/ui/form/AddPositionForm"
 import SearchBar from "@/ui/form/SearchBar"
 import PositionTableSkeleton from "@/ui/skeletons/PositionTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
@@ -23,7 +24,7 @@ export default async function PositionsPage({
 
     return (
         <>
-            <AddForm />
+            <AddPositionForm/>
             <SearchBar placeholder="Search..." />
             <Suspense
                 key={query + currentPage}

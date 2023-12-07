@@ -3,6 +3,7 @@ import Sidebar from "@/ui/sidebar/SideBar"
 import Header from "@/ui/header/Header"
 import Providers from "@/providers/Providers"
 import { HEADER_HEIGHT } from "@/constants"
+import ToastContainerListensTheme from "@/lib/ToastContainerWithTheme"
 
 export default function RootLayout({
     children,
@@ -26,6 +27,7 @@ export default function RootLayout({
                     </div>
                 </main>
             </div>
+            <ToastContainerListensTheme/>
         </Providers>
     )
 }
