@@ -22,7 +22,7 @@ export default function RootLayout({
             suppressHydrationWarning
         >
             <body
-                className={`${inter.className} dark:bg-bg-dark  dark:text-text-dark flex antialiased`}
+                className={`${inter.className} dark:bg-bg-dark  dark:text-text-dark antialiased`}
             >
                 {children}
             </body>

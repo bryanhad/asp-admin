@@ -1,26 +1,19 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import {
-    MdNotifications,
-    MdOutlineChat,
-    MdPublic,
-    MdSearch,
-} from "react-icons/md"
-
 import React from "react"
 import ThemeButton from "./ThemeButton"
 import BurgerButton from "./BurgerButton"
 import BurgerMenu from "./BurgerMenu"
 import MiniUser from "./MiniUser"
+import { HEADER_HEIGHT } from "@/constants"
 
 export default function Header() {
-    const NAV_HEIGHT = 94
     const pathname = usePathname()
     return (
         <>
             <div
-                style={{ height: `${NAV_HEIGHT}px` }}
+                style={{ height: `${HEADER_HEIGHT}px` }}
                 className="dark:bg-bg-soft-dark bg-bg-soft dark:border-b-active-dark border-b-active flex w-full items-center justify-between p-5 max-lg:fixed max-lg:z-30 max-lg:border-b"
             >
                 <div className="dark:text-text-soft-dark text-text-soft font-bold capitalize">
@@ -35,14 +28,14 @@ export default function Header() {
                     />
                 </div> */}
                 <div className="flex gap-5">
-                    <div className="hidden lg:flex gap-5">
+                    <div className="hidden gap-5 lg:flex">
                         <ThemeButton />
-                        <MiniUser/>
+                        <MiniUser />
                     </div>
                     <BurgerButton />
                 </div>
             </div>
-            <BurgerMenu navHeight={NAV_HEIGHT} />
+            <BurgerMenu navHeight={HEADER_HEIGHT} />
         </>
     )
 }
