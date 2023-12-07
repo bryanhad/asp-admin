@@ -11,7 +11,7 @@ export default function ThemeButton() {
     // if u try to render the this button based on the current theme, (resolvedTheme)
     // well, you will get a hydration mismatch error!
 
-    // To fix this, we must make sure to only render this button after the page is mounted on the client. 
+    // To fix this, we must make sure to only render this button after the page is mounted on the client.
     const [mounted, setMounted] = useState(false)
     useEffect(() => setMounted(true), [])
 

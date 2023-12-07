@@ -23,10 +23,10 @@ export default function RootLayout({
                 className={`${inter.className} dark:bg-bg-dark  dark:text-text-dark flex antialiased`}
             >
                 <Providers>
-                    <div className="dark:bg-bg-soft-dark bg-bg-soft flex-[1] p-5">
+                    <div className="dark:bg-bg-soft-dark bg-bg-soft flex-[1] p-5 hidden lg:block">
                         <Sidebar />
                     </div>
-                    <div className="flex-[4] p-5">
+                    <div className="flex-[4] lg:p-5">
                         <Header />
                         {children}
                     </div>

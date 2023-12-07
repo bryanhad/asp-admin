@@ -35,6 +35,7 @@ export default function Sidebar() {
                     </li>
                 ))}
             </ul>
+            {/* LOGOUT */}
             <form
                 action={async () => {
                     "use server"
