@@ -4,7 +4,7 @@ import TextSkeleton from "./TextSkeleton"
 
 export default function PositionTableSkeleton() {
     const numOfCols = Array.from(Array(2).keys())
-    const numOfDesktopRows = Array.from(Array(10).keys())
+    const numOfDesktopRows = Array.from(Array(6).keys())
     const numOfMobileRows = Array.from(Array(6).keys())
 
     return (

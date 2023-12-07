@@ -29,11 +29,12 @@ export default async function PositionsPage({
                 key={query + currentPage}
                 fallback={<PositionTableSkeleton />}
             >
-                <PositionTable query={query} currentPage={currentPage} />
+                <PositionTable
+                    query={query}
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                />
             </Suspense>
-            <div className="flex justify-center">
-                <Pagination totalPages={totalPages} />
-            </div>
         </>
     )
 }

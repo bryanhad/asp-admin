@@ -19,7 +19,7 @@ export async function fetchPositions() {
     }
 }
 
-const ITEMS_PER_PAGE = 5
+const ITEMS_PER_PAGE = 6
 export async function fetchFilteredPositions(
     query: string,
     currentPage: number,
