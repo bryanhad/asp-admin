@@ -15,7 +15,7 @@ type SideBarLinkProps = {
 export default function SideBarLink({ link }: SideBarLinkProps) {
     const pathname = usePathname()
 
-    const className = clsx("p-4 lg:p-5 flex text-sm lg:text-base items-center gap-3 my-[10px] rounded-md dark:hover:bg-active-dark hover:bg-active", {
+    const className = clsx("p-4 lg:p-5 flex text-sm lg:text-base items-center gap-3 mb-[3px] lg:my-[10px] rounded-md dark:hover:bg-active-dark hover:bg-active", {
         "dark:bg-active-dark bg-active": pathname === link.path,
     })
 

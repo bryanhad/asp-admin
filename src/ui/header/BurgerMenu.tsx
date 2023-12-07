@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { sidebarLinks } from "../sidebar/sidebarLinks"
 import SideBarLink from "../sidebar/SideBarLink"
 import ThemeButton from "./ThemeButton"
+import MiniUser from "./MiniUser"
 
 export default function BurgerMenu({ navHeight }: { navHeight: number }) {
     const { isNavOpen, setIsNavOpen } = useNavbarContext()
@@ -27,13 +28,16 @@ export default function BurgerMenu({ navHeight }: { navHeight: number }) {
                     isNavOpen ? "right-[0%]" : "-right-[100%]"
                 }`}
             >
+                <div className="flex justify-end p-6">
+                    <MiniUser />
+                </div>
                 {/* MENU */}
-                <ul className="p-8">
+                <ul className="px-6 md:px-8">
                     {sidebarLinks.map((item) => (
                         <li key={item.title}>
-                            <span className="dark:text-text-soft-dark text-text-soft my-3 text-[13px] font-bold">
+                            <p className="dark:text-text-soft-dark text-text-soft my-2 max-lg:mb-2 text-[13px] font-bold">
                                 {item.title}
-                            </span>
+                            </p>
                             {item.list.map((link) => (
                                 <SideBarLink link={link} key={link.title} />
                             ))}

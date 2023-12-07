@@ -12,6 +12,7 @@ import React from "react"
 import ThemeButton from "./ThemeButton"
 import BurgerButton from "./BurgerButton"
 import BurgerMenu from "./BurgerMenu"
+import MiniUser from "./MiniUser"
 
 export default function Header() {
     const NAV_HEIGHT = 94
@@ -34,8 +35,9 @@ export default function Header() {
                     />
                 </div> */}
                 <div className="flex gap-5">
-                    <div className="hidden lg:block">
+                    <div className="hidden lg:flex gap-5">
                         <ThemeButton />
+                        <MiniUser/>
                     </div>
                     <BurgerButton />
                 </div>

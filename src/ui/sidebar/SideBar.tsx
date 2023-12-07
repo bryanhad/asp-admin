@@ -2,25 +2,14 @@ import Image from "next/image"
 import { sidebarLinks } from "./sidebarLinks"
 import SideBarLink from "./SideBarLink"
 import { MdLogout } from "react-icons/md"
+import Logo from "../Logo"
 
 export default function Sidebar() {
-    const user = { img: "", username: "Brock" }
-
     return (
         <nav className="sticky top-[40px]">
-            {/* USER */}
-            <div className="mb-10 flex items-center gap-5">
-                <Image
-                    className="rounded-full object-cover"
-                    src={"/noavatar.png"}
-                    alt=""
-                    width="50"
-                    height="50"
-                />
-                <div className="flex flex-col">
-                    <span className="font-bold">{user.username}</span>
-                    <span className="text-textSoft text-sm">Administrator</span>
-                </div>
+            {/* LOGO */}
+            <div className="mb-10">
+                <Logo />
             </div>
             {/* Menu */}
             <ul>
