@@ -4,6 +4,7 @@ import { Position } from "@prisma/client"
 import Input from "@/ui/form/Input"
 import { ButtonIcon } from "@/ui/form/ButtonIcon"
 import TableButton from "../TableButton"
+import DeleteConfirmation from "../DeleteConfirmation"
 
 export type FetchedPositionType = {
     _count: {
@@ -21,9 +22,33 @@ export default function PositionTableRow({
 
     // const updatePositionWithId = editPosition.bind(null, position.id)
 
-    const isEditingRow = (
+    return (
+        <>
+            {isEditing ? (
+                <IsEditingPosition
+                    position={position}
+                    setIsEditing={setIsEditing}
+                />
+            ) : (
+                <IsNotEditingPosition
+                    position={position}
+                    setIsEditing={setIsEditing}
+                />
+            )}
+        </>
+    )
+}
+
+function IsEditingPosition({
+    position,
+    setIsEditing,
+}: {
+    position: Position
+    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
+}) {
+    return (
         <td colSpan={3}>
-            <form className="flex items-center gap-3 p-1">
+            <form className="flex items-center gap-3 p-2">
                 <Input
                     isForTable
                     id="position"
@@ -45,26 +70,45 @@ export default function PositionTableRow({
                     Save
                 </TableButton>
             </form>
-            {error && <p className="text-error p-2">{error}</p>}
         </td>
     )
+}
 
-    const isNotEditingRow = (
+function IsNotEditingPosition({
+    position,
+    setIsEditing,
+}: {
+    position: FetchedPositionType
+    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
+}) {
+    const [showConfirmDelete, setShowConfirmDelete] = useState(false)
+
+    return (
         <>
-            <td className="p-2">{position.name}</td>
-            <td className="p-2">{position._count.members}</td>
-            <td className="p-2">
-                <div className="flex justify-end gap-3">
-                    <TableButton
-                        onClick={() => setIsEditing((prev) => !prev)}
-                        buttonType="edit"
-                    >
-                        Edit
-                    </TableButton>
-                    <TableButton buttonType="delete">Delete</TableButton>
-                </div>
+            <td className="p-3">{position.name}</td>
+            <td className="p-3">{position._count.members}</td>
+            <td className="p-3">
+                {showConfirmDelete ? (
+                    <DeleteConfirmation
+                        setShowDeleteConfirmation={setShowConfirmDelete}
+                    />
+                ) : (
+                    <div className="flex justify-end gap-3">
+                        <TableButton
+                            onClick={() => setIsEditing((prev) => !prev)}
+                            buttonType="edit"
+                        >
+                            Edit
+                        </TableButton>
+                        <TableButton
+                            onClick={() => setShowConfirmDelete(true)}
+                            buttonType="delete"
+                        >
+                            Delete
+                        </TableButton>
+                    </div>
+                )}
             </td>
         </>
     )
-    return <>{isEditing ? isEditingRow : isNotEditingRow}</>
 }

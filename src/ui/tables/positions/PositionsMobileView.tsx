@@ -5,6 +5,7 @@ import TableButton from "../TableButton"
 import { FetchedPositionType } from "./PositionTableRow"
 import { useState } from "react"
 import Input from "@/ui/form/Input"
+import DeleteConfirmation from "../DeleteConfirmation"
 
 type PositionsTableMobileProps = {
     position: FetchedPositionType
@@ -19,7 +20,7 @@ export default function PositionsMobileView({
         <>
             <div
                 key={position.id}
-                className="flex flex-col gap-4 rounded-lg dark:bg-slate-700 bg-bg-soft  p-4"
+                className="flex flex-col gap-4 rounded-lg bg-bg-soft p-4  dark:bg-slate-700"
             >
                 {isEditing ? (
                     <IsEditingPosition
@@ -82,21 +83,31 @@ function IsNotEditingPosition({
     position: FetchedPositionType
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+    const [showConfirmDelete, setShowConfirmDelete] = useState(false)
     return (
         <>
             <div className="flex justify-between">
                 <p>{position.name}</p>
                 <p>{position._count.members}</p>
             </div>
-            <div className="flex gap-4">
-                <TableButton
-                    onClick={() => setIsEditing((prev) => !prev)}
-                    buttonType="edit"
-                >
-                    Edit
-                </TableButton>
-                <TableButton buttonType="delete">Delete</TableButton>
-            </div>
+            {showConfirmDelete ? (
+                <DeleteConfirmation setShowDeleteConfirmation={setShowConfirmDelete} />
+            ) : (
+                <div className="flex gap-4">
+                    <TableButton
+                        onClick={() => setIsEditing((prev) => !prev)}
+                        buttonType="edit"
+                    >
+                        Edit
+                    </TableButton>
+                    <TableButton
+                        onClick={() => setShowConfirmDelete(true)}
+                        buttonType="delete"
+                    >
+                        Delete
+                    </TableButton>
+                </div>
+            )}
         </>
     )
 }

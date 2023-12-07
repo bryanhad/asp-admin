@@ -12,6 +12,7 @@ const config: Config = {
         extend: {
             colors: {
                 "label-color": "#64748b",
+                error: "#ef4444",
 
                 "success-dark": "#16a34a",
                 "edit-dark": "#0f766e",
