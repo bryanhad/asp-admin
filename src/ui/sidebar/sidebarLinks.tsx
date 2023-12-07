@@ -12,7 +12,7 @@ export const sidebarLinks = [
       list: [
         {
           title: "Dashboard",
-          path: "/dashboard",
+          path: "/",
           icon: <MdSpaceDashboard />,
         },
         {

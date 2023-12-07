@@ -26,7 +26,7 @@ export default function Sidebar() {
             <ul>
                 {sidebarLinks.map((item) => (
                     <li key={item.title}>
-                        <span className="text-textSoft my-3 text-[13px] font-bold">
+                        <span className="dark:text-text-soft-dark text-text-soft my-3 text-[13px] font-bold">
                             {item.title}
                         </span>
                         {item.list.map((link) => (
@@ -41,7 +41,7 @@ export default function Sidebar() {
                     //   await signOut();
                 }}
             >
-                <button className="dark:hover:bg-active my-1 flex w-full items-center gap-3 rounded-lg p-5 dark:text-white ">
+                <button className="dark:hover:bg-active-dark  my-1 flex w-full items-center gap-3 rounded-lg p-5">
                     <MdLogout />
                     Logout
                 </button>

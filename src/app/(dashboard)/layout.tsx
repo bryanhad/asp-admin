@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import "@/ui/globals.css"
 import Sidebar from "@/ui/sidebar/SideBar"
 import Header from "@/ui/header/Header"
+import Providers from "@/providers/Providers"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -17,15 +18,19 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
-            <body className={`${inter.className} antialiased flex dark:bg-bg-dark dark:text-text-dark`}>
-                <div className="dark:bg-bg-soft-dark flex-[1] p-5">
-                    <Sidebar />
-                </div>
-                <div className="flex-[4] p-5">
-                    <Header />
-                    {children}
-                </div>
+        <html lang="en" className="light" style={{ colorScheme: "light" }}>
+            <body
+                className={`${inter.className} dark:bg-bg-dark  dark:text-text-dark flex antialiased`}
+            >
+                <Providers>
+                    <div className="dark:bg-bg-soft-dark bg-bg-soft flex-[1] p-5">
+                        <Sidebar />
+                    </div>
+                    <div className="flex-[4] p-5">
+                        <Header />
+                        {children}
+                    </div>
+                </Providers>
             </body>
         </html>
     )

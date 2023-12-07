@@ -9,27 +9,26 @@ import {
 } from "react-icons/md"
 
 import React from "react"
+import ThemeButton from "./ThemeButton"
 
 export default function Header() {
     const pathname = usePathname()
     return (
-        <div className="bg-bgSoft flex items-center justify-between p-5">
-            <div className="dark:text-text-soft-dark font-bold capitalize">
+        <div className="dark:bg-bg-soft-dark bg-bg-soft flex items-center justify-between p-5">
+            <div className="dark:text-text-soft-dark text-text-soft font-bold capitalize">
                 {pathname.split("/").pop() || "Dashboard"}
             </div>
             <div className="flex items-center gap-3">
-                <div className="dark:bg-active-dark flex items-center gap-3 rounded-lg p-3">
+                <div className="dark:bg-active-dark bg-white flex items-center gap-3 rounded-lg p-3">
                     <MdSearch />
                     <input
                         type="text"
                         placeholder="Search..."
-                        className="dark:text-text-dark bg-transparent"
+                        className="dark:text-text-dark text-text-soft bg-transparent"
                     />
                 </div>
                 <div className="flex gap-5">
-                    <MdOutlineChat size={20} />
-                    <MdNotifications size={20} />
-                    <MdPublic size={20} />
+                    <ThemeButton/>
                 </div>
             </div>
         </div>
