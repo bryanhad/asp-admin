@@ -51,24 +51,24 @@ export async function fetchFilteredPositions(
     }
 }
 
-// export async function fetchMembersPage(query: string) {
-//     noStore()
-//     try {
-//         const { _all } = await prisma.member.count({
-//             where: {
-//                 name: {
-//                     contains: query,
-//                     mode: "insensitive",
-//                 },
-//             },
-//             select: {
-//                 _all: true,
-//             },
-//         })
-//         const totalPages = Math.ceil(Number(_all) / ITEMS_PER_PAGE)
-//         return totalPages
-//     } catch (error) {
-//         console.error("Database Error:", error)
-//         throw new Error("Failed to fetch total number of Members.")
-//     }
-// }
+export async function fetchPositionsPageAmount(query: string) {
+    noStore()
+    try {
+        const { _all } = await prisma.position.count({
+            where: {
+                name: {
+                    contains: query,
+                    mode: "insensitive",
+                },
+            },
+            select: {
+                _all: true,
+            },
+        })
+        const totalPages = Math.ceil(Number(_all) / ITEMS_PER_PAGE)
+        return totalPages
+    } catch (error) {
+        console.error("Database Error:", error)
+        throw new Error("Failed to fetch total number of Members.")
+    }
+}
