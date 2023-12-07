@@ -3,6 +3,7 @@ import { TbSunHigh } from "react-icons/tb"
 import { BiSolidMoon } from "react-icons/bi"
 import { useState, useEffect } from "react"
 import { useTheme } from "next-themes"
+import ThemeButtonSkeleton from "../skeletons/ThemeButtonSkeleton"
 
 export default function ThemeButton() {
     const { resolvedTheme, setTheme } = useTheme()
@@ -19,8 +20,8 @@ export default function ThemeButton() {
         setTheme(resolvedTheme === "dark" ? "light" : "dark")
     }
 
-    // dont show anything if the button is not mounted
-    if (!mounted) return null
+    // show skeleton if the button is not mounted
+    if (!mounted) return <ThemeButtonSkeleton />
 
     return (
         <button
