@@ -11,6 +11,8 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
+                "label-color": "#64748b",
+
                 "success-dark": "#16a34a",
 
                 "bg-dark": "#151c2c",

@@ -1,7 +1,12 @@
-import AddForm from "@/ui/form/AddForm";
+import { fetchPositions } from "@/lib/data"
+import AddForm from "@/ui/form/AddForm"
+import PositionTable from "@/ui/tables/PositionTable"
 
-export default function PositionsPage() {
-    return <>
-      <AddForm />
-    </>
+export default async function PositionsPage() {
+    return (
+        <>
+            <AddForm />
+            <PositionTable />
+        </>
+    )
 }
