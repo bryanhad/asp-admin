@@ -18,9 +18,8 @@ export default function RootLayout({
                 <main className="flex flex-[4] flex-col gap-5 lg:p-5">
                     <Header />
                     <div style={{marginTop: `${HEADER_HEIGHT}px`}} className="lg:hidden"/>
-                    <div className="max-lg:px-5">
+                    <div className="max-lg:px-5 flex flex-col gap-5">
                         {children}
-
                     </div>
                 </main>
             </div>

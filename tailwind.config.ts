@@ -11,7 +11,13 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
+                "label-color": "#64748b",
+                error: "#ef4444",
+
                 "success-dark": "#16a34a",
+                "edit-dark": "#0f766e",
+                "delete-dark": "#991b1b",
+                "cancel-dark": "#6b7280",
 
                 "bg-dark": "#151c2c",
                 "bg-soft-dark": "#182237",
@@ -21,6 +27,9 @@ const config: Config = {
                 "focus-dark": "#94a3b8",
 
                 success: "#22c55e",
+                edit: "#06b6d4",
+                delete: "#dc2626",
+                cancel: "#e5e7eb",
 
                 bg: "white",
                 "bg-soft": "#f9fafb",
