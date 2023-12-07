@@ -2,7 +2,6 @@
 import { useState } from "react"
 import { Position } from "@prisma/client"
 import Input from "@/ui/form/Input"
-import { ButtonIcon } from "@/ui/form/ButtonIcon"
 import TableButton from "../TableButton"
 import DeleteConfirmation from "../DeleteConfirmation"
 

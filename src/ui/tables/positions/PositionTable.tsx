@@ -6,7 +6,7 @@ export default async function PositionTable() {
     const positions = await fetchPositions()
 
     return (
-        <div className="overflow-auto p-5 dark:bg-bg-soft-dark">
+        <div className="overflow-auto p-5 dark:bg-bg-soft-dark md:bg-bg-soft">
             {/* DESKTOP */}
             <table className="hidden w-full md:table">
                 <thead>
