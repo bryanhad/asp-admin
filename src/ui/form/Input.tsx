@@ -1,6 +1,8 @@
+import clsx from "clsx"
 import Label from "./Label"
 
 type InputType = {
+    isForTable?: boolean
     name: string
     id: string
     label?: string
@@ -9,6 +11,7 @@ type InputType = {
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 export default function Input({
+    isForTable,
     label,
     name,
     id,
@@ -16,11 +19,19 @@ export default function Input({
     extra,
     ...props
 }: InputType) {
+    const customClassName = clsx(
+        "rounded-lg border bg-bg-soft focus:border-2 focus:border-focus dark:border-active-dark dark:bg-bg-soft-dark focus:dark:border-focus-dark",
+        {
+            "p-2": isForTable === true,
+            "p-4": isForTable === undefined,
+        },
+    )
+
     if (!label)
         return (
             <input
                 size={1}
-                className={`rounded-lg border bg-bg-soft focus:border-2 focus:border-focus dark:border-active-dark dark:bg-bg-soft-dark focus:dark:border-focus-dark ${className}`}
+                className={`${customClassName} ${className}`}
                 {...props}
                 name={name}
                 id={id}
@@ -37,7 +48,7 @@ export default function Input({
             </Label>
             <input
                 size={1}
-                className={`rounded-lg border bg-bg-soft focus:border-2 focus:border-focus dark:border-active-dark dark:bg-bg-soft-dark focus:dark:border-focus-dark ${className}`}
+                className={`${customClassName} ${className}`}
                 {...props}
                 name={name}
                 id={id}

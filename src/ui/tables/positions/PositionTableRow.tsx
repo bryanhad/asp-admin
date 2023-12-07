@@ -3,8 +3,9 @@ import { useState } from "react"
 import { Position } from "@prisma/client"
 import Input from "@/ui/form/Input"
 import { ButtonIcon } from "@/ui/form/ButtonIcon"
+import TableButton from "../TableButton"
 
-type PositionType = {
+export type FetchedPositionType = {
     _count: {
         members: number
     }
@@ -13,7 +14,7 @@ type PositionType = {
 export default function PositionTableRow({
     position,
 }: {
-    position: PositionType
+    position: FetchedPositionType
 }) {
     const [isEditing, setIsEditing] = useState(false)
     const [error, setError] = useState("")
@@ -24,17 +25,25 @@ export default function PositionTableRow({
         <td colSpan={3}>
             <form className="flex items-center gap-3 p-1">
                 <Input
+                    isForTable
                     id="position"
                     name="position"
                     className="flex-1"
                     defaultValue={position.name}
                 />
-                <ButtonIcon icon="confirm" type="submit" />
-                <ButtonIcon
+                <TableButton
                     onClick={() => setIsEditing(false)}
-                    icon="cancel"
-                    type="button"
-                />
+                    buttonType="cancel"
+                >
+                    Cancel
+                </TableButton>
+                <TableButton
+                    type="submit"
+                    onClick={() => setIsEditing((prev) => !prev)}
+                    buttonType="save"
+                >
+                    Save
+                </TableButton>
             </form>
             {error && <p className="text-error p-2">{error}</p>}
         </td>
@@ -42,15 +51,17 @@ export default function PositionTableRow({
 
     const isNotEditingRow = (
         <>
-            <td className="px-6 py-1">{position.name}</td>
-            <td className="px-6 py-1">{position._count.members}</td>
-            <td className="py-1 ">
+            <td className="p-2">{position.name}</td>
+            <td className="p-2">{position._count.members}</td>
+            <td className="p-2">
                 <div className="flex justify-end gap-3">
-                    <ButtonIcon
+                    <TableButton
                         onClick={() => setIsEditing((prev) => !prev)}
-                        icon="edit"
-                    />
-                    {/* <DeletePositionButton position={position} /> */}
+                        buttonType="edit"
+                    >
+                        Edit
+                    </TableButton>
+                    <TableButton buttonType="delete">Delete</TableButton>
                 </div>
             </td>
         </>
