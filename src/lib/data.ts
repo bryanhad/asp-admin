@@ -3,8 +3,6 @@ import { prisma } from "./db/prisma"
 
 export async function fetchPositions() {
     noStore()
-    console.log('Fethcing Positions')
-    await new Promise((res) => setTimeout(res, 3000))
 
     try {
         const positions = await prisma.position.findMany({
@@ -14,7 +12,6 @@ export async function fetchPositions() {
                 },
             },
         })
-        console.log('Positions Fetched after 3 seconds')
         return positions
     } catch (err) {
         console.error("Database Error:", err)
