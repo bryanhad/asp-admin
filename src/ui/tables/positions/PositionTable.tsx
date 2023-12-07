@@ -1,11 +1,16 @@
-import { fetchPositions } from "@/lib/data"
+import { fetchFilteredPositions, fetchPositions } from "@/lib/data"
 import PositionTableRow from "./PositionTableRow"
 import PositionsTableMobile from "./PositionsMobileView"
 import Table from "../Table"
 import TableRowWithBorderBottom from "../TableRowWithBorderBottom"
 
-export default async function PositionTable() {
-    const positions = await fetchPositions()
+type PositionTableProps = { query: string; currentPage: number }
+
+export default async function PositionTable({
+    query,
+    currentPage,
+}: PositionTableProps) {
+    const positions = await fetchFilteredPositions(query, currentPage)
 
     return (
         <Table

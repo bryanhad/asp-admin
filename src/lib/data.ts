@@ -19,36 +19,37 @@ export async function fetchPositions() {
     }
 }
 
-// const ITEMS_PER_PAGE = 5
-// export async function fetchFilteredPositions(
-//     query: string,
-//     currentPage: number,
-// ) {
-//     noStore()
+const ITEMS_PER_PAGE = 5
+export async function fetchFilteredPositions(
+    query: string,
+    currentPage: number,
+) {
+    noStore()
 
-//     const offset = (currentPage - 1) * ITEMS_PER_PAGE
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE
 
-//     try {
-//         const members = await prisma.member.findMany({
-//             skip: offset,
-//             take: ITEMS_PER_PAGE,
-//             where: {
-//                 name: {
-//                     contains: query,
-//                     mode: "insensitive",
-//                 },
-//             },
-//             include: {
-//                 position: { select: { name: true } },
-//                 isUser: { select: { role: true } },
-//             },
-//         })
-//         return members
-//     } catch (err) {
-//         console.error("Database Error:", err)
-//         throw new Error("Failed to fetch members")
-//     }
-// }
+    try {
+        const members = await prisma.position.findMany({
+            skip: offset,
+            take: ITEMS_PER_PAGE,
+            where: {
+                name: {
+                    contains: query,
+                    mode: "insensitive",
+                },
+            },
+            include: {
+                _count: {
+                    select: { members: true },
+                },
+            },
+        })
+        return members
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch members")
+    }
+}
 
 // export async function fetchMembersPage(query: string) {
 //     noStore()

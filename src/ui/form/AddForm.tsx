@@ -2,7 +2,7 @@ import { serverAction } from "../../../types"
 
 export default function AddForm({ serverAction }: serverAction) {
     return (
-        <div className="rounded-lg border focus-within:border-2 focus-within:border-focus dark:border-active-dark dark:bg-bg-soft-dark focus-within:dark:border-focus-dark">
+        <div className="rounded-lg border overflow-hidden focus-within:border-focus dark:border-active-dark dark:bg-bg-soft-dark focus-within:dark:border-focus-dark">
             <form action={serverAction} className="flex gap-1">
                 <input
                     size={1}
@@ -11,7 +11,7 @@ export default function AddForm({ serverAction }: serverAction) {
                 />
                 <button
                     type="submit"
-                    className="rounded-r-lg bg-success px-12 py-3 text-white dark:bg-success-dark"
+                    className="bg-success px-12 py-3 text-white dark:bg-success-dark"
                 >
                     ADD
                 </button>
