@@ -3,8 +3,10 @@ import PositionTableRow from "./PositionTableRow"
 import PositionsTableMobile from "./PositionsMobileView"
 import Table from "../Table"
 import TableRowWithBorderBottom from "../TableRowWithBorderBottom"
-import Pagination from "../Pagination"
 import SearchNotFound from "../SearchNotFound"
+import DeleteConfirmation from "../DeleteConfirmation"
+import { deletePosition } from "@/actions/positions.action"
+import PositionMobilleViewNEW from "./PositionMobilleViewNEW"
 
 type PositionTableProps = {
     query: string
@@ -26,9 +28,15 @@ export default async function PositionTable({
                 theads={["Name", "Member Count"]}
                 mobileView={
                     <>
-                        {positions.map((position) => (
-                            <PositionsTableMobile
+                        {/* {positions.map((position, i) => (
+                            <PositionMobilleViewNEW
                                 key={position.id}
+                                position={position}
+                            />
+                        ))} */}
+                        {positions.map((position, i) => (
+                            <PositionsTableMobile
+                                key={i}
                                 position={position}
                             />
                         ))}

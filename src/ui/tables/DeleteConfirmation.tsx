@@ -1,3 +1,5 @@
+'use client'
+
 import TableButton from "./TableButton"
 import ErrorText from "../form/ErrorText"
 import { useFormState } from "react-dom"
@@ -16,13 +18,16 @@ export default function DeleteConfirmation({
     setShowDeleteConfirmation,
 }: DeleteConfirmationProps) {
     const serverActionWithId = serverAction.bind(null, id)
-    const [state, dispatch] = useFormState(serverActionWithId, {
+    const [state, formAction] = useFormState(serverActionWithId, {
         success: false,
         message: "",
     })
-
+    console.log('object')
+    console.log(state)
     useEffect(() => {
+        console.log(state.success)
         if (state.success) {
+            console.log('deleted success')
             toast.success(state.message)
             setShowDeleteConfirmation(false)
         }
@@ -34,7 +39,7 @@ export default function DeleteConfirmation({
                 Are you sure?
             </p>
             <form
-                action={dispatch}
+                action={formAction}
                 className="flex flex-wrap gap-4 max-sm:flex-col sm:max-w-max sm:flex-row-reverse md:ml-auto"
             >
                 <TableButton
@@ -49,8 +54,8 @@ export default function DeleteConfirmation({
                 </TableButton>
                 <TableButton
                     className="max-sm:flex-[1]"
-                    buttonType="save"
                     type="submit"
+                    buttonType="save"
                 >
                     Yes
                 </TableButton>
