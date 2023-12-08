@@ -1,23 +1,23 @@
-import { fetchFilteredPositions } from "@/lib/data"
-import PositionTableRow from "./PositionTableRow"
-import PositionsMobile from "./PositionsMobile"
+import { fetchFilteredMembers } from "@/lib/data"
 import Table from "../Table"
 import TableRowWithBorderBottom from "../TableRowWithBorderBottom"
 import SearchNotFound from "../SearchNotFound"
+import MembersTableRow from "./MembersTableRow"
+import MembersMobile from "./MembersMobile"
 
-type PositionTableProps = {
+type MembersTableProps = {
     query: string
     currentPage: number
 }
 
-export default async function PositionTable({
+export default async function MembersTable({
     query,
     currentPage,
-}: PositionTableProps) {
-    const positions = await fetchFilteredPositions(query, currentPage)
+}: MembersTableProps) {
+    const members = await fetchFilteredMembers(query, currentPage)
 
-    if (positions.length < 1)
-        return <SearchNotFound searchTerm="Position" query={query} />
+    if (members.length < 1)
+        return <SearchNotFound searchTerm="Member" query={query} />
 
     return (
         <>
@@ -25,20 +25,20 @@ export default async function PositionTable({
                 theads={["Name", "Member Count"]}
                 mobileView={
                     <>
-                        {positions.map((position, i) => (
-                            <PositionsMobile key={i} position={position} />
+                        {members.map((member, i) => (
+                            <MembersMobile key={i} member={member} />
                         ))}
                     </>
                 }
             >
                 <>
-                    {positions.map((position, i) => (
+                    {members.map((member, i) => (
                         <TableRowWithBorderBottom
                             key={i}
                             index={i}
-                            arrayLength={positions.length}
+                            arrayLength={members.length}
                         >
-                            <PositionTableRow position={position} />
+                            <MembersTableRow member={member} />
                         </TableRowWithBorderBottom>
                     ))}
                 </>
