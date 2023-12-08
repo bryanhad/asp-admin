@@ -4,6 +4,9 @@ import { Position } from "@prisma/client"
 import Input from "@/ui/form/Input"
 import TableButton from "../TableButton"
 import DeleteConfirmation from "../DeleteConfirmation"
+import { deletePosition, editPosition } from "@/actions/positions.action"
+import ErrorText from "@/ui/form/ErrorText"
+import useFormLogic from "@/hooks/useFormLogic"
 
 export type FetchedPositionType = {
     _count: {
@@ -17,9 +20,6 @@ export default function PositionTableRow({
     position: FetchedPositionType
 }) {
     const [isEditing, setIsEditing] = useState(false)
-    const [error, setError] = useState("")
-
-    // const updatePositionWithId = editPosition.bind(null, position.id)
 
     return (
         <>
@@ -45,30 +45,36 @@ function IsEditingPosition({
     position: Position
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+    const [state, dispatch] = useFormLogic({
+        id: position.id,
+        serverAction: editPosition,
+        onSuccess: () => setIsEditing(false),
+    })
+
     return (
         <td colSpan={3}>
-            <form className="flex items-center gap-3 p-2">
+            <form action={dispatch} className="flex items-center gap-3 p-2">
                 <Input
                     isForTable
                     id="position"
-                    name="position"
+                    name="name"
                     className="flex-1"
                     defaultValue={position.name}
                 />
                 <TableButton
+                    type="button"
                     onClick={() => setIsEditing(false)}
                     buttonType="cancel"
                 >
                     Cancel
                 </TableButton>
-                <TableButton
-                    type="submit"
-                    onClick={() => setIsEditing((prev) => !prev)}
-                    buttonType="save"
-                >
+                <TableButton type="submit" buttonType="save">
                     Save
                 </TableButton>
             </form>
+            {!state.success && state.message && (
+                <ErrorText dep={state} str={state.message} />
+            )}
         </td>
     )
 }
@@ -89,6 +95,8 @@ function IsNotEditingPosition({
             <td className="p-3">
                 {showConfirmDelete ? (
                     <DeleteConfirmation
+                        id={position.id}
+                        serverAction={deletePosition}
                         setShowDeleteConfirmation={setShowConfirmDelete}
                     />
                 ) : (

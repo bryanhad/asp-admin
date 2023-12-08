@@ -1,3 +1,5 @@
 export type ServerAction = {
-    serverAction(): Promise<void>
+    serverAction(
+        prevState?: any,
+    ): void
 }

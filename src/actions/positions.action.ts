@@ -18,7 +18,6 @@ export async function createPosition(prevState: any, formData: FormData) {
 
     // If form validation fails, return errors early. Otherwise, continue.
     if (!validatedPosition.success) {
-        console.log()
         return {
             success: false,
             message: validatedPosition.error.errors[0].message,
@@ -36,12 +35,67 @@ export async function createPosition(prevState: any, formData: FormData) {
             success: true,
             message: `Successfully created position "${newPosition.name}"`,
         }
-    } catch (err:any) {
+    } catch (err: any) {
         // If a database error occurs, return a more specific error.
         const msg = getPrismaError(err)
         return {
             success: false,
             message: msg ?? "Database Error: Failed to Create Position.",
+        }
+    }
+}
+
+export async function editPosition(
+    id: string,
+    prevState: any,
+    formData: FormData,
+) {
+    const validatedPosition = FormSchema.safeParse(formData.get("name"))
+
+    if (!validatedPosition.success) {
+        return {
+            success: false,
+            message: validatedPosition.error.errors[0].message,
+        }
+    }
+
+    try {
+        const newPosition = await prisma.position.update({
+            where: { id },
+            data: { name: validatedPosition.data },
+        })
+        revalidatePath("/positions")
+        return {
+            success: true,
+            message: `Successfully updated position "${newPosition.name}"`,
+        }
+    } catch (err: any) {
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Edit Position.",
+        }
+    }
+}
+
+export async function deletePosition(
+    id: string,
+    prevState: any,
+) {
+    try {
+        const newPosition = await prisma.position.delete({
+            where: { id },
+        })
+        revalidatePath("/positions")
+        return {
+            success: true,
+            message: `Successfully deleted position "${newPosition.name}"`,
+        }
+    } catch (err: any) {
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Delete Position.",
         }
     }
 }

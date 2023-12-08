@@ -1,7 +1,7 @@
 "use client"
 
 import { useFormState } from "react-dom"
-import { useRef, useState, useEffect, useMemo } from "react"
+import { useRef, useEffect } from "react"
 import AddForm from "./AddForm"
 import { createPosition } from "@/actions/positions.action"
 import { toast } from "react-toastify"
@@ -26,7 +26,12 @@ export default function AddPositionForm() {
 
     return (
         <div>
-            <AddForm inputName="name" serverAction={dispatch} />
+            <AddForm
+                resMessage={state.message}
+                success={state.success}
+                inputName="name"
+                serverAction={dispatch}
+            />
             {!state.success && state.message && (
                 <ErrorText dep={state} str={state.message} />
             )}

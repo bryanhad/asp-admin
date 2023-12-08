@@ -19,7 +19,7 @@ export default function ErrorText({
         }, 300)
     }, [dep])
 
-    const className = clsx("text-error mt-2 text-sm font-light", {
+    const className = clsx("text-error mt-2 text-sm font-light max-sm:text-center", {
         "error-shake": shouldShake === true,
     })
 

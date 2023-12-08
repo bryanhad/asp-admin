@@ -6,6 +6,9 @@ import { FetchedPositionType } from "./PositionTableRow"
 import { useState } from "react"
 import Input from "@/ui/form/Input"
 import DeleteConfirmation from "../DeleteConfirmation"
+import useFormLogic from "@/hooks/useFormLogic"
+import ErrorText from "@/ui/form/ErrorText"
+import { deletePosition, editPosition } from "@/actions/positions.action"
 
 type PositionsTableMobileProps = {
     position: FetchedPositionType
@@ -45,18 +48,27 @@ function IsEditingPosition({
     position: Position
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+    const [state, dispatch] = useFormLogic({
+        id: position.id,
+        serverAction: editPosition,
+        onSuccess: () => setIsEditing(false),
+    })
+
     return (
         <>
-            <div className="flex justify-between">
-                <form action="" className="flex-1 ">
+            <div className="flex flex-col">
+                <form action={dispatch} className="flex-1 ">
                     <Input
                         defaultValue={position.name}
                         className="w-full"
                         id="position"
-                        name="position"
+                        name="name"
                         isForTable
                     />
                 </form>
+                {!state.success && state.message && (
+                    <ErrorText dep={state} str={state.message} />
+                )}
             </div>
             <div className="flex gap-4">
                 <TableButton
@@ -84,6 +96,7 @@ function IsNotEditingPosition({
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
 }) {
     const [showConfirmDelete, setShowConfirmDelete] = useState(false)
+
     return (
         <>
             <div className="flex justify-between">
@@ -91,7 +104,11 @@ function IsNotEditingPosition({
                 <p>{position._count.members}</p>
             </div>
             {showConfirmDelete ? (
-                <DeleteConfirmation setShowDeleteConfirmation={setShowConfirmDelete} />
+                <DeleteConfirmation
+                    id={position.id}
+                    serverAction={deletePosition}
+                    setShowDeleteConfirmation={setShowConfirmDelete}
+                />
             ) : (
                 <div className="flex gap-4">
                     <TableButton
