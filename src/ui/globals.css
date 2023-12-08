@@ -11,15 +11,14 @@ input:focus {
     left: 50%;
   }
   25% {
-    left: 52%;
+    left: 51%;
   }
   75% {
-    left: 48%;
+    left: 49%;
   }
 }
 
 .error-center {
-  text-align: center;
   width: 100%;
   left: 50%;
   top: 50%;
