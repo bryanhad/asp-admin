@@ -13,7 +13,7 @@ export default function Table({ theads, mobileView, children, header }: TablePro
         <div className="overflow-auto p-5 dark:bg-bg-soft-dark md:bg-bg-soft flex flex-col gap-5">
             {header}
             {/* DESKTOP */}
-            <table className="w-full md:table">
+            <table className="hidden w-full md:table">
                 <thead>
                     <tr>
                         {theads.map((title, i) => (
@@ -33,7 +33,7 @@ export default function Table({ theads, mobileView, children, header }: TablePro
                 <tbody>{children}</tbody>
             </table>
             {/* MOBILE */}
-            <div className="flex flex-col gap-5 ">{mobileView}</div>
+            <div className="flex flex-col gap-5 md:hidden">{mobileView}</div>
         </div>
     )
 }

@@ -14,7 +14,7 @@ type PositionsTableMobileProps = {
     position: FetchedPositionType
 }
 
-export default function PositionsMobileView({
+export default function PositionsMobile({
     position,
 }: PositionsTableMobileProps) {
     const [isEditing, setIsEditing] = useState(false)

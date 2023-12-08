@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import TableButton from "./TableButton"
 import ErrorText from "../form/ErrorText"
@@ -17,18 +17,17 @@ export default function DeleteConfirmation({
     serverAction,
     setShowDeleteConfirmation,
 }: DeleteConfirmationProps) {
+    
     const serverActionWithId = serverAction.bind(null, id)
+    // TODO: SOMETIMES THE STATE IS NOT UPDATED AFTER SUCCESS
     const [state, formAction] = useFormState(serverActionWithId, {
         success: false,
         message: "",
     })
-    console.log('object')
-    console.log(state)
+
     useEffect(() => {
-        console.log(state.success)
         if (state.success) {
-            console.log('deleted success')
-            toast.success(state.message)
+            toast.success(state.message) //notification
             setShowDeleteConfirmation(false)
         }
     }, [state.success, state.message, setShowDeleteConfirmation])
@@ -61,7 +60,7 @@ export default function DeleteConfirmation({
                 </TableButton>
             </form>
             {!state.success && state.message && (
-                <ErrorText dep={state} str={state.message} />
+                <ErrorText className="text-center sm:text-start md:text-end" dep={state} str={state.message} />
             )}
         </div>
     )

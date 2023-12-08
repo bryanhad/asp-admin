@@ -1,12 +1,9 @@
 import { fetchFilteredPositions } from "@/lib/data"
 import PositionTableRow from "./PositionTableRow"
-import PositionsTableMobile from "./PositionsMobileView"
+import PositionsMobile from "./PositionsMobile"
 import Table from "../Table"
 import TableRowWithBorderBottom from "../TableRowWithBorderBottom"
 import SearchNotFound from "../SearchNotFound"
-import DeleteConfirmation from "../DeleteConfirmation"
-import { deletePosition } from "@/actions/positions.action"
-import PositionMobilleViewNEW from "./PositionMobilleViewNEW"
 
 type PositionTableProps = {
     query: string
@@ -28,17 +25,8 @@ export default async function PositionTable({
                 theads={["Name", "Member Count"]}
                 mobileView={
                     <>
-                        {/* {positions.map((position, i) => (
-                            <PositionMobilleViewNEW
-                                key={position.id}
-                                position={position}
-                            />
-                        ))} */}
                         {positions.map((position, i) => (
-                            <PositionsTableMobile
-                                key={i}
-                                position={position}
-                            />
+                            <PositionsMobile key={i} position={position} />
                         ))}
                     </>
                 }

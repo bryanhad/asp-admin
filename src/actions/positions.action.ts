@@ -78,10 +78,7 @@ export async function editPosition(
     }
 }
 
-export async function deletePosition(
-    id: string,
-    prevState: any,
-) {
+export async function deletePosition(id: string, prevState: any) {
     try {
         const newPosition = await prisma.position.delete({
             where: { id },
