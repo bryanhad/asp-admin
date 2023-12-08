@@ -1,15 +1,17 @@
 import React from "react"
 
 type TableProps = {
+    header?:React.ReactNode
     theads: string[] | JSX.Element[]
     mobileView: React.ReactNode
     children: React.ReactNode
 }
 
-export default function Table({ theads, mobileView, children }: TableProps) {
+export default function Table({ theads, mobileView, children, header }: TableProps) {
     const th_WIDTH = 100 / (theads.length + 1)
     return (
-        <div className="overflow-auto p-5 dark:bg-bg-soft-dark md:bg-bg-soft">
+        <div className="overflow-auto p-5 dark:bg-bg-soft-dark md:bg-bg-soft flex flex-col gap-5">
+            {header}
             {/* DESKTOP */}
             <table className="hidden w-full md:table">
                 <thead>

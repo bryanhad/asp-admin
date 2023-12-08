@@ -6,7 +6,7 @@ import Logo from "../Logo"
 
 export default function Sidebar() {
     return (
-        <nav className="sticky top-[40px]">
+        <nav className="sticky top-[20px]">
             {/* LOGO */}
             <div className="mb-10">
                 <Logo />
