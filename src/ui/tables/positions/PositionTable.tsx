@@ -9,13 +9,11 @@ import SearchNotFound from "../SearchNotFound"
 type PositionTableProps = {
     query: string
     currentPage: number
-    totalPages: number
 }
 
 export default async function PositionTable({
     query,
     currentPage,
-    totalPages,
 }: PositionTableProps) {
     const positions = await fetchFilteredPositions(query, currentPage)
 
@@ -49,9 +47,6 @@ export default async function PositionTable({
                     ))}
                 </>
             </Table>
-            <div className="flex justify-center">
-                <Pagination totalPages={totalPages} />
-            </div>
         </>
     )
 }

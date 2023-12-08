@@ -1,14 +1,17 @@
 "use client"
 
 import { useFormState } from "react-dom"
-import { useRef, useEffect } from "react"
+import { useRef, useState, useEffect, useMemo } from "react"
 import AddForm from "./AddForm"
 import { createPosition } from "@/actions/positions.action"
 import { toast } from "react-toastify"
+import ErrorText from "./ErrorText"
 
 export default function AddPositionForm() {
     const isMounted = useRef(false)
-    const initialState = { message: "", errors: {}, success: false }
+
+    const initialState = { message: "", success: false }
+
     const [state, dispatch] = useFormState(createPosition, initialState)
 
     useEffect(() => {
@@ -19,12 +22,14 @@ export default function AddPositionForm() {
         } else {
             isMounted.current = true
         }
-    }, [state])
+    }, [state.message, state.success])
 
-    console.log(state)
     return (
         <div>
             <AddForm inputName="name" serverAction={dispatch} />
+            {!state.success && state.message && (
+                <ErrorText dep={state} str={state.message} />
+            )}
         </div>
     )
 }

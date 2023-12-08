@@ -1,9 +1,12 @@
+import React from "react"
+
 type AddFormProps = {
     inputName: string
-    serverAction(formData:FormData): void
+    serverAction(formData: FormData): void
 }
 
-export default function AddForm({ serverAction, inputName }: AddFormProps) {
+const AddForm = React.memo(({ serverAction, inputName }: AddFormProps) => {
+    console.log(inputName)
     return (
         <div className="overflow-hidden rounded-lg border focus-within:border-focus dark:border-active-dark dark:bg-bg-soft-dark focus-within:dark:border-focus-dark">
             <form action={serverAction} className="flex gap-1">
@@ -22,4 +25,5 @@ export default function AddForm({ serverAction, inputName }: AddFormProps) {
             </form>
         </div>
     )
-}
+})
+export default AddForm

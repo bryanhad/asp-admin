@@ -1,6 +1,7 @@
 "use server"
 
 import { prisma } from "@/lib/db/prisma"
+import getPrismaError from "@/utils/getPrismaError"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { z } from "zod"
@@ -17,10 +18,10 @@ export async function createPosition(prevState: any, formData: FormData) {
 
     // If form validation fails, return errors early. Otherwise, continue.
     if (!validatedPosition.success) {
+        console.log()
         return {
             success: false,
-            errors: validatedPosition.error.flatten().fieldErrors,
-            message: "Missing Fields. Failed to Create Invoice.",
+            message: validatedPosition.error.errors[0].message,
         }
     }
 
@@ -33,16 +34,14 @@ export async function createPosition(prevState: any, formData: FormData) {
         revalidatePath("/positions")
         return {
             success: true,
-            errors: null,
-            message: `Successfully created ${newPosition.name}`,
+            message: `Successfully created position "${newPosition.name}"`,
         }
-    } catch (err) {
-        console.log(err)
+    } catch (err:any) {
         // If a database error occurs, return a more specific error.
+        const msg = getPrismaError(err)
         return {
             success: false,
-            errors: null,
-            message: "Database Error: Failed to Create Position.",
+            message: msg ?? "Database Error: Failed to Create Position.",
         }
     }
 }

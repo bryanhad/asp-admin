@@ -36,6 +36,9 @@ export default async function PositionsPage({
                     totalPages={totalPages}
                 />
             </Suspense>
+            <div className="flex justify-center">
+                <Pagination totalPages={totalPages} />
+            </div>
         </>
     )
 }
