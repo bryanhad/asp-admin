@@ -83,7 +83,6 @@ export async function deletePosition(id: string, prevState: any) {
         const newPosition = await prisma.position.delete({
             where: { id },
         })
-        revalidatePath("/positions")
         return {
             success: true,
             message: `Successfully deleted position "${newPosition.name}"`,
@@ -94,5 +93,7 @@ export async function deletePosition(id: string, prevState: any) {
             success: false,
             message: msg ?? "Database Error: Failed to Delete Position.",
         }
+    } finally {
+        revalidatePath("/positions")
     }
 }
