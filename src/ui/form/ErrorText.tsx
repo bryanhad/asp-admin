@@ -5,10 +5,12 @@ import { useState, useEffect } from "react"
 
 export default function ErrorText({
     str,
-    dep
+    dep,
+    className,
 }: {
     str: string
-    dep:any
+    dep: any
+    className?: string
 }) {
     const [shouldShake, setShouldShake] = useState(false)
 
@@ -16,12 +18,17 @@ export default function ErrorText({
         setShouldShake(true)
         setTimeout(() => {
             setShouldShake(false)
-        }, 300)
+        }, 400)
     }, [dep])
 
-    const className = clsx("text-error mt-2 text-sm font-light max-sm:text-center", {
-        "error-shake": shouldShake === true,
-    })
+    const customClassName = clsx(
+        `text-error text-sm font-light absolute error-center`,
+        {
+            "shake-center": shouldShake === true,
+        },
+    )
 
-    return <p className={className}>{str}</p>
+    return <div className={`relative h-[20px] mt-3`}>
+        <p className={`${customClassName} ${className}`}>{str}</p>
+    </div>
 }

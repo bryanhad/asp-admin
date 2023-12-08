@@ -1,5 +1,4 @@
 import { fetchPositionsPageAmount } from "@/lib/data"
-import AddForm from "@/ui/form/AddForm"
 import AddPositionForm from "@/ui/form/AddPositionForm"
 import SearchBar from "@/ui/form/SearchBar"
 import PositionTableSkeleton from "@/ui/skeletons/PositionTableSkeleton"
@@ -33,7 +32,6 @@ export default async function PositionsPage({
                 <PositionTable
                     query={query}
                     currentPage={currentPage}
-                    totalPages={totalPages}
                 />
             </Suspense>
             <div className="flex justify-center">
