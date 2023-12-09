@@ -17,7 +17,7 @@ export default function PositionTableSkeleton() {
                     {numOfMobileRows.map((el) => (
                         <div
                             key={el}
-                            className="flex flex-col gap-4 rounded-lg bg-bg-soft p-4  dark:bg-slate-700"
+                            className="flex flex-col gap-4 rounded-lg bg-bg-soft p-4  dark:bg-bg-soft-dark"
                         >
                             <div className="flex justify-between">
                                 <TextSkeleton className="w-[150px]" />

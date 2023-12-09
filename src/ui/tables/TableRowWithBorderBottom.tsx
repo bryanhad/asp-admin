@@ -11,11 +11,11 @@ export default function TableRowWithBorderBottom({
 }) {
     return (
         <tr
-            className={
+            className={`hover:bg-active/40 dark:hover:bg-active-dark/40 duration-300 ${
                 index !== arrayLength - 1
                     ? "border-b border-active dark:border-active-dark"
                     : ""
-            }
+            }`}
         >
             {children}
         </tr>

@@ -5,6 +5,7 @@ import SearchNotFound from "../SearchNotFound"
 import MembersTableRow from "./MembersTableRow"
 import MembersMobile from "./MembersMobile"
 import { Button } from "@/ui/form/Button"
+import NoDataFound from "../NoDataFound"
 
 type MembersTableProps = {
     query: string
@@ -17,8 +18,13 @@ export default async function MembersTable({
 }: MembersTableProps) {
     const members = await fetchFilteredMembers(query, currentPage)
 
-    if (members.length < 1)
-        return <SearchNotFound searchTerm="Member" query={query} />
+    if (members.length < 1) {
+        if (query) {
+            return <SearchNotFound searchTerm="Member" query={query} />
+        } else {
+            return <NoDataFound buttonText="Add Member" desc={`"Members" table is empty.`} href="/members/add"/>
+        }
+    }
 
     return (
         <>

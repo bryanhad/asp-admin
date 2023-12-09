@@ -23,7 +23,7 @@ export default function PositionsMobile({
         <>
             <div
                 key={position.id}
-                className="flex flex-col gap-4 rounded-lg bg-bg-soft p-4  dark:bg-slate-700"
+                className="flex flex-col gap-4 rounded-lg bg-bg-soft p-4 dark:bg-bg-soft-dark"
             >
                 {isEditing ? (
                     <IsEditingPosition

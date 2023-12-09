@@ -1,11 +1,10 @@
 "use server"
 
 import { prisma } from "@/lib/db/prisma"
-import { MemberInfo } from "@/ui/form/memberForm/MemberForm"
 import getPrismaError from "@/utils/getPrismaError"
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
 import { z } from "zod"
+import { MemberInfoState } from "../../types"
 
 const FormSchema = z.object({
     email: z
@@ -20,7 +19,7 @@ const FormSchema = z.object({
 })
 
 export async function createMember(
-    memberInfo: MemberInfo,
+    memberInfo: MemberInfoState,
     prevState: any,
     formData: FormData,
 ) {
@@ -49,8 +48,8 @@ export async function createMember(
             ...memberInfo,
         }
         const newMember = await prisma.member.create({
-            data: newMemberData,
-        })
+                data: newMemberData,
+            })
         // Revalidate the cache for the invoices page and redirect the user.
         revalidatePath("/members")
         return {
@@ -70,7 +69,7 @@ export async function createMember(
 
 export async function editMember(
     id: string,
-    memberInfo: MemberInfo,
+    memberInfo: MemberInfoState,
     prevState: any,
     formData: FormData,
 ) {
@@ -116,5 +115,25 @@ export async function editMember(
             success: false,
             message: msg ?? "Database Error: Failed to Edit Member.",
         }
+    }
+}
+
+export async function deleteMember(id: string, prevState: any) {
+    try {
+        const newMember = await prisma.member.delete({
+            where: { id },
+        })
+        return {
+            success: true,
+            message: `Successfully deleted member "${newMember.name}"`,
+        }
+    } catch (err: any) {
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Delete Member.",
+        }
+    } finally {
+        revalidatePath("/members")
     }
 }
