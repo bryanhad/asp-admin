@@ -11,7 +11,7 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                "label-color": "#64748b",
+                "label-color": "#94a3b8",
                 error: "#ef4444",
 
                 "success-dark": "#16a34a",
@@ -24,7 +24,7 @@ const config: Config = {
                 "active-dark": "#2e374a",
                 "text-dark": "#f3f4f6",
                 "text-soft-dark": "#b7bac1",
-                "focus-dark": "#94a3b8",
+                "focus-dark": "#64748b",
 
                 success: "#22c55e",
                 edit: "#06b6d4",
@@ -36,7 +36,7 @@ const config: Config = {
                 active: "#e5e7eb",
                 text: "#475569",
                 "text-soft": "#9ca3af",
-                "focus": "#94a3b8",
+                "focus": "#d1d5db",
             },
         },
     },

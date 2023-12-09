@@ -1,18 +1,18 @@
 import clsx from "clsx"
 import Label from "./Label"
 
-type InputType = {
-    containerClassName?:string
-    ref?: React.LegacyRef<HTMLInputElement>
+type TextAreaType = {
+    containerClassName?: string
+    ref?: React.LegacyRef<HTMLTextAreaElement>
     isForTable?: boolean
     name: string
     id: string
     label?: string
     className?: string
     extra?: React.ReactNode
-} & React.InputHTMLAttributes<HTMLInputElement>
+} & React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
-export default function Input({
+export default function TextArea({
     containerClassName,
     isForTable,
     label,
@@ -21,7 +21,7 @@ export default function Input({
     className,
     extra,
     ...props
-}: InputType) {
+}: TextAreaType) {
     const customClassName = clsx(
         "rounded-lg border border-focus bg-white focus:outline focus:outline-[2px] focus:outline-offset-4 focus:outline-focus dark:border-focus-dark dark:bg-bg-soft-dark dark:focus:outline-focus-dark",
         {
@@ -32,8 +32,7 @@ export default function Input({
 
     if (!label)
         return (
-            <input
-                size={1}
+            <textarea
                 className={`${customClassName} ${className}`}
                 {...props}
                 name={name}
@@ -49,8 +48,7 @@ export default function Input({
                     {extra}
                 </>
             </Label>
-            <input
-                size={1}
+            <textarea
                 className={`${customClassName} ${className}`}
                 {...props}
                 name={name}

@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "@/ui/globals.css"
 
-
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -23,7 +22,7 @@ export default function RootLayout({
             suppressHydrationWarning
         >
             <body
-                className={`${inter.className} antialiased  dark:bg-bg-dark dark:text-text-dark overflow-hidden`}
+                className={`${inter.className} overflow-x-hidden  antialiased dark:bg-bg-dark dark:text-text-dark`}
             >
                 {children}
             </body>

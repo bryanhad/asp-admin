@@ -7,7 +7,7 @@ export default function Label({ htmlFor, children, ...props }: LabelProps) {
     return (
         <label
             htmlFor={htmlFor}
-            className={`text-label-color ${props.className}`}
+            className={`text-label-color cursor-pointer ${props.className}`}
         >
             {children}
         </label>
