@@ -4,6 +4,7 @@ import TableRowWithBorderBottom from "../TableRowWithBorderBottom"
 import SearchNotFound from "../SearchNotFound"
 import MembersTableRow from "./MembersTableRow"
 import MembersMobile from "./MembersMobile"
+import { Button } from "@/ui/form/Button"
 
 type MembersTableProps = {
     query: string

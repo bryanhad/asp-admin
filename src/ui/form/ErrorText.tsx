@@ -28,7 +28,9 @@ export default function ErrorText({
         },
     )
 
-    return <div className={`relative h-[20px] mt-3`}>
-        <p className={`${customClassName} ${className}`}>{str}</p>
-    </div>
+    return (
+        <div className={`relative mt-3 h-[20px]`}>
+            <p className={`${customClassName} ${className}`}>{str}</p>
+        </div>
+    )
 }

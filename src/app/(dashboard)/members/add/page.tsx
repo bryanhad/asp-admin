@@ -1,9 +1,11 @@
+import { prisma } from "@/lib/db/prisma"
 import MemberForm from "@/ui/form/memberForm/MemberForm"
 
-export default function page() {
+export default async function AddMemberPage() {
+    const positions = await prisma.position.findMany()
     return (
         <div>
-            <MemberForm />
+            <MemberForm positions={positions} />
         </div>
     )
 }

@@ -2,9 +2,11 @@ import clsx from "clsx"
 import Label from "./Label"
 
 type InputType = {
-    containerClassName?:string
+    options?: { id: string; name: string }[]
+    containerClassName?: string
     ref?: React.LegacyRef<HTMLInputElement>
     isForTable?: boolean
+    isSelectInput?: boolean
     name: string
     id: string
     label?: string
@@ -13,6 +15,8 @@ type InputType = {
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 export default function Input({
+    options,
+    isSelectInput,
     containerClassName,
     isForTable,
     label,
@@ -27,6 +31,7 @@ export default function Input({
         {
             "p-2": isForTable === true,
             "p-4": isForTable === undefined,
+            "p-0 pr-5": isSelectInput === true,
         },
     )
 
@@ -39,6 +44,30 @@ export default function Input({
                 name={name}
                 id={id}
             />
+        )
+
+    if (isSelectInput)
+        return (
+            <div className={`flex flex-col gap-2 ${containerClassName} `}>
+                <Label htmlFor={id}>
+                    <>
+                        {label}
+                        {extra}
+                    </>
+                </Label>
+                <div className={`${customClassName} focus-within:outline-focus dark:focus-within:outline-focus-dark focus-within:outline focus-within:outline-offset-4 focus-within:outline-[2px]`}>
+                    <select name={name} id={id} className="bg-transparent w-full focus:outline-none cursor-pointer">
+                        <option value="" className="hidden">
+                            {props.placeholder}
+                        </option>
+                        {options?.map((option) => (
+                            <option key={option.id} value={option.id}>
+                                {option.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </div>
         )
 
     return (

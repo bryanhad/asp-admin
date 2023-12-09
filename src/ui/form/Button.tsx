@@ -9,34 +9,20 @@ type MyButtonTypes = {
 
 export function Button({ buttonType, isLink, href, ...props }: MyButtonTypes) {
     const customStyle = clsx({
-        "bg-green-500 text-white": buttonType === "add",
+        "bg-success dark:bg-success-dark text-white rounded-lg px-10 py-4":
+            buttonType === "add",
     })
-
-    switch (buttonType) {
-        case "add":
-            break
-        default:
-            throw Error(
-                `buttonType of '${buttonType}' is not specified in component MyButton!`,
-            )
-    }
 
     if (isLink && href) {
         return (
-            <Link
-                className={`btn_text btn ${customStyle} ${props.className}`}
-                href={href}
-            >
+            <Link className={` ${customStyle} ${props.className}`} href={href}>
                 {props.children}
             </Link>
         )
     }
 
     return (
-        <button
-            className={`btn_text btn ${customStyle} ${props.className}`}
-            {...props}
-        >
+        <button {...props} className={` ${customStyle} ${props.className}`}>
             {props.children}
         </button>
     )

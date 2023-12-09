@@ -3,7 +3,6 @@
 import { prisma } from "@/lib/db/prisma"
 import getPrismaError from "@/utils/getPrismaError"
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
 import { z } from "zod"
 
 const FormSchema = z
