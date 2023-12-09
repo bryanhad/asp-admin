@@ -2,7 +2,15 @@ import { useEffect } from "react"
 import { useFormState } from "react-dom"
 import { toast } from "react-toastify"
 
-type useFormLogicProps = { id: string; serverAction: any; onSuccess(): void }
+type useFormLogicProps = {
+    id: string
+    serverAction(
+        id?: string,
+        prevState?: any,
+        formData?: FormData,
+    ): Promise<{ success: boolean; message: string }>
+    onSuccess(): void
+}
 
 export default function useFormLogic({
     id,

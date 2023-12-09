@@ -43,8 +43,8 @@ model Member {
   positionId   String   @db.ObjectId
   position     Position @relation(fields: [positionId], references: [id])
 
-  isUser Boolean
-  User      User?
+  isUser Boolean @default(false)
+  User   User?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

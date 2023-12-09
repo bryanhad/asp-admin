@@ -1,38 +1,31 @@
 "use client"
 
-import { Position } from "@prisma/client"
+import { Member } from "@prisma/client"
 import TableButton from "../TableButton"
-import { FetchedPositionType } from "./PositionTableRow"
 import { useState } from "react"
 import Input from "@/ui/form/Input"
 import DeleteConfirmation from "../DeleteConfirmation"
 import useFormLogic from "@/hooks/useFormLogic"
 import ErrorText from "@/ui/form/ErrorText"
-import { deletePosition, editPosition } from "@/actions/positions.action"
+import { editPosition } from "@/actions/positions.action"
 
-type PositionsTableMobileProps = {
-    position: FetchedPositionType
-}
-
-export default function PositionsMobileView({
-    position,
-}: PositionsTableMobileProps) {
+export default function MembersMobile({ member }: { member: Member }) {
     const [isEditing, setIsEditing] = useState(false)
 
     return (
         <>
             <div
-                key={position.id}
+                key={member.id}
                 className="flex flex-col gap-4 rounded-lg bg-bg-soft p-4  dark:bg-slate-700"
             >
                 {isEditing ? (
-                    <IsEditingPosition
-                        position={position}
+                    <IsEditingMember
+                        member={member}
                         setIsEditing={setIsEditing}
                     />
                 ) : (
-                    <IsNotEditingPosition
-                        position={position}
+                    <IsNotEditingMember
+                        member={member}
                         setIsEditing={setIsEditing}
                     />
                 )}
@@ -41,15 +34,15 @@ export default function PositionsMobileView({
     )
 }
 
-function IsEditingPosition({
-    position,
+function IsEditingMember({
+    member,
     setIsEditing,
 }: {
-    position: Position
+    member: Member
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
 }) {
     const [state, dispatch] = useFormLogic({
-        id: position.id,
+        id: member.id,
         serverAction: editPosition,
         onSuccess: () => setIsEditing(false),
     })
@@ -59,9 +52,9 @@ function IsEditingPosition({
             <div className="flex flex-col">
                 <form action={dispatch} className="flex-1 ">
                     <Input
-                        defaultValue={position.name}
+                        defaultValue={member.name}
                         className="w-full"
-                        id="position"
+                        id="member"
                         name="name"
                         isForTable
                     />
@@ -88,11 +81,11 @@ function IsEditingPosition({
     )
 }
 
-function IsNotEditingPosition({
-    position,
+function IsNotEditingMember({
+    member,
     setIsEditing,
 }: {
-    position: FetchedPositionType
+    member: Member
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
 }) {
     const [showConfirmDelete, setShowConfirmDelete] = useState(false)
@@ -100,13 +93,12 @@ function IsNotEditingPosition({
     return (
         <>
             <div className="flex justify-between">
-                <p>{position.name}</p>
-                <p>{position._count.members}</p>
+                <p>{member.name}</p>
             </div>
             {showConfirmDelete ? (
                 <DeleteConfirmation
-                    id={position.id}
-                    serverAction={deletePosition}
+                    id={member.id}
+                    serverAction={editPosition}
                     setShowDeleteConfirmation={setShowConfirmDelete}
                 />
             ) : (

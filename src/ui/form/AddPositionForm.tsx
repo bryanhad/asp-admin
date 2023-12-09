@@ -33,7 +33,7 @@ export default function AddPositionForm() {
                 serverAction={dispatch}
             />
             {!state.success && state.message && (
-                <ErrorText dep={state} str={state.message} />
+                <ErrorText className="text-center md:text-start" dep={state} str={state.message} />
             )}
         </div>
     )

@@ -1,10 +1,9 @@
 import { fetchPositionsPageAmount } from "@/lib/data"
-import AddForm from "@/ui/form/AddForm"
 import AddPositionForm from "@/ui/form/AddPositionForm"
 import SearchBar from "@/ui/form/SearchBar"
-import PositionTableSkeleton from "@/ui/skeletons/PositionTableSkeleton"
+import PositionsTableSkeleton from "@/ui/skeletons/PositionsTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
-import PositionTable from "@/ui/tables/positions/PositionTable"
+import PositionsTable from "@/ui/tables/positions/PositionsTable"
 import { Suspense } from "react"
 
 type PositionPageProps = {
@@ -24,17 +23,13 @@ export default async function PositionsPage({
 
     return (
         <>
-            <AddPositionForm/>
+            <AddPositionForm />
             <SearchBar placeholder="Search..." />
             <Suspense
                 key={query + currentPage}
-                fallback={<PositionTableSkeleton />}
+                fallback={<PositionsTableSkeleton />}
             >
-                <PositionTable
-                    query={query}
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                />
+                <PositionsTable query={query} currentPage={currentPage} />
             </Suspense>
             <div className="flex justify-center">
                 <Pagination totalPages={totalPages} />

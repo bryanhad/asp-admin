@@ -1,4 +1,5 @@
 "use client"
+
 import { useState } from "react"
 import { Position } from "@prisma/client"
 import Input from "@/ui/form/Input"
@@ -14,7 +15,7 @@ export type FetchedPositionType = {
     }
 } & Position
 
-export default function PositionTableRow({
+export default function PositionsTableRow({
     position,
 }: {
     position: FetchedPositionType

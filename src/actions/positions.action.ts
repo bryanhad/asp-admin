@@ -3,7 +3,6 @@
 import { prisma } from "@/lib/db/prisma"
 import getPrismaError from "@/utils/getPrismaError"
 import { revalidatePath } from "next/cache"
-import { redirect } from "next/navigation"
 import { z } from "zod"
 
 const FormSchema = z
@@ -78,15 +77,11 @@ export async function editPosition(
     }
 }
 
-export async function deletePosition(
-    id: string,
-    prevState: any,
-) {
+export async function deletePosition(id: string, prevState: any) {
     try {
         const newPosition = await prisma.position.delete({
             where: { id },
         })
-        revalidatePath("/positions")
         return {
             success: true,
             message: `Successfully deleted position "${newPosition.name}"`,
@@ -97,5 +92,7 @@ export async function deletePosition(
             success: false,
             message: msg ?? "Database Error: Failed to Delete Position.",
         }
+    } finally {
+        revalidatePath("/positions")
     }
 }
