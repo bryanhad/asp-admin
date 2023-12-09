@@ -11,7 +11,7 @@ export async function fetchFilteredPositions(
     const offset = (currentPage - 1) * ITEMS_PER_PAGE
 
     try {
-        const members = await prisma.position.findMany({
+        const positions = await prisma.position.findMany({
             skip: offset,
             take: ITEMS_PER_PAGE,
             where: {
@@ -20,13 +20,14 @@ export async function fetchFilteredPositions(
                     mode: "insensitive",
                 },
             },
+            orderBy: { id: "desc" },
             include: {
                 _count: {
                     select: { members: true },
                 },
             },
         })
-        return members
+        return positions
     } catch (err) {
         console.error("Database Error:", err)
         throw new Error("Failed to fetch positions")
@@ -48,6 +49,7 @@ export async function fetchFilteredMembers(query: string, currentPage: number) {
                     mode: "insensitive",
                 },
             },
+            orderBy: { id: "desc" },
         })
         return members
     } catch (err) {

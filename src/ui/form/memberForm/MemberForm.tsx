@@ -49,8 +49,8 @@ export default function MemberForm({
 }: MemberFormProps) {
     const [memberInfo, setMemberInfo] = useState<MemberInfoState>({
         education: data ? data.education : [],
-        organization: data ? data.education : [],
-        practices: data ? data.education : [],
+        organization: data ? data.organization : [],
+        practices: data ? data.practices : [],
     })
     const serverActionWithInfo = serverAction.bind(null, memberInfo)
 

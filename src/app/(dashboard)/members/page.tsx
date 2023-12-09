@@ -6,14 +6,14 @@ import Pagination from "@/ui/tables/Pagination"
 import MembersTable from "@/ui/tables/members/MembersTable"
 import { Suspense } from "react"
 
-type PositionPageProps = {
+type MembersPageProps = {
     searchParams?: {
         q?: string
         page?: string
     }
 }
 
-export default async function MembersPage({ searchParams }: PositionPageProps) {
+export default async function MembersPage({ searchParams }: MembersPageProps) {
     const query = searchParams?.q || ""
     const currentPage = Number(searchParams?.page) || 1
 
@@ -21,15 +21,15 @@ export default async function MembersPage({ searchParams }: PositionPageProps) {
 
     return (
         <>
-            <SearchBar placeholder="Search..." />
             <Button
                 isLink
                 href="/members/add"
-                className="ml-auto px-5 text-sm py-2 md:text-base md:py-3 md:px-12"
+                className="ml-auto px-5 py-2 text-sm md:px-12 md:py-3 md:text-base"
                 buttonType="add"
             >
                 Add Member
             </Button>
+            <SearchBar placeholder="Search..." />
             <Suspense
                 key={query + currentPage}
                 fallback={<MembersTableSkeleton />}

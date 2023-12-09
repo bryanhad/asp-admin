@@ -58,7 +58,7 @@ export default function MembersTableSkeleton() {
                         arrayLength={numOfDesktopRows.length}
                         index={el}
                     >
-                        <td className="p-4">
+                        <td className="p-2">
                             <div className="flex items-center gap-4">
                                 <TextSkeleton
                                     circle

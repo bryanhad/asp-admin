@@ -14,7 +14,7 @@ export default function MembersTableRow({ member }: { member: Member }) {
         <>
             <td className="p-3">
                 <div className="flex items-center gap-4">
-                    <div className="grid h-[45px] w-[45px] place-content-center overflow-hidden rounded-full bg-active-dark dark:bg-active-dark">
+                    <div className="grid h-[45px] w-[45px] place-content-center overflow-hidden rounded-full bg-active dark:bg-active-dark">
                         <Image
                             className="rounded-full object-cover"
                             src={member.picture || "/noavatar.png"}
