@@ -11,18 +11,18 @@ import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { redirect } from "next/navigation"
 import {
-    AddMemberServerActionParameters,
-    EditMemberServerActionParameters,
+    AddMemberServerActionArguments,
+    EditMemberServerActionArguments,
     MemberInfoState,
     ServerActionFunctionReturn,
 } from "../../../../types"
 
 type ServerActionFunction = {
     (
-        ...args: EditMemberServerActionParameters
+        ...args: EditMemberServerActionArguments
     ): Promise<ServerActionFunctionReturn>
     (
-        ...args: AddMemberServerActionParameters
+        ...args: AddMemberServerActionArguments
     ): Promise<ServerActionFunctionReturn>
 }
 

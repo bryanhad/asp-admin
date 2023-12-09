@@ -22,13 +22,13 @@ export type MemberInfoState = {
     practices: Array<string> | never[]
 }
 
-export type AddMemberServerActionParameters = [
+export type AddMemberServerActionArguments = [
     memberInfo: MemberInfo,
     prevState: any,
     formData: FormData,
 ]
 
-export type EditMemberServerActionParameters = [
+export type EditMemberServerActionArguments = [
     id: string,
     memberInfo: MemberInfo,
     prevState: any,
