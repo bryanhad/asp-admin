@@ -108,7 +108,8 @@ function IsNotEditingMember({
                 ) : (
                     <div className="flex justify-end gap-3">
                         <TableButton
-                            onClick={() => setIsEditing((prev) => !prev)}
+                            isLink
+                            href={`/members/${member.id}/edit`}
                             buttonType="edit"
                         >
                             Edit

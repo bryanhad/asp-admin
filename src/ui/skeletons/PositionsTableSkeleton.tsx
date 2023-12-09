@@ -1,6 +1,6 @@
 import Table from "../tables/Table"
 import TableRowWithBorderBottom from "../tables/TableRowWithBorderBottom"
-import TextSkeleton from "./TextSkeleton"
+import { TextSkeleton } from "./Skeleton"
 
 export default function PositionTableSkeleton() {
     const numOfCols = Array.from(Array(2).keys())

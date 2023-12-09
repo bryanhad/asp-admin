@@ -7,24 +7,25 @@ import MemberMultiInputs from "./MemberMultiInputs"
 import { useFormState } from "react-dom"
 import { Button } from "../Button"
 import ErrorText from "../ErrorText"
-import { Position } from "@prisma/client"
+import { Member, Position } from "@prisma/client"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { redirect } from "next/navigation"
 
 type MemberFormProps = {
     positions: Position[]
+    data?: Member
 }
 export type MemberInfo = {
     education: Array<string> | never[]
     organization: Array<string> | never[]
     practices: Array<string> | never[]
 }
-export default function MemberForm({ positions }: MemberFormProps) {
+export default function MemberForm({ positions, data }: MemberFormProps) {
     const [memberInfo, setMemberInfo] = useState<MemberInfo>({
-        education: [],
-        organization: [],
-        practices: [],
+        education: data ? data.education : [],
+        organization: data ? data.education : [],
+        practices: data ? data.education : [],
     })
     const createMemberWithInfo = createMember.bind(null, memberInfo)
     const [state, serverAction] = useFormState(createMemberWithInfo, {
@@ -53,19 +54,30 @@ export default function MemberForm({ positions }: MemberFormProps) {
                     name="picture"
                 />
                 <div className="lg:w-[45%]">
-                    <Input label="Name" id="name" name="name" />
+                    <Input
+                        defaultValue={data?.name}
+                        label="Name"
+                        id="name"
+                        name="name"
+                    />
                     {state?.error?.name && (
                         <ErrorText dep={state} str={state.error.name[0]} />
                     )}
                 </div>
                 <div className="lg:w-[45%]">
-                    <Input label="Email" id="email" name="email" />
+                    <Input
+                        defaultValue={data?.email}
+                        label="Email"
+                        id="email"
+                        name="email"
+                    />
                     {state?.error?.email && (
                         <ErrorText dep={state} str={state.error.email[0]} />
                     )}
                 </div>
                 <div className="lg:w-[45%]">
                     <Input
+                        defaultValue={data?.positionId}
                         isSelectInput
                         placeholder="-- Select Position --"
                         options={positions}
@@ -85,6 +97,7 @@ export default function MemberForm({ positions }: MemberFormProps) {
                     setMemberInfo={setMemberInfo}
                 />
                 <TextArea
+                    defaultValue={data?.description ?? ""}
                     containerClassName="w-full"
                     rows={5}
                     label="Description"

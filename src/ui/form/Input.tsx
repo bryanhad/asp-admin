@@ -55,8 +55,15 @@ export default function Input({
                         {extra}
                     </>
                 </Label>
-                <div className={`${customClassName} focus-within:outline-focus dark:focus-within:outline-focus-dark focus-within:outline focus-within:outline-offset-4 focus-within:outline-[2px]`}>
-                    <select name={name} id={id} className="bg-transparent w-full focus:outline-none cursor-pointer">
+                <div
+                    className={`${customClassName} focus-within:outline focus-within:outline-[2px] focus-within:outline-offset-4 focus-within:outline-focus dark:focus-within:outline-focus-dark`}
+                >
+                    <select
+                        defaultValue={props.defaultValue}
+                        name={name}
+                        id={id}
+                        className="w-full cursor-pointer bg-transparent focus:outline-none"
+                    >
                         <option value="" className="hidden">
                             {props.placeholder}
                         </option>

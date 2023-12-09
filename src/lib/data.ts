@@ -33,10 +33,7 @@ export async function fetchFilteredPositions(
     }
 }
 
-export async function fetchFilteredMembers(
-    query: string,
-    currentPage: number,
-) {
+export async function fetchFilteredMembers(query: string, currentPage: number) {
     noStore()
 
     const offset = (currentPage - 1) * ITEMS_PER_PAGE
@@ -100,5 +97,22 @@ export async function fetchMembersPageAmount(query: string) {
     } catch (error) {
         console.error("Database Error:", error)
         throw new Error("Failed to fetch total pages amount of Members.")
+    }
+}
+
+export async function fetchMemberDataAndPositions(memberId: string) {
+    noStore()
+    await new Promise(res => setTimeout(res, 3000))
+    try {
+        const [memberData, positions] = await Promise.all([
+            prisma.member.findUnique({
+                where: { id: memberId },
+            }),
+            prisma.position.findMany(),
+        ])
+        return [memberData, positions] as const
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch Member.")
     }
 }
