@@ -102,7 +102,6 @@ export async function fetchMembersPageAmount(query: string) {
 
 export async function fetchMemberDataAndPositions(memberId: string) {
     noStore()
-    await new Promise(res => setTimeout(res, 3000))
     try {
         const [memberData, positions] = await Promise.all([
             prisma.member.findUnique({
