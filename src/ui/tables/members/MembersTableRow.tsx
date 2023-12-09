@@ -8,6 +8,7 @@ import DeleteConfirmation from "../DeleteConfirmation"
 import ErrorText from "@/ui/form/ErrorText"
 import useFormLogic from "@/hooks/useFormLogic"
 import { editPosition } from "@/actions/positions.action"
+import Image from "next/image"
 
 export default function MembersTableRow({ member }: { member: Member }) {
     const [isEditing, setIsEditing] = useState(false)
@@ -78,7 +79,25 @@ function IsNotEditingMember({
 
     return (
         <>
-            <td className="p-3">{member.name}</td>
+            <td className="p-3">
+                <div className="flex items-center gap-4">
+                    <Image
+                        className="rounded-full object-cover"
+                        src={member.picture || "/noavatar.png"}
+                        alt={`${member.name}'s Profile Picture`}
+                        width={38}
+                        height={38}
+                    />
+                    {member.name}
+                </div>
+            </td>
+            <td className="p-3">{member.email}</td>
+            <td className="p-3">
+                {member.createdAt
+                    .toLocaleDateString("id-ID")
+                    .split("/")
+                    .join(" / ")}
+            </td>
             <td className="p-3">
                 {showConfirmDelete ? (
                     <DeleteConfirmation

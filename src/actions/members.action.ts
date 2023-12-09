@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db/prisma"
 import { MemberInfo } from "@/ui/form/memberForm/MemberForm"
 import getPrismaError from "@/utils/getPrismaError"
 import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 import { z } from "zod"
 
 const FormSchema = z.object({
@@ -58,6 +59,7 @@ export async function createMember(
         }
     } catch (err: any) {
         // If a database error occurs, return a more specific error.
+        console.log(err)
         const msg = getPrismaError(err)
         return {
             success: false,

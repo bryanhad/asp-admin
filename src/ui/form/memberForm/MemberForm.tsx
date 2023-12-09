@@ -10,6 +10,7 @@ import ErrorText from "../ErrorText"
 import { Position } from "@prisma/client"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
+import { redirect } from "next/navigation"
 
 type MemberFormProps = {
     positions: Position[]
@@ -35,9 +36,10 @@ export default function MemberForm({ positions }: MemberFormProps) {
     useEffect(() => {
         if (state.success) {
             toast.success(state.message)
+            redirect("/members")
         }
     }, [state.success, state.message])
-    
+
     return (
         <div>
             <form
@@ -91,7 +93,11 @@ export default function MemberForm({ positions }: MemberFormProps) {
                 />
                 {!state.success && state.message && (
                     <div className="w-full">
-                        <ErrorText className="text-center" dep={state} str={state.message} />
+                        <ErrorText
+                            className="text-center"
+                            dep={state}
+                            str={state.message}
+                        />
                     </div>
                 )}
                 <Button

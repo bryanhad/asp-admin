@@ -23,7 +23,7 @@ export default async function MembersTable({
     return (
         <>
             <Table
-                theads={["Name", "Member Count"]}
+                theads={["Member", "Email", "createdAt"]}
                 mobileView={
                     <>
                         {members.map((member, i) => (
