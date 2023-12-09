@@ -67,3 +67,54 @@ export async function createMember(
         }
     }
 }
+
+export async function editMember(
+    id: string,
+    memberInfo: MemberInfo,
+    prevState: any,
+    formData: FormData,
+) {
+    // Validate form using Zod
+    const validation = FormSchema.safeParse({
+        name: formData.get("name"),
+        email: formData.get("email"),
+        positionId: formData.get("positionId"),
+        picture: formData.get("picture"),
+        description: formData.get("description"),
+    })
+
+    // If form validation fails, return errors early. Otherwise, continue.
+    if (!validation.success) {
+        return {
+            success: false,
+            error: validation.error.flatten().fieldErrors,
+            message: "Failed to Add Member",
+        }
+    }
+
+    // Insert data into the database
+    try {
+        const newMemberData = {
+            ...validation.data,
+            ...memberInfo,
+        }
+        const newMember = await prisma.member.update({
+            where: { id },
+            data: newMemberData,
+        })
+        // Revalidate the cache for the invoices page and redirect the user.
+        revalidatePath("/members")
+        return {
+            success: true,
+            message: `Successfully edited member "${newMember.name}"`,
+        }
+    } catch (err: any) {
+        // If a database error occurs, return a more specific error.
+        console.log(err)
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Edit Member.",
+        }
+    }
+}
