@@ -25,7 +25,7 @@ export default async function MembersPage({ searchParams }: PositionPageProps) {
             <Button
                 isLink
                 href="/members/add"
-                className="ml-auto px-12"
+                className="ml-auto px-5 text-sm py-2 md:text-base md:py-3 md:px-12"
                 buttonType="add"
             >
                 Add Member

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import { withUt } from "uploadthing/tw";
 
 const config: Config = {
     darkMode: "class",
@@ -16,6 +17,7 @@ const config: Config = {
 
                 "success-dark": "#16a34a",
                 "edit-dark": "#0f766e",
+                "edit-darker-dark": "#115e59",
                 "delete-dark": "#991b1b",
                 "cancel-dark": "#6b7280",
 
@@ -28,6 +30,7 @@ const config: Config = {
 
                 success: "#22c55e",
                 edit: "#06b6d4",
+                "edit-darker": "#0891b2",
                 delete: "#dc2626",
                 cancel: "#e5e7eb",
 
@@ -42,4 +45,5 @@ const config: Config = {
     },
     plugins: [],
 }
-export default config
+
+export default withUt(config)

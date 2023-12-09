@@ -16,6 +16,7 @@ import {
     MemberInfoState,
     ServerActionFunctionReturn,
 } from "../../../../types"
+import UploadPhoto from "../UploadPhoto"
 
 type ServerActionFunction = {
     (
@@ -51,9 +52,9 @@ export default function MemberForm({
         organization: data ? data.education : [],
         practices: data ? data.education : [],
     })
-    const createMemberWithInfo = serverAction.bind(null, memberInfo)
+    const serverActionWithInfo = serverAction.bind(null, memberInfo)
 
-    const [state, formAction] = useFormState(createMemberWithInfo, {
+    const [state, formAction] = useFormState(serverActionWithInfo, {
         success: false,
         error: {},
         message: "",
@@ -71,12 +72,7 @@ export default function MemberForm({
             action={formAction}
             className="flex flex-col gap-5 lg:flex-row lg:flex-wrap lg:justify-between"
         >
-            <Input
-                containerClassName="lg:w-[45%]"
-                label="Picture"
-                id="picture"
-                name="picture"
-            />
+            <UploadPhoto />
             <div className="lg:w-[45%]">
                 <Input
                     defaultValue={data?.name}
