@@ -117,3 +117,23 @@ export async function editMember(
         }
     }
 }
+
+export async function deleteMember(id: string, prevState: any) {
+    try {
+        const newMember = await prisma.member.delete({
+            where: { id },
+        })
+        return {
+            success: true,
+            message: `Successfully deleted member "${newMember.name}"`,
+        }
+    } catch (err: any) {
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Delete Member.",
+        }
+    } finally {
+        revalidatePath("/members")
+    }
+}
