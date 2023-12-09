@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  email          String  @unique
+  profilePicture String?
+  username       String
+  password       String
+  role           Role
+  posts          Post[]
+
+  isMember Boolean
+  memberId String? @unique @db.ObjectId
+  member   Member? @relation(fields: [memberId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Member {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  email        String   @unique
+  name         String
+  picture      String?
+  description  String?
+  education    String[]
+  organization String[]
+  practices    String[]
+  positionId   String   @db.ObjectId
+  position     Position @relation(fields: [positionId], references: [id])
+
+  isUser Boolean @default(false)
+  User   User?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("members")
+}
+
+model Position {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  name    String   @unique
+  members Member[]
+
+  @@map("positions")
+}
+
+model Post {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  body     String
+  image    String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("posts")
+}
+
+enum Role {
+  ADMIN
+  USER
+}

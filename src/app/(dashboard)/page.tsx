@@ -1,9 +1,9 @@
-import React from 'react'
+import DashboardCards from "@/ui/dashboard/DashboardCards";
 
-export default function page() {
-  return (
-    <div>
-      DashboardPage
-    </div>
-  )
+export default function DashboardPage() {
+    return (
+        <>
+            <DashboardCards/>
+        </>
+    )
 }
