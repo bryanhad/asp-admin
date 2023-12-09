@@ -19,17 +19,16 @@ import {
 
 type ServerActionFunction = {
     (
-        ...props: EditMemberServerActionParameters
+        ...args: EditMemberServerActionParameters
     ): Promise<ServerActionFunctionReturn>
     (
-        ...props: AddMemberServerActionParameters
+        ...args: AddMemberServerActionParameters
     ): Promise<ServerActionFunctionReturn>
 }
 
 //honestly type definition below is from chat GPT, I dunno how it works.. but hey! it works for now lol :D
 type ServerActionType = CallableFunction & {
     (
-        this: null,
         ...args: Parameters<ServerActionFunction> //Paremeters extracts the parameter types from ServerActionFunction.
     ): ReturnType<ServerActionFunction> //ReturnType extracts the return type from ServerActionFunction. neat stuff.
 }
