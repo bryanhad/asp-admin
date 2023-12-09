@@ -14,14 +14,16 @@ export default function MembersTableRow({ member }: { member: Member }) {
         <>
             <td className="p-3">
                 <div className="flex items-center gap-4">
-                    <Image
-                        className="rounded-full object-cover"
-                        src={member.picture || "/noavatar.png"}
-                        alt={`${member.name}'s Profile Picture`}
-                        width={38}
-                        height={38}
-                    />
-                    {member.name}
+                    <div className="grid h-[45px] w-[45px] place-content-center overflow-hidden rounded-full bg-active-dark dark:bg-active-dark">
+                        <Image
+                            className="rounded-full object-cover"
+                            src={member.picture || "/noavatar.png"}
+                            alt={`${member.name}'s Profile Picture`}
+                            width={38}
+                            height={38}
+                        />
+                    </div>
+                    <p>{member.name}</p>
                 </div>
             </td>
             <td className="p-3">{member.email}</td>

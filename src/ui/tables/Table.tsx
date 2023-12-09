@@ -26,7 +26,7 @@ export default function Table({
                                 <th
                                     style={{ width: `${th_WIDTH}%` }}
                                     key={i}
-                                    className="p-2 text-start font-normal"
+                                    className="px-4 pb-3 pt-2 text-start font-normal"
                                 >
                                     {title}
                                 </th>

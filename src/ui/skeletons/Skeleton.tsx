@@ -1,15 +1,17 @@
 export function TextSkeleton({
     className,
     circle,
+    small
 }: {
     className: string
     circle?: boolean
+    small?: boolean
 }) {
     return (
         <div
             className={`animate-pulse ${
                 circle ? "rounded-full" : "rounded-lg"
-            } bg-active p-3 dark:bg-active-dark ${className}`}
+            } ${small ? '' : 'p-3'} bg-active dark:bg-active-dark ${className}`}
         />
     )
 }

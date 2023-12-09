@@ -1,7 +1,7 @@
 import { fetchMembersPageAmount } from "@/lib/data"
 import { Button } from "@/ui/form/Button"
 import SearchBar from "@/ui/form/SearchBar"
-import PositionTableSkeleton from "@/ui/skeletons/PositionsTableSkeleton"
+import MembersTableSkeleton from "@/ui/skeletons/MembersTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
 import MembersTable from "@/ui/tables/members/MembersTable"
 import { Suspense } from "react"
@@ -32,7 +32,7 @@ export default async function MembersPage({ searchParams }: PositionPageProps) {
             </Button>
             <Suspense
                 key={query + currentPage}
-                fallback={<PositionTableSkeleton />}
+                fallback={<MembersTableSkeleton />}
             >
                 <MembersTable query={query} currentPage={currentPage} />
             </Suspense>

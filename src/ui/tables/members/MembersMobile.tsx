@@ -14,20 +14,22 @@ export default function MembersMobile({ member }: { member: Member }) {
         <>
             <div
                 key={member.id}
-                className="flex flex-col gap-4 rounded-lg bg-bg-soft p-4  dark:bg-slate-700"
+                className="flex flex-col gap-4 rounded-lg bg-bg-soft p-4 dark:bg-bg-soft-dark"
             >
                 <div className="flex justify-between">
                     <div className="flex gap-4">
-                        <Image
-                            className="rounded-full object-cover"
-                            src={member.picture || "/noavatar.png"}
-                            alt=""
-                            width="45"
-                            height="45"
-                        />
+                        <div className="grid h-[45px] w-[45px] place-content-center overflow-hidden rounded-full bg-active-dark dark:bg-active-dark">
+                            <Image
+                                className="object-cover dark:bg-active-dark"
+                                src={member.picture || "/noavatar.png"}
+                                alt=""
+                                width={45}
+                                height={45}
+                            />
+                        </div>
                         <div className="flex flex-col">
                             <p>{member.name}</p>
-                            <p className="text-text-soft text-sm dark:text-text-soft-dark">
+                            <p className="text-sm text-text-soft dark:text-text-soft-dark">
                                 {member.email}
                             </p>
                         </div>
