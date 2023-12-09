@@ -7,14 +7,20 @@ import { Button } from "./Button"
 import { toast } from "react-toastify"
 import Loading from "../Loading"
 
-export default function UploadPhoto() {
-    const [image, setImage] = useState({ name: "", url: "" })
+export default function UploadPhoto({ picture }: { picture?: string | null }) {
+    const [image, setImage] = useState({ name: "", url: picture ?? "" })
     const [loading, setLoading] = useState(false)
 
     return (
         <div className="flex items-center gap-5 ">
-          {/* a hidden input for the form to get the image.url value on serverAction */}
-          <input type="text" name="picture" className="hidden" value={image.url} onChange={() => {}} />
+            {/* a hidden input for the form to get the image.url value on serverAction */}
+            <input
+                type="text"
+                name="picture"
+                className="hidden"
+                value={image.url}
+                onChange={() => {}}
+            />
             <div className="relative flex h-[130px] w-[130px] min-w-[130px] items-center justify-center overflow-hidden rounded-full bg-bg-soft dark:bg-bg-soft-dark">
                 <Image
                     className={`h-auto w-auto object-cover ${
@@ -37,7 +43,7 @@ export default function UploadPhoto() {
                     <div className="flex items-center gap-4 max-sm:flex-wrap">
                         <div className="relative max-sm:w-full">
                             <UploadButton
-                                className="ut-allowed-content:dark:text-focus-dark ut-allowed-content:text-slate-500 ut-button:dark:focus-within:border-red-400 ut-allowed-content:hidden  ut-button:dark:bg-edit-dark ut-button:after:dark:bg-edit-darker-dark ut-button:bg-edit ut-button:after:bg-edit-darker ut-button:max-sm:px-8 ut-button:max-sm:py-3 ut-button:max-sm:text-sm ut-button:rounded-full ut-button:w-full max-sm:w-full sm:ut-button:px-16 sm:ut-button:h-[54px]"
+                                className="ut-allowed-content:dark:text-focus-dark ut-allowed-content:text-slate-500 ut-button:dark:focus-within:border-red-400 ut-allowed-content:hidden  ut-button:dark:bg-edit-dark ut-button:after:dark:bg-edit-darker-dark ut-button:bg-edit ut-button:after:bg-edit-darker ut-button:max-sm:px-8 ut-button:max-sm:py-3 ut-button:max-sm:text-sm ut-button:rounded-full ut-button:w-full sm:ut-button:px-16 sm:ut-button:h-[54px] max-sm:w-full"
                                 content={{
                                     button: ["Change"],
                                 }}

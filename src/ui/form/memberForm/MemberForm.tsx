@@ -66,13 +66,12 @@ export default function MemberForm({
             redirect("/members")
         }
     }, [state.success, state.message])
-
     return (
         <form
             action={formAction}
             className="flex flex-col gap-5 lg:flex-row lg:flex-wrap lg:justify-between"
         >
-            <UploadPhoto />
+            <UploadPhoto picture={data?.picture}/>
             <div className="lg:w-[45%]">
                 <Input
                     defaultValue={data?.name}
