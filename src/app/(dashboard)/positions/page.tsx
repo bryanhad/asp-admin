@@ -23,8 +23,8 @@ export default async function PositionsPage({
 
     return (
         <>
-            <AddPositionForm />
             <SearchBar placeholder="Search..." />
+            <AddPositionForm />
             <Suspense
                 key={query + currentPage}
                 fallback={<PositionsTableSkeleton />}
