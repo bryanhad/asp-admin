@@ -5,7 +5,6 @@ import { useDebouncedCallback } from "use-debounce"
 import Input from "./Input"
 
 export default function SearchBar({ placeholder }: { placeholder: string }) {
-    console.log('searchbar Rendered')
     // useSearchParams:
     // "/dashboard/invoices?page=1&query=pending"
     // would look like this: {page: '1', query: 'pending'}
