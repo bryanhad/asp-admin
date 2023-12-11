@@ -55,11 +55,8 @@ export default function TextEditor() {
                         <FormItem>
                             <FormLabel>Title</FormLabel>
                             <FormControl>
-                                <Input placeholder="shadcn" {...field} />
+                                <Input placeholder="Your Awesome Title.." {...field} />
                             </FormControl>
-                            <FormDescription>
-                                This is your public display name.
-                            </FormDescription>
                             <FormMessage />
                         </FormItem>
                     )}
@@ -79,9 +76,6 @@ export default function TextEditor() {
                                     onChange={field.onChange}
                                 />
                             </FormControl>
-                            <FormDescription>
-                                This is your public display name.
-                            </FormDescription>
                             <FormMessage />
                         </FormItem>
                     )}

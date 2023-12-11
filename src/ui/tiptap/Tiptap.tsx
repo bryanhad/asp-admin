@@ -25,7 +25,7 @@ export default function Tiptap({
         content: description,
         editorProps: {
             attributes: {
-                class: "rounded-b-md min-h-[400px] max-w-none bg-background p-4 focus:outline-none prose bg-white w-full",
+                class: "rounded-b-md min-h-[400px] max-w-none bg-background p-4 focus:outline-none prose dark:prose-invert w-full",
             },
         },
         onUpdate({ editor }) {
@@ -36,7 +36,7 @@ export default function Tiptap({
     })
 
     return (
-        <section>
+        <section className="flex flex-col">
             <div className="overflow-hidden rounded-md border ">
                 <ToolBar editor={editor} />
                 <EditorContent editor={editor} />
