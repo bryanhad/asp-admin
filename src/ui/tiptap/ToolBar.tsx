@@ -27,8 +27,7 @@ export default function ToolBar({ editor }: ToolBarProps) {
     if (!editor) return null // if editor prop from tiptap is not passed, well return nothin!
 
     return (
-        <div className="flex flex-wrap items-center gap-1 bg-secondary p-1">
-            <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 bg-secondary p-1">
                 <Toggle //from shadCn
                     size="sm"
                     pressed={editor.isActive("bold")} // if the editors 'bold' is active, give the toggle active styling! cuz this will return boolean
@@ -61,9 +60,7 @@ export default function ToolBar({ editor }: ToolBarProps) {
                 >
                     <Strikethrough className="h-4 w-4" />
                 </Toggle>
-            </div>
             <span className="text-xl text-accent">|</span>
-            <div className="flex items-center gap-2">
                 <Toggle
                     size="sm"
                     pressed={editor.isActive("heading", { level: 1 })}
@@ -91,9 +88,7 @@ export default function ToolBar({ editor }: ToolBarProps) {
                 >
                     <span className="w-4">p</span>
                 </Toggle>
-            </div>
             <span className="text-xl text-accent">|</span>
-            <div className="flex items-center gap-2">
                 <Toggle
                     size="sm"
                     pressed={editor.isActive("bulletList")}
@@ -134,9 +129,7 @@ export default function ToolBar({ editor }: ToolBarProps) {
                 >
                     <SeparatorHorizontal className="h-5 w-5" />
                 </Button>
-            </div>
             <span className="text-xl text-accent">|</span>
-            <div className="flex items-center gap-2">
                 <Button
                     size="sm"
                     variant="soft"
@@ -155,9 +148,7 @@ export default function ToolBar({ editor }: ToolBarProps) {
                 >
                     <RiFormatClear className="h-5 w-5" />
                 </Button>
-            </div>
             <span className="text-xl text-accent">|</span>
-            <div className="flex items-center gap-2">
                 <Button
                     type="button"
                     className="px-2"
@@ -180,7 +171,6 @@ export default function ToolBar({ editor }: ToolBarProps) {
                 >
                     <Redo className="h-6 w-6" />
                 </Button>
-            </div>
         </div>
     )
 }
