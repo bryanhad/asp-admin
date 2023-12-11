@@ -15,9 +15,18 @@ import {
     ServerActionFunctionReturn,
 } from "../../../../types"
 import UploadPhoto from "../UploadPhoto"
-import { Input } from "@/ui/shadcn/input"
 import { Button } from "@/ui/shadcn/button"
 import MyInput from "../MyInput"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/ui/shadcn/select"
+import { Label } from "@/ui/shadcn/label"
 
 type ServerActionFunction = {
     (
@@ -75,6 +84,7 @@ export default function MemberForm({
             <UploadPhoto picture={data?.picture} />
             <div className="lg:w-[45%]">
                 <MyInput
+                    className="p-4"
                     defaultValue={data?.name}
                     label="Name"
                     id="name"
@@ -86,6 +96,7 @@ export default function MemberForm({
             </div>
             <div className="lg:w-[45%]">
                 <MyInput
+                    className="p-4"
                     defaultValue={data?.email}
                     label="Email"
                     id="email"
@@ -95,16 +106,36 @@ export default function MemberForm({
                     <ErrorText dep={state} str={state.error.email[0]} />
                 )}
             </div>
-            <div className="lg:w-[45%]">
-                <MyInput
-                    defaultValue={data?.positionId}
-                    isSelectInput
-                    placeholder="-- Select Position --"
-                    options={positions}
-                    label="Position"
-                    id="positionId"
-                    name="positionId"
-                />
+
+            <div className="pt-[28px] lg:w-[45%]">
+                <Select name="positionId" defaultValue={data?.positionId.toString()}>
+                    <SelectTrigger id="positionId">
+                        <SelectValue
+                            placeholder={
+                                positions.find(
+                                    (el) => el.id === data?.positionId,
+                                )?.name ?? "Select a position"
+                            }
+                        />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup >
+                            <SelectLabel>Positions</SelectLabel>
+                            {positions.map((position) => (
+                                <SelectItem
+                                    // defaultChecked={
+                                    //     data?.positionId.toString() ===
+                                    //     position.id.toString()
+                                    // }
+                                    key={position.id}
+                                    value={position.id.toString()}
+                                >
+                                    {position.name}
+                                </SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
                 {state?.error?.positionId && (
                     <ErrorText dep={state} str={state.error.positionId[0]} />
                 )}
@@ -131,7 +162,7 @@ export default function MemberForm({
                 </div>
             )}
             <Button
-                className="mx-auto mt-4 w-full md:w-[40%] py-5"
+                className="mx-auto mt-4 w-full py-5 md:w-[40%]"
                 variant={"success"}
             >
                 {buttonText}

@@ -1,12 +1,11 @@
 import clsx from "clsx"
 import Label from "./Label"
+import { Input } from "../shadcn/input"
 
 type InputType = {
     options?: { id: string; name: string }[]
     containerClassName?: string
-    ref?: React.LegacyRef<HTMLInputElement>
     isForTable?: boolean
-    isSelectInput?: boolean
     name: string
     id: string
     label?: string
@@ -16,7 +15,6 @@ type InputType = {
 
 export default function MyInput({
     options,
-    isSelectInput,
     containerClassName,
     isForTable,
     label,
@@ -31,7 +29,6 @@ export default function MyInput({
         {
             "p-2": isForTable === true,
             "p-4": isForTable === undefined,
-            "p-0 pr-5": isSelectInput === true,
         },
     )
 
@@ -46,52 +43,15 @@ export default function MyInput({
             />
         )
 
-    if (isSelectInput)
-        return (
-            <div className={`flex flex-col gap-2 ${containerClassName} `}>
-                <Label htmlFor={id}>
-                    <>
-                        {label}
-                        {extra}
-                    </>
-                </Label>
-                <div
-                    className={`${customClassName} focus-within:outline focus-within:outline-[2px] focus-within:outline-offset-4 focus-within:outline-focus dark:focus-within:outline-focus-dark`}
-                >
-                    <select
-                        defaultValue={props.defaultValue}
-                        name={name}
-                        id={id}
-                        className="w-full cursor-pointer bg-transparent focus:outline-none"
-                    >
-                        <option value="" className="hidden">
-                            {props.placeholder}
-                        </option>
-                        {options?.map((option) => (
-                            <option key={option.id} value={option.id}>
-                                {option.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-        )
-
     return (
-        <div className={`flex flex-col gap-2 ${containerClassName}`}>
+        <div className={`flex items-start flex-col gap-2 ${containerClassName}`}>
             <Label htmlFor={id}>
                 <>
                     {label}
                     {extra}
                 </>
             </Label>
-            <input
-                size={1}
-                className={`${customClassName} ${className}`}
-                {...props}
-                name={name}
-                id={id}
-            />
+            <Input id={id} name={name} {...props}></Input>
         </div>
     )
 }

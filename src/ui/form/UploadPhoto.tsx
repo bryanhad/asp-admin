@@ -21,7 +21,7 @@ export default function UploadPhoto({ picture }: { picture?: string | null }) {
                 value={image.url}
                 onChange={() => {}}
             />
-            <div className="relative flex h-[130px] w-[130px] min-w-[130px] items-center justify-center overflow-hidden rounded-full bg-bg-soft dark:bg-bg-soft-dark">
+            <div className="bg-secondary relative flex h-[130px] w-[130px] min-w-[130px] items-center justify-center overflow-hidden rounded-full">
                 <Image
                     className={`h-auto w-auto object-cover ${
                         loading ? "brightness-75" : ""
@@ -43,7 +43,7 @@ export default function UploadPhoto({ picture }: { picture?: string | null }) {
                     <div className="flex items-center gap-4 max-sm:flex-wrap">
                         <div className="relative max-sm:w-full">
                             <UploadButton
-                                className="ut-allowed-content:dark:text-focus-dark ut-allowed-content:text-slate-500 ut-button:dark:focus-within:border-red-400 ut-allowed-content:hidden  ut-button:dark:bg-edit-dark ut-button:after:dark:bg-edit-darker-dark ut-button:bg-edit ut-button:after:bg-edit-darker ut-button:max-sm:px-8 ut-button:max-sm:py-3 ut-button:max-sm:text-sm ut-button:rounded-full ut-button:w-full sm:ut-button:px-16 sm:ut-button:h-[54px] max-sm:w-full"
+                                className=" ut-allowed-content:text-slate-500  ut-allowed-content:hidden    ut-button:bg-edit ut-button:after:bg-edit ut-button:max-sm:px-8 ut-button:max-sm:py-3 ut-button:max-sm:text-sm ut-button:rounded-full ut-button:w-full sm:ut-button:px-8 sm:ut-button:h-[44px] max-sm:w-full"
                                 content={{
                                     button: ["Change"],
                                 }}
@@ -77,7 +77,7 @@ export default function UploadPhoto({ picture }: { picture?: string | null }) {
                             type="button"
                             className="max-sm:w-full max-sm:px-8 max-sm:py-2 max-sm:text-sm"
                             onClick={() => setImage({ name: "", url: "" })}
-                            variant='default'
+                            variant="outline"
                         >
                             Remove
                         </Button>
@@ -91,7 +91,7 @@ export default function UploadPhoto({ picture }: { picture?: string | null }) {
             ) : (
                 <>
                     <UploadButton
-                        className="ut-allowed-content:dark:text-focus-dark ut-allowed-content:text-slate-500 ut-button:dark:focus-within:border-red-400 ut-button:after:dark:bg-blue-700 ut-button:bg-blue-600"
+                        className="ut-allowed-content:text-slate-500 ut-button:bg-blue-600"
                         appearance={{
                             container: {
                                 display: "flex",
@@ -117,7 +117,6 @@ export default function UploadPhoto({ picture }: { picture?: string | null }) {
                                     url: res[0].url,
                                 })
                             }
-                            console.log("Files: ", res)
                         }}
                         onUploadProgress={() => setLoading(true)}
                         onUploadError={(error: Error) => {
