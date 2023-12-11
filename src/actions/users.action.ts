@@ -57,7 +57,56 @@ export async function createUser(prevState: any, formData: FormData) {
         const msg = getPrismaError(err)
         return {
             success: false,
-            message: msg ?? "Database Error: Failed to Create Position.",
+            message: msg ?? "Database Error: Failed to Create User.",
+        }
+    }
+}
+
+export async function editUser(id: string, prevState: any, formData: FormData) {
+    const validation = UserFormSchema.omit({ password: true }).safeParse({
+        username: formData.get("username"),
+        email: formData.get("email"),
+        role: formData.get("role"),
+        memberId: formData.get("memberId"),
+        profilePicture: formData.get("picture"),
+    })
+
+    if (!validation.success) {
+        console.log(validation.error.flatten().fieldErrors)
+        return {
+            success: false,
+            error: validation.error.flatten().fieldErrors,
+            message: ``,
+        }
+    }
+
+    try {
+        console.log(validation.data.memberId)
+        const user = await prisma.user.update({
+            where: { id },
+            data: {
+                email: validation.data.email,
+                role: validation.data.role,
+                username: validation.data.username,
+                memberId:
+                    validation.data.memberId === "none" || ""
+                        ? null
+                        : validation.data.memberId,
+                profilePicture: validation.data.profilePicture,
+            },
+        })
+        revalidatePath("/users")
+        return {
+            success: true,
+            message: `Successfully edited user ${user.username}`,
+        }
+    } catch (err: any) {
+        console.log(err)
+        const msg = getPrismaError(err)
+        console.log(msg)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Edit User.",
         }
     }
 }

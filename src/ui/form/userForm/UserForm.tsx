@@ -25,17 +25,39 @@ import {
     SelectValue,
 } from "@/ui/shadcn/select"
 import { useFormState } from "react-dom"
-import { createUser } from "@/actions/users.action"
 import ErrorText from "../ErrorText"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
-import { redirect } from "next/navigation"
+import { redirect, usePathname } from "next/navigation"
 import UploadPhoto from "../UploadPhoto"
 import { User } from "@prisma/client"
+import {
+    AddUserServerActionArguments,
+    EditUserServerActionArguments,
+    UserServerActionFunctionReturn,
+} from "../../../../types"
+
+type ServerActionFunction = {
+    (
+        ...args: EditUserServerActionArguments
+    ): Promise<UserServerActionFunctionReturn>
+    (
+        ...args: AddUserServerActionArguments
+    ): Promise<UserServerActionFunctionReturn>
+}
+
+//honestly type definition below is from chat GPT, I dunno how it works.. but hey! it works for now lol :D
+type ServerActionType = CallableFunction & {
+    (
+        ...args: Parameters<ServerActionFunction> //Paremeters extracts the parameter types from ServerActionFunction.
+    ): ReturnType<ServerActionFunction> //ReturnType extracts the return type from ServerActionFunction. neat stuff.
+}
 
 type UserFormProps = {
+    buttonText: string
     members: { id: string; name: string }[]
     data?: User
+    serverAction: ServerActionType
 }
 
 const UserFormSchema = z.object({
@@ -46,20 +68,27 @@ const UserFormSchema = z.object({
     memberId: z.string().nullable(),
 })
 
-export default function UserForm({ members, data }: UserFormProps) {
+export default function UserForm({
+    members,
+    data,
+    buttonText,
+    serverAction,
+}: UserFormProps) {
+    const pathname = usePathname()
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof UserFormSchema>>({
         resolver: zodResolver(UserFormSchema),
         defaultValues: {
-            username: "",
-            email: "",
+            username: data?.username || "",
+            email: data?.email || "",
             password: "",
             role: "USER",
-            memberId: "",
+            memberId: data?.memberId || "",
         },
     })
 
-    const [state, serverAction] = useFormState(createUser, {
+    const [state, formAction] = useFormState(serverAction, {
         success: false,
         error: {},
         message: "",
@@ -71,11 +100,10 @@ export default function UserForm({ members, data }: UserFormProps) {
             redirect("/users")
         }
     }, [state.success, state.message])
-    
 
     return (
         <Form {...form}>
-            <form action={serverAction} className="space-y-8">
+            <form action={formAction} className="space-y-8">
                 <UploadPhoto picture={data?.profilePicture} />
 
                 <FormField
@@ -117,49 +145,57 @@ export default function UserForm({ members, data }: UserFormProps) {
                         </FormItem>
                     )}
                 />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Password</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="Super Secret Password"
-                                    type="password"
-                                    {...field}
-                                />
-                            </FormControl>
-                            {state.error?.password && (
-                                <ErrorText
-                                    dep={state}
-                                    str={state.error.password[0]}
-                                />
-                            )}
-                        </FormItem>
-                    )}
-                />
+                {!pathname.includes('/edit') && (
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Super Secret Password"
+                                        type="password"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                {state.error?.password && (
+                                    <ErrorText
+                                        dep={state}
+                                        str={state.error.password[0]}
+                                    />
+                                )}
+                            </FormItem>
+                        )}
+                    />
+                )}
                 <FormField
                     control={form.control}
                     name="memberId"
                     render={({ field }) => (
                         <FormItem>
+                                <FormLabel htmlFor="memberId">Select Member</FormLabel>
+
                             <Select
+                                defaultValue={
+                                    data?.memberId
+                                        ? data?.memberId.toString()
+                                        : ""
+                                }
+                                onValueChange={(value) => {
+                                    field.value = value === "none" ? "" : value
+                                    console.log(field.value)
+                                }}
                                 name="memberId"
                                 // defaultValue={data?.positionId.toString()}
                             >
-                                <SelectTrigger id="positionId">
+                                <SelectTrigger>
                                     <SelectValue
-                                        placeholder={
-                                            // positions.find(
-                                            //     (el) => el.id === data?.positionId,
-                                            // )?.name ??
-                                            "Is User A Member?"
-                                        }
+                                        placeholder={"Is User A Member?"}
                                     />
                                 </SelectTrigger>
                                 <SelectContent className="max-h-[12rem] overflow-y-auto">
-                                    <SelectGroup>
+                                    <SelectGroup >
                                         <SelectLabel>
                                             Registered Members
                                         </SelectLabel>
@@ -171,6 +207,9 @@ export default function UserForm({ members, data }: UserFormProps) {
                                                 {member.name}
                                             </SelectItem>
                                         ))}
+                                        <SelectItem value="none">
+                                            Not A User
+                                        </SelectItem>
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
@@ -188,7 +227,7 @@ export default function UserForm({ members, data }: UserFormProps) {
                                     name="role"
                                     className="flex gap-4"
                                     onValueChange={field.onChange}
-                                    defaultValue="USER"
+                                    defaultValue={data?.role || "USER"}
                                 >
                                     <div className="flex items-center space-x-2">
                                         <RadioGroupItem
@@ -215,28 +254,6 @@ export default function UserForm({ members, data }: UserFormProps) {
                                         </Label>
                                     </div>
                                 </RadioGroup>
-                                {/* <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className="flex flex-col space-y-1"
-                >
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value='ADMIN' />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      Admin
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className="flex items-center space-x-3 space-y-0">
-                    <FormControl>
-                      <RadioGroupItem value="USER" />
-                    </FormControl>
-                    <FormLabel className="font-normal">
-                      User
-                    </FormLabel>
-                  </FormItem>
-                </RadioGroup> */}
                             </FormControl>
                             {state.error?.role && (
                                 <ErrorText
@@ -247,10 +264,12 @@ export default function UserForm({ members, data }: UserFormProps) {
                         </FormItem>
                     )}
                 />
-                {state.error && state.message && (
+                {!state.success && state.message && (
                     <ErrorText dep={state} str={state.message} />
                 )}
-                <Button variant='success' type="submit">Submit</Button>
+                <Button variant="success" type="submit">
+                    {buttonText}
+                </Button>
             </form>
         </Form>
     )

@@ -163,3 +163,19 @@ export async function fetchMemberDataAndPositions(memberId: string) {
         throw new Error("Failed to fetch Member.")
     }
 }
+
+export async function fetchUserDataAndMembers(userId: string) {
+    noStore()
+    try {
+        const [userData, members] = await Promise.all([
+            prisma.user.findUnique({
+                where: { id: userId },
+            }),
+            prisma.member.findMany(),
+        ])
+        return [userData, members] as const
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch User.")
+    }
+}

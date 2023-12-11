@@ -1,3 +1,4 @@
+import { createUser } from "@/actions/users.action"
 import { prisma } from "@/lib/db/prisma"
 import UserForm from "@/ui/form/userForm/UserForm"
 import React from "react"
@@ -11,7 +12,11 @@ export default async function AddUserPage() {
     })
     return (
         <div>
-            <UserForm members={members} />
+            <UserForm
+                buttonText="Add User"
+                serverAction={createUser}
+                members={members}
+            />
         </div>
     )
 }
