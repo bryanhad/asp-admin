@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation"
 import React from "react"
-import ThemeButton from "./ThemeButton"
 import BurgerButton from "./BurgerButton"
 import BurgerMenu from "./BurgerMenu"
 import MiniUser from "./MiniUser"
@@ -15,19 +14,11 @@ export default function Header() {
         <>
             <div
                 style={{ height: `${HEADER_HEIGHT}px` }}
-                className="bg-background dark:border-b-active-dark border-b-active flex w-full items-center justify-between p-5 max-lg:fixed max-lg:z-30 max-lg:border-b"
+                className="bg-secondary lg:rounded-lg text-secondary-foreground border-b-active flex w-full items-center justify-between p-5 max-lg:fixed max-lg:z-30 max-lg:border-b"
             >
                 <div className="dark:text-text-soft-dark text-text-soft font-bold capitalize">
                     {pathname.split("/").pop() || "Dashboard"}
                 </div>
-                {/* <div className="dark:bg-active-dark bg-white flex items-center gap-3 rounded-lg p-3">
-                    <MdSearch />
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="dark:text-text-dark text-text-soft bg-transparent"
-                    />
-                </div> */}
                 <div className="flex gap-5">
                     <div className="hidden gap-5 lg:flex lg:items-center">
                         <MiniUser />

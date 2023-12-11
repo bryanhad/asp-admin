@@ -9,7 +9,7 @@ type CardProps = {
 
 export default function DashboardCard({ item }: CardProps) {
     return (
-        <div className="dark:bg-bg-soft-dark bg-bg-soft flex w-full cursor-pointer gap-5 rounded-lg p-5 hover:brightness-95 dark:hover:brightness-110">
+        <div className="bg-secondary flex w-full cursor-pointer gap-5 rounded-lg p-5 hover:brightness-95 dark:hover:brightness-110">
             {item.icon}
             <div className="flex flex-col gap-5">
                 <span className="">{item.title}</span>
