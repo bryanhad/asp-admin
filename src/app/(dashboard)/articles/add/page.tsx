@@ -1,4 +1,4 @@
-import TextEditor from "@/ui/tiptap/TextEditor"
+import TextEditor from "@/ui/form/articleForm/AddArticleForm"
 
 export default function AddArticlePage() {
     return (

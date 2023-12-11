@@ -17,7 +17,7 @@ export default function WordCount({
 
     const characterCount = editor.storage.characterCount.characters()
     return (
-        <div className="ml-auto pt-3 px-3 text-secondary-foreground/60">
+        <div className="ml-auto py-2 px-3 text-secondary-foreground/60">
             {formatNumberWithDot(characterCount)}/
             {formatNumberWithDot(maxCharacters)} characters
             <br />

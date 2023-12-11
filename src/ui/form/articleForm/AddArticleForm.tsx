@@ -7,15 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
-} from "../shadcn/form"
-import { Input } from "../shadcn/input"
-import { Button } from "../shadcn/button"
-import Tiptap from "./Tiptap"
+} from "../../shadcn/form"
+import { Input } from "../../shadcn/input"
+import { Button } from "../../shadcn/button"
+import Tiptap from "../../tiptap/Tiptap"
 
 export default function TextEditor() {
     const formSchema = z.object({
@@ -46,7 +45,7 @@ export default function TextEditor() {
 
     return (
         // spread the form from react-hook-form's form that we created
-        <Form {...form}> 
+        <Form {...form}>
             <form className="space-y-8">
                 <FormField
                     control={form.control}
@@ -55,7 +54,10 @@ export default function TextEditor() {
                         <FormItem>
                             <FormLabel>Title</FormLabel>
                             <FormControl>
-                                <Input placeholder="Your Awesome Title.." {...field} />
+                                <Input
+                                    placeholder="Your Awesome Title.."
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -65,12 +67,12 @@ export default function TextEditor() {
                 <FormField
                     control={form.control}
                     name="description"
-                    render={({ field }) => ( 
+                    render={({ field }) => (
                         <FormItem>
                             <FormLabel>Body</FormLabel>
                             <FormControl>
                                 {/* TIP TAP */}
-                                <Tiptap 
+                                <Tiptap
                                     maxCharacter={3000}
                                     description={field.value}
                                     onChange={field.onChange}

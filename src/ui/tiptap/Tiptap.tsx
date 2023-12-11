@@ -36,7 +36,7 @@ export default function Tiptap({
     })
 
     return (
-        <section className="flex flex-col">
+        <section className="flex flex-col rounded-lg border border-focus ring-offset-background focus-within:ring-2 focus-within:ring-ring/50 focus-within:ring-offset-2 focus:outline-none bg-background">
             <div className="overflow-hidden rounded-md border ">
                 <ToolBar editor={editor} />
                 <EditorContent editor={editor} />
