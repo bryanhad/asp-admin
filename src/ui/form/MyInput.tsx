@@ -1,18 +1,20 @@
 import clsx from "clsx"
 import Label from "./Label"
+import { Input } from "../shadcn/input"
 
-type TextAreaType = {
+type InputType = {
+    options?: { id: string; name: string }[]
     containerClassName?: string
-    ref?: React.LegacyRef<HTMLTextAreaElement>
     isForTable?: boolean
     name: string
     id: string
     label?: string
     className?: string
     extra?: React.ReactNode
-} & React.TextareaHTMLAttributes<HTMLTextAreaElement>
+} & React.InputHTMLAttributes<HTMLInputElement>
 
-export default function TextArea({
+export default function MyInput({
+    options,
     containerClassName,
     isForTable,
     label,
@@ -21,9 +23,9 @@ export default function TextArea({
     className,
     extra,
     ...props
-}: TextAreaType) {
+}: InputType) {
     const customClassName = clsx(
-        "rounded-lg border border-focus ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus:outline-none bg-background",
+        "rounded-lg border border-focus bg-white focus:outline focus:outline-[2px] focus:outline-offset-4 focus:outline-focus dark:border-focus-dark dark:bg-bg-soft-dark dark:focus:outline-focus-dark",
         {
             "p-2": isForTable === true,
             "p-4": isForTable === undefined,
@@ -32,7 +34,8 @@ export default function TextArea({
 
     if (!label)
         return (
-            <textarea
+            <input
+                size={1}
                 className={`${customClassName} ${className}`}
                 {...props}
                 name={name}
@@ -41,19 +44,14 @@ export default function TextArea({
         )
 
     return (
-        <div className={`flex flex-col gap-2 ${containerClassName}`}>
+        <div className={`flex items-start flex-col gap-2 ${containerClassName}`}>
             <Label htmlFor={id}>
                 <>
                     {label}
                     {extra}
                 </>
             </Label>
-            <textarea
-                className={`${customClassName} ${className}`}
-                {...props}
-                name={name}
-                id={id}
-            />
+            <Input id={id} name={name} {...props}></Input>
         </div>
     )
 }

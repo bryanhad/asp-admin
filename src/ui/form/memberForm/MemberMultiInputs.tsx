@@ -1,12 +1,12 @@
 "use client"
 
-import React, { Dispatch, SetStateAction, useState } from "react"
+import React, { Dispatch, SetStateAction } from "react"
 import MultiInput from "../MultiInput"
-import { MemberInfo } from "./MemberForm"
+import { MemberInfoState } from "../../../../types"
 
 type MemberMultiInputsProps = {
-    memberInfo: MemberInfo
-    setMemberInfo: Dispatch<SetStateAction<MemberInfo>>
+    memberInfo: MemberInfoState
+    setMemberInfo: Dispatch<SetStateAction<MemberInfoState>>
 }
 
 export default function MemberMultiInputs({

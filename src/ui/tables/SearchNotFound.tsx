@@ -13,9 +13,9 @@ export default function SearchNotFound({
                 <div className="text-[120px] max-lg:text-[80px]">
                     <TbDatabaseSearch />
                 </div>
-                <h1 className="text-4xl font-bold max-lg:text-2xl">
+                <p className="text-4xl font-bold max-lg:text-2xl">
                     No Result Found
-                </h1>
+                </p>
                 <p className="text-xl max-lg:text-lg">
                     {searchTerm} &lsquo;
                     <span className="mr-1 italic">{query}</span>&rsquo; is not
