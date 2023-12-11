@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react"
+import { Input } from "../shadcn/input"
+import { Button } from "../shadcn/button"
 
 type AddFormProps = {
     success: boolean
@@ -18,24 +20,21 @@ const AddForm = React.memo(
         }, [success, resMessage])
 
         return (
-            <div className="overflow-hidden rounded-lg border focus-within:border-focus dark:border-active-dark dark:bg-bg-soft-dark focus-within:dark:border-focus-dark">
+            <div className="rounded-lg border focus-within:outline-none focus-within:outline-offset-2 focus-within:outline-ring focus-within:ring-2">
                 <form
                     ref={formRef}
                     action={serverAction}
-                    className="flex gap-1"
+                    className="flex items-center gap-1"
                 >
-                    <input
-                        size={1}
+                    <Input
                         name={inputName}
                         type="text"
-                        className="flex-1 bg-transparent px-5"
+                        className="flex-1 border-none bg-transparent px-5 focus-visible:ring-transparent"
                     />
-                    <button
-                        type="submit"
-                        className="bg-success px-12 py-3 text-white dark:bg-success-dark"
-                    >
+
+                    <Button variant="success" size="lg" className="px-12 rounded-l-none">
                         ADD
-                    </button>
+                    </Button>
                 </form>
             </div>
         )

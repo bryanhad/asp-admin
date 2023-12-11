@@ -6,7 +6,7 @@ import Logo from "../Logo"
 
 export default function Sidebar() {
     return (
-        <nav className="sticky top-[20px]">
+        <nav className="sticky top-[20px] text-secondary-foreground">
             {/* LOGO */}
             <div className="mb-10">
                 <Logo />
@@ -15,7 +15,7 @@ export default function Sidebar() {
             <ul>
                 {sidebarLinks.map((item) => (
                     <li key={item.title}>
-                        <span className="dark:text-text-soft-dark text-text-soft my-3 text-[13px] font-bold">
+                        <span className="my-3 text-[13px] font-bold">
                             {item.title}
                         </span>
                         {item.list.map((link) => (
@@ -31,7 +31,7 @@ export default function Sidebar() {
                     //   await signOut();
                 }}
             >
-                <button className="dark:hover:bg-active-dark  my-1 flex w-full items-center gap-3 rounded-lg p-5">
+                <button className="bg-active  my-1 flex w-full items-center gap-3 rounded-lg p-5">
                     <MdLogout />
                     Logout
                 </button>
