@@ -2,7 +2,7 @@
 import { FiSearch } from "react-icons/fi"
 import { useSearchParams, usePathname, useRouter } from "next/navigation"
 import { useDebouncedCallback } from "use-debounce"
-import Input from "./Input"
+import { Input } from "../shadcn/input"
 
 export default function SearchBar({ placeholder }: { placeholder: string }) {
     // useSearchParams:
@@ -42,7 +42,7 @@ export default function SearchBar({ placeholder }: { placeholder: string }) {
                 }}
                 // so the input will be in sync base on url
                 defaultValue={searchParams.get("q")?.toString()}
-                className="peer w-full pl-10"
+                className="peer w-full pl-10 py-7"
             />
             <FiSearch className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-slate-700" />
         </div>

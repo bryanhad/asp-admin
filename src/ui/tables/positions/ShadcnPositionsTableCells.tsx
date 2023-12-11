@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import { Position } from "@prisma/client"
-import Input from "@/ui/form/Input"
-import TableButton from "../TableButton"
+import { Input } from "@/ui/shadcn/input"
 import DeleteConfirmation from "../DeleteConfirmation"
 import { deletePosition, editPosition } from "@/actions/positions.action"
 import ErrorText from "@/ui/form/ErrorText"
 import useFormLogic from "@/hooks/useFormLogic"
+import { Button } from "@/ui/shadcn/button"
+import { TableCell } from "@/ui/shadcn/table"
 
 export type FetchedPositionType = {
     _count: {
@@ -15,7 +16,7 @@ export type FetchedPositionType = {
     }
 } & Position
 
-export default function PositionsTableRow({
+export default function ShadcnPositionsTableCells({
     position,
 }: {
     position: FetchedPositionType
@@ -53,30 +54,40 @@ function IsEditingPosition({
     })
 
     return (
-        <td colSpan={3}>
-            <form action={dispatch} className="flex items-center gap-3 p-2">
-                <Input
-                    isForTable
-                    id="position"
-                    name="name"
-                    className="flex-1"
-                    defaultValue={position.name}
-                />
-                <TableButton
-                    type="button"
-                    onClick={() => setIsEditing(false)}
-                    buttonType="cancel"
+        <TableCell colSpan={3}>
+            <form
+                action={dispatch}
+                className="flex flex-col items-center gap-3 sm:flex-row"
+            >
+                <div className="flex w-full items-center gap-3">
+                    <Input
+                        id="position"
+                        name="name"
+                        className="flex-1"
+                        defaultValue={position.name}
+                    />
+                    <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setIsEditing(false)}
+                    >
+                        Cancel
+                    </Button>
+                </div>
+                <Button
+                    className="max-sm:w-full"
+                    variant="default"
+                    size="sm"
+                    type="submit"
                 >
-                    Cancel
-                </TableButton>
-                <TableButton type="submit" buttonType="save">
                     Save
-                </TableButton>
+                </Button>
             </form>
             {!state.success && state.message && (
                 <ErrorText dep={state} str={state.message} />
             )}
-        </td>
+        </TableCell>
     )
 }
 
@@ -91,9 +102,9 @@ function IsNotEditingPosition({
 
     return (
         <>
-            <td className="p-3">{position.name}</td>
-            <td className="p-3">{position._count.members}</td>
-            <td className="p-3">
+            <TableCell className="font-medium">{position.name}</TableCell>
+            <TableCell>{position._count.members}</TableCell>
+            <TableCell>
                 {showConfirmDelete ? (
                     <DeleteConfirmation
                         id={position.id}
@@ -101,22 +112,24 @@ function IsNotEditingPosition({
                         setShowDeleteConfirmation={setShowConfirmDelete}
                     />
                 ) : (
-                    <div className="flex justify-end gap-3">
-                        <TableButton
+                    <div className="flex flex-col justify-end gap-3 sm:flex-row">
+                        <Button
+                            size="sm"
                             onClick={() => setIsEditing((prev) => !prev)}
-                            buttonType="edit"
+                            variant="edit"
                         >
                             Edit
-                        </TableButton>
-                        <TableButton
+                        </Button>
+                        <Button
+                            size="sm"
                             onClick={() => setShowConfirmDelete(true)}
-                            buttonType="delete"
+                            variant="destructive"
                         >
                             Delete
-                        </TableButton>
+                        </Button>
                     </div>
                 )}
-            </td>
+            </TableCell>
         </>
     )
 }

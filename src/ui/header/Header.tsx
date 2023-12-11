@@ -7,6 +7,7 @@ import BurgerButton from "./BurgerButton"
 import BurgerMenu from "./BurgerMenu"
 import MiniUser from "./MiniUser"
 import { HEADER_HEIGHT } from "@/constants"
+import { ThemeToggle } from "./ThemeToggle"
 
 export default function Header() {
     const pathname = usePathname()
@@ -28,9 +29,9 @@ export default function Header() {
                     />
                 </div> */}
                 <div className="flex gap-5">
-                    <div className="hidden gap-5 lg:flex">
-                        <ThemeButton />
+                    <div className="hidden gap-5 lg:flex lg:items-center">
                         <MiniUser />
+                        <ThemeToggle/>
                     </div>
                     <BurgerButton />
                 </div>

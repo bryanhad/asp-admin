@@ -6,6 +6,7 @@ import { sidebarLinks } from "../sidebar/sidebarLinks"
 import SideBarLink from "../sidebar/SideBarLink"
 import ThemeButton from "./ThemeButton"
 import MiniUser from "./MiniUser"
+import { ThemeToggle } from "./ThemeToggle"
 
 export default function BurgerMenu({ navHeight }: { navHeight: number }) {
     const { isNavOpen, setIsNavOpen } = useNavbarContext()
@@ -44,7 +45,8 @@ export default function BurgerMenu({ navHeight }: { navHeight: number }) {
                         </li>
                     ))}
                     <div className="flex justify-end">
-                        <ThemeButton />
+                        <ThemeToggle/>
+                        {/* <ThemeButton /> */}
                     </div>
                 </ul>
             </section>
