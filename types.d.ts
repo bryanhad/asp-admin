@@ -2,7 +2,7 @@ export type ServerAction = {
     serverAction(prevState?: any): void
 }
 
-export type ServerActionFunctionReturn = {
+export type MemberServerActionFunctionReturn = {
     success: boolean
     error?:
         | {
@@ -35,3 +35,25 @@ export type EditMemberServerActionArguments = [
     formData: FormData,
 ]
 
+export type UserServerActionFunctionReturn = {
+    success: boolean
+    error?:
+        | {
+              role?: string[] | undefined
+              email?: string[] | undefined
+              username?: string[] | undefined
+              password?: string[] | undefined
+              memberId?: string[] | undefined
+              profilePicture?: string[] | undefined
+          }
+        | undefined
+    message: string
+}
+
+export type AddUserServerActionArguments = [prevState: any, formData: FormData]
+
+export type EditUserServerActionArguments = [
+    id: string,
+    prevState: any,
+    formData: FormData,
+]

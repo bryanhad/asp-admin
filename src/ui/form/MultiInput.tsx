@@ -9,7 +9,7 @@ import {
 } from "react"
 import { ButtonIcon } from "./ButtonIcon"
 import Label from "./Label"
-import { isNonEmptyArray } from "@/utils"
+import { isNonEmptyArray } from "@/lib/utils"
 import ErrorText from "./ErrorText"
 
 type GenericState = {

@@ -1,7 +1,7 @@
 "use server"
 
 import { prisma } from "@/lib/db/prisma"
-import getPrismaError from "@/utils/getPrismaError"
+import { getPrismaError } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
 

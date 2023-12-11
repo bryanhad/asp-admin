@@ -1,7 +1,7 @@
 "use server"
 
 import { prisma } from "@/lib/db/prisma"
-import getPrismaError from "@/utils/getPrismaError"
+import { getPrismaError } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
 import { MemberInfoState } from "../../types"
@@ -48,8 +48,8 @@ export async function createMember(
             ...memberInfo,
         }
         const newMember = await prisma.member.create({
-                data: newMemberData,
-            })
+            data: newMemberData,
+        })
         // Revalidate the cache for the invoices page and redirect the user.
         revalidatePath("/members")
         return {

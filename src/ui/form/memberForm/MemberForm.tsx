@@ -12,7 +12,7 @@ import {
     AddMemberServerActionArguments,
     EditMemberServerActionArguments,
     MemberInfoState,
-    ServerActionFunctionReturn,
+    MemberServerActionFunctionReturn,
 } from "../../../../types"
 import UploadPhoto from "../UploadPhoto"
 import { Button } from "@/ui/shadcn/button"
@@ -26,15 +26,14 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/ui/shadcn/select"
-import { Label } from "@/ui/shadcn/label"
 
 type ServerActionFunction = {
     (
         ...args: EditMemberServerActionArguments
-    ): Promise<ServerActionFunctionReturn>
+    ): Promise<MemberServerActionFunctionReturn>
     (
         ...args: AddMemberServerActionArguments
-    ): Promise<ServerActionFunctionReturn>
+    ): Promise<MemberServerActionFunctionReturn>
 }
 
 //honestly type definition below is from chat GPT, I dunno how it works.. but hey! it works for now lol :D
@@ -76,6 +75,7 @@ export default function MemberForm({
             redirect("/members")
         }
     }, [state.success, state.message])
+
     return (
         <form
             action={formAction}
@@ -108,25 +108,24 @@ export default function MemberForm({
             </div>
 
             <div className="pt-[28px] lg:w-[45%]">
-                <Select name="positionId" defaultValue={data?.positionId.toString()}>
+                <Select
+                    name="positionId"
+                    defaultValue={
+                        data?.positionId
+                            ? data?.positionId.toString()
+                            : ""
+                    }
+                >
                     <SelectTrigger id="positionId">
                         <SelectValue
-                            placeholder={
-                                positions.find(
-                                    (el) => el.id === data?.positionId,
-                                )?.name ?? "Select a position"
-                            }
+                            placeholder={"Select a position"}
                         />
                     </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup >
+                    <SelectContent className="overflow-y-auto max-h-[12rem]">
+                        <SelectGroup>
                             <SelectLabel>Positions</SelectLabel>
                             {positions.map((position) => (
                                 <SelectItem
-                                    // defaultChecked={
-                                    //     data?.positionId.toString() ===
-                                    //     position.id.toString()
-                                    // }
                                     key={position.id}
                                     value={position.id.toString()}
                                 >
