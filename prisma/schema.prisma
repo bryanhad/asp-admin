@@ -18,7 +18,7 @@ model User {
   username       String
   password       String
   role           Role
-  posts          Post[]
+  articles          Article[]
 
   isMember Boolean
   memberId String? @unique @db.ObjectId
@@ -60,7 +60,7 @@ model Position {
   @@map("positions")
 }
 
-model Post {
+model Article {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
   title    String
   body     String
@@ -71,7 +71,7 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("posts")
+  @@map("articles")
 }
 
 enum Role {
