@@ -2,7 +2,7 @@
 
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6"
 import Link from "next/link"
-import { generatePagination } from "@/utils/generatePagination"
+import { generatePagination } from "@/lib/utils"
 import { usePathname, useSearchParams } from "next/navigation"
 import clsx from "clsx"
 
