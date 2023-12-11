@@ -24,7 +24,7 @@ const AddForm = React.memo(
                 <form
                     ref={formRef}
                     action={serverAction}
-                    className="flex items-center gap-1 p-1"
+                    className="flex items-center gap-1"
                 >
                     <Input
                         name={inputName}
@@ -32,7 +32,7 @@ const AddForm = React.memo(
                         className="flex-1 border-none bg-transparent px-5 focus-visible:ring-transparent"
                     />
 
-                    <Button variant="default" size="lg" className="px-12">
+                    <Button variant="success" size="lg" className="px-12 rounded-l-none">
                         ADD
                     </Button>
                 </form>

@@ -14,7 +14,7 @@
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
     --secondary: 0 0% 98%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary-foreground: 240 4% 46%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 210 40% 96.1%;
@@ -28,6 +28,9 @@
     --edit: 189 94% 43%;
     --error: 0 84% 60%;
     --active: 240 6% 90%;
+    --active: 240 6% 90%;
+    --active-foreground: 240 5% 26%;
+    --success: 142 71% 45%;
   }
  
   .dark {
@@ -53,6 +56,7 @@
     --edit: 175 84% 32%;
     --error: 0 84% 60%;
     --active: 217 33% 17%;
+    --success: 142 76% 36%;
   }
 }
 
