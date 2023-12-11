@@ -61,3 +61,23 @@ export async function createUser(prevState: any, formData: FormData) {
         }
     }
 }
+
+export async function deleteUser(id: string, prevState: any) {
+    try {
+        const newUser = await prisma.user.delete({
+            where: { id },
+        })
+        revalidatePath("/users")
+
+        return {
+            success: true,
+            message: `Successfully deleted user "${newUser.username}"`,
+        }
+    } catch (err: any) {
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Delete User.",
+        }
+    }
+}

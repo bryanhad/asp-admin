@@ -1,5 +1,10 @@
+import { fetchUsersPageAmount } from "@/lib/data"
 import { Link } from "@/ui/Link"
 import SearchBar from "@/ui/form/SearchBar"
+import MembersTableSkeleton from "@/ui/skeletons/MembersTableSkeleton"
+import Pagination from "@/ui/tables/Pagination"
+import UsersTable from "@/ui/tables/users/UsersTable"
+import { Suspense } from "react"
 
 type UsersPageProps = {
     searchParams?: {
@@ -11,7 +16,7 @@ type UsersPageProps = {
 export default async function UsersPage({ searchParams }: UsersPageProps) {
     const query = searchParams?.q || ""
     const currentPage = Number(searchParams?.page) || 1
-    // const totalPages = await fetchUsersPageAmount(query)
+    const totalPages = await fetchUsersPageAmount(query)
 
     return (
         <>
@@ -24,15 +29,15 @@ export default async function UsersPage({ searchParams }: UsersPageProps) {
             >
                 Add User
             </Link>
-            {/* <Suspense
+            <Suspense
                 key={query + currentPage}
-                fallback={<UsersTableSkeleton />}
+                fallback={<MembersTableSkeleton />}
             >
-                <ShadcnUsersTable query={query} currentPage={currentPage} />
+                <UsersTable query={query} currentPage={currentPage} />
             </Suspense>
             <div className="flex justify-center">
                 <Pagination totalPages={totalPages} />
-            </div> */}
+            </div>
         </>
     )
 }
