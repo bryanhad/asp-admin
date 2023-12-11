@@ -14,7 +14,7 @@ type InputType = {
     extra?: React.ReactNode
 } & React.InputHTMLAttributes<HTMLInputElement>
 
-export default function Input({
+export default function MyInput({
     options,
     isSelectInput,
     containerClassName,

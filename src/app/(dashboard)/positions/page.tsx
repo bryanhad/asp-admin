@@ -1,5 +1,5 @@
 import { fetchPositionsPageAmount } from "@/lib/data"
-import AddPositionForm from "@/ui/form/AddPositionForm"
+import AddPositionForm from "@/ui/form/positionForm/AddPositionForm"
 import SearchBar from "@/ui/form/SearchBar"
 import PositionsTableSkeleton from "@/ui/skeletons/PositionsTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
@@ -29,7 +29,7 @@ export default async function PositionsPage({
                 key={query + currentPage}
                 fallback={<PositionsTableSkeleton />}
             >
-                <ShadcnPositionsTable query={query} currentPage={currentPage}/>
+                <ShadcnPositionsTable query={query} currentPage={currentPage} />
             </Suspense>
             <div className="flex justify-center">
                 <Pagination totalPages={totalPages} />

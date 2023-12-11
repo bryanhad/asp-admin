@@ -2,10 +2,10 @@
 
 import { useFormState } from "react-dom"
 import { useRef, useEffect } from "react"
-import AddForm from "./AddForm"
+import AddForm from "../AddForm"
 import { createPosition } from "@/actions/positions.action"
 import { toast } from "react-toastify"
-import ErrorText from "./ErrorText"
+import ErrorText from "../ErrorText"
 
 export default function AddPositionForm() {
     const isMounted = useRef(false)
@@ -33,7 +33,11 @@ export default function AddPositionForm() {
                 serverAction={dispatch}
             />
             {!state.success && state.message && (
-                <ErrorText className="text-center md:text-start" dep={state} str={state.message} />
+                <ErrorText
+                    className="text-center md:text-start"
+                    dep={state}
+                    str={state.message}
+                />
             )}
         </div>
     )

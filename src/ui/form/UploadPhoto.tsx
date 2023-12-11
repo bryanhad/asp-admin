@@ -3,9 +3,9 @@
 import { UploadButton } from "@/lib/uploadthing"
 import Image from "next/image"
 import { useState } from "react"
-import { Button } from "./Button"
 import { toast } from "react-toastify"
 import Loading from "../Loading"
+import { Button } from "../shadcn/button"
 
 export default function UploadPhoto({ picture }: { picture?: string | null }) {
     const [image, setImage] = useState({ name: "", url: picture ?? "" })
@@ -77,7 +77,7 @@ export default function UploadPhoto({ picture }: { picture?: string | null }) {
                             type="button"
                             className="max-sm:w-full max-sm:px-8 max-sm:py-2 max-sm:text-sm"
                             onClick={() => setImage({ name: "", url: "" })}
-                            buttonType="cancel"
+                            variant='default'
                         >
                             Remove
                         </Button>

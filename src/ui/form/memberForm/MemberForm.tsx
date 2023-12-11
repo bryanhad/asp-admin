@@ -1,10 +1,8 @@
 "use client"
 
-import Input from "../Input"
 import TextArea from "../TextArea"
 import MemberMultiInputs from "./MemberMultiInputs"
 import { useFormState } from "react-dom"
-import { Button } from "../Button"
 import ErrorText from "../ErrorText"
 import { Member, Position } from "@prisma/client"
 import { useEffect, useState } from "react"
@@ -17,6 +15,9 @@ import {
     ServerActionFunctionReturn,
 } from "../../../../types"
 import UploadPhoto from "../UploadPhoto"
+import { Input } from "@/ui/shadcn/input"
+import { Button } from "@/ui/shadcn/button"
+import MyInput from "../MyInput"
 
 type ServerActionFunction = {
     (
@@ -71,9 +72,9 @@ export default function MemberForm({
             action={formAction}
             className="flex flex-col gap-5 lg:flex-row lg:flex-wrap lg:justify-between"
         >
-            <UploadPhoto picture={data?.picture}/>
+            <UploadPhoto picture={data?.picture} />
             <div className="lg:w-[45%]">
-                <Input
+                <MyInput
                     defaultValue={data?.name}
                     label="Name"
                     id="name"
@@ -84,7 +85,7 @@ export default function MemberForm({
                 )}
             </div>
             <div className="lg:w-[45%]">
-                <Input
+                <MyInput
                     defaultValue={data?.email}
                     label="Email"
                     id="email"
@@ -95,7 +96,7 @@ export default function MemberForm({
                 )}
             </div>
             <div className="lg:w-[45%]">
-                <Input
+                <MyInput
                     defaultValue={data?.positionId}
                     isSelectInput
                     placeholder="-- Select Position --"
@@ -129,7 +130,10 @@ export default function MemberForm({
                     />
                 </div>
             )}
-            <Button className="mx-auto mt-4 w-full md:w-[40%]" buttonType="add">
+            <Button
+                className="mx-auto mt-4 w-full md:w-[40%] py-5"
+                variant={"success"}
+            >
                 {buttonText}
             </Button>
         </form>
