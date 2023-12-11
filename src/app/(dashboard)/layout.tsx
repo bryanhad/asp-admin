@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
     return (
         <Providers>
-            <NextSSRPlugin
+            <NextSSRPlugin //uploadthing package
                 /**
                  * The `extractRouterConfig` will extract **only** the route configs
                  * from the router to prevent additional information from being
@@ -25,7 +25,7 @@ export default function RootLayout({
                 routerConfig={extractRouterConfig(ourFileRouter)}
             />
             <div className="flex min-h-screen text-text dark:text-text-dark">
-                <div className="hidden flex-[1] bg-bg-soft p-5 dark:bg-bg-soft-dark lg:block">
+                <div className="hidden flex-[1] bg-secondary p-5 lg:block">
                     <Sidebar />
                 </div>
                 <main className="flex flex-[4] flex-col gap-5 lg:p-5">

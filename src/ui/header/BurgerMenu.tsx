@@ -6,6 +6,7 @@ import { sidebarLinks } from "../sidebar/sidebarLinks"
 import SideBarLink from "../sidebar/SideBarLink"
 import ThemeButton from "./ThemeButton"
 import MiniUser from "./MiniUser"
+import { ThemeToggle } from "./ThemeToggle"
 
 export default function BurgerMenu({ navHeight }: { navHeight: number }) {
     const { isNavOpen, setIsNavOpen } = useNavbarContext()
@@ -24,18 +25,18 @@ export default function BurgerMenu({ navHeight }: { navHeight: number }) {
             )}
             <section
                 style={{ top: `${navHeight}px` }}
-                className={`dark:bg-bg-soft-dark bg-bg-soft fixed z-[21] h-full w-[80%] duration-300 lg:hidden ${
+                className={`fixed z-[21] h-full w-[80%] bg-background p-6 border-l border-l-active flex flex-col gap-4 duration-300 lg:hidden ${
                     isNavOpen ? "right-[0%]" : "-right-[100%]"
                 }`}
             >
-                <div className="flex justify-end p-6">
+                <div className="flex justify-end">
                     <MiniUser />
                 </div>
                 {/* MENU */}
-                <ul className="px-6 md:px-8">
+                <ul className="border-t md:px-8">
                     {sidebarLinks.map((item) => (
                         <li key={item.title}>
-                            <p className="dark:text-text-soft-dark text-text-soft my-2 max-lg:mb-2 text-[13px] font-bold">
+                            <p className="dark:text-text-soft-dark text-text-soft my-2 text-[13px] font-bold max-lg:mb-2">
                                 {item.title}
                             </p>
                             {item.list.map((link) => (
@@ -43,10 +44,11 @@ export default function BurgerMenu({ navHeight }: { navHeight: number }) {
                             ))}
                         </li>
                     ))}
-                    <div className="flex justify-end">
-                        <ThemeButton />
-                    </div>
                 </ul>
+                    <div className="flex justify-end">
+                        <ThemeToggle />
+                        {/* <ThemeButton /> */}
+                    </div>
             </section>
         </>
     )
