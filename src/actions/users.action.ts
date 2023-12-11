@@ -26,7 +26,6 @@ export async function createUser(prevState: any, formData: FormData) {
     })
 
     if (!validation.success) {
-        console.log(validation.error.flatten().fieldErrors)
         return {
             success: false,
             error: validation.error.flatten().fieldErrors,
@@ -53,7 +52,6 @@ export async function createUser(prevState: any, formData: FormData) {
             message: `Successfully created user ${user.username}`,
         }
     } catch (err: any) {
-        console.log(err)
         const msg = getPrismaError(err)
         return {
             success: false,
@@ -72,7 +70,6 @@ export async function editUser(id: string, prevState: any, formData: FormData) {
     })
 
     if (!validation.success) {
-        console.log(validation.error.flatten().fieldErrors)
         return {
             success: false,
             error: validation.error.flatten().fieldErrors,
@@ -81,7 +78,6 @@ export async function editUser(id: string, prevState: any, formData: FormData) {
     }
 
     try {
-        console.log(validation.data.memberId)
         const user = await prisma.user.update({
             where: { id },
             data: {
@@ -101,9 +97,7 @@ export async function editUser(id: string, prevState: any, formData: FormData) {
             message: `Successfully edited user ${user.username}`,
         }
     } catch (err: any) {
-        console.log(err)
         const msg = getPrismaError(err)
-        console.log(msg)
         return {
             success: false,
             message: msg ?? "Database Error: Failed to Edit User.",
