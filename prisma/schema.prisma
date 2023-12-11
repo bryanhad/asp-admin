@@ -13,14 +13,13 @@ datasource db {
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  email          String  @unique
+  email          String    @unique
   profilePicture String?
   username       String
   password       String
   role           Role
-  articles          Article[]
+  articles       Article[]
 
-  isMember Boolean
   memberId String? @unique @db.ObjectId
   member   Member? @relation(fields: [memberId], references: [id])
 
@@ -43,7 +42,6 @@ model Member {
   positionId   String   @db.ObjectId
   position     Position @relation(fields: [positionId], references: [id])
 
-  isUser Boolean @default(false)
   User   User?
 
   createdAt DateTime @default(now())

@@ -76,6 +76,7 @@ export default function MemberForm({
             redirect("/members")
         }
     }, [state.success, state.message])
+    
     return (
         <form
             action={formAction}
@@ -108,7 +109,10 @@ export default function MemberForm({
             </div>
 
             <div className="pt-[28px] lg:w-[45%]">
-                <Select name="positionId" defaultValue={data?.positionId.toString()}>
+                <Select
+                    name="positionId"
+                    defaultValue={data?.positionId.toString()}
+                >
                     <SelectTrigger id="positionId">
                         <SelectValue
                             placeholder={
@@ -118,15 +122,11 @@ export default function MemberForm({
                             }
                         />
                     </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup >
+                    <SelectContent className="overflow-y-auto max-h-[12rem]">
+                        <SelectGroup>
                             <SelectLabel>Positions</SelectLabel>
                             {positions.map((position) => (
                                 <SelectItem
-                                    // defaultChecked={
-                                    //     data?.positionId.toString() ===
-                                    //     position.id.toString()
-                                    // }
                                     key={position.id}
                                     value={position.id.toString()}
                                 >
