@@ -15,7 +15,7 @@ export default function Header() {
         <>
             <div
                 style={{ height: `${HEADER_HEIGHT}px` }}
-                className="dark:bg-bg-soft-dark bg-bg-soft dark:border-b-active-dark border-b-active flex w-full items-center justify-between p-5 max-lg:fixed max-lg:z-30 max-lg:border-b"
+                className="bg-background dark:border-b-active-dark border-b-active flex w-full items-center justify-between p-5 max-lg:fixed max-lg:z-30 max-lg:border-b"
             >
                 <div className="dark:text-text-soft-dark text-text-soft font-bold capitalize">
                     {pathname.split("/").pop() || "Dashboard"}
