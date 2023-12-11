@@ -2,7 +2,6 @@
 
 import React from "react"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
     Form,
@@ -15,31 +14,16 @@ import {
 import { Input } from "../../shadcn/input"
 import { Button } from "../../shadcn/button"
 import Tiptap from "../../tiptap/Tiptap"
+import { ArticleFormSchema, ArticlesFormT } from "@/actions/articles.action"
 
 export default function TextEditor() {
-    const formSchema = z.object({
-        title: z
-            .string()
-            .min(5, { message: "Minimum title length is 5 characters long!" })
-            .max(100, {
-                message: "Maximum title length is 100 characters long :(",
-            }),
-        description: z
-            .string()
-            .min(10, {
-                message: "Minimum description length is 10 characters long!",
-            })
-            .trim(),
-    })
-
-    type formSchemaT = z.infer<typeof formSchema>
-
-    const form = useForm<formSchemaT>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<ArticlesFormT>({
+        resolver: zodResolver(ArticleFormSchema),
         mode: "onChange",
         defaultValues: {
             title: "",
-            description: "",
+            body: "",
+            image: "",
         },
     })
 
@@ -66,10 +50,10 @@ export default function TextEditor() {
                 {/* RICH EDITOR */}
                 <FormField
                     control={form.control}
-                    name="description"
+                    name="body"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Body</FormLabel>
+                            <FormLabel>Article Body</FormLabel>
                             <FormControl>
                                 {/* TIP TAP */}
                                 <Tiptap

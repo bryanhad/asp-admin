@@ -5,30 +5,34 @@ import getPrismaError from "@/utils/getPrismaError"
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
 
-const FormSchema = z.object({
-    email: z
-        .string({ required_error: "Email field is required" })
-        .email("Please use correct email format"),
-    name: z
-        .string({ required_error: "Full name field is required" })
-        .min(5, "Minimum length of full name is 5 characters"),
-    positionId: z.string().min(12, "Please select a position"),
-    picture: z.string().nullable(),
-    description: z.string().nullable(),
+export const ArticleFormSchema = z.object({
+    title: z
+        .string()
+        .min(5, { message: "Minimum title length is 5 characters long!" })
+        .max(100, {
+            message: "Maximum title length is 100 characters long :(",
+        }),
+    body: z
+        .string()
+        .min(10, {
+            message: "Minimum description length is 10 characters long!",
+        })
+        .trim(),
+    image: z.string({ required_error: "Please select an image" }),
 })
 
+export type ArticlesFormT = z.infer<typeof ArticleFormSchema>
+
 export async function createArticle(
-    articleInfo: ArticleInfoState,
+    authorId: string,
     prevState: any,
     formData: FormData,
 ) {
     // Validate form using Zod
-    const validation = FormSchema.safeParse({
-        name: formData.get("name"),
-        email: formData.get("email"),
-        positionId: formData.get("positionId"),
-        picture: formData.get("picture"),
-        description: formData.get("description"),
+    const validation = ArticleFormSchema.safeParse({
+        title: formData.get("title"),
+        body: formData.get("body"),
+        image: formData.get("image"),
     })
 
     // If form validation fails, return errors early. Otherwise, continue.
@@ -42,18 +46,14 @@ export async function createArticle(
 
     // Insert data into the database
     try {
-        const newArticleData = {
-            ...validation.data,
-            ...articleInfo,
-        }
         const newArticle = await prisma.article.create({
-                data: newArticleData,
-            })
+            data: { ...validation.data, authorId },
+        })
         // Revalidate the cache for the invoices page and redirect the user.
         revalidatePath("/articles")
         return {
             success: true,
-            message: `Successfully created article "${newArticle.name}"`,
+            message: `Successfully created article "${newArticle.title}"`,
         }
     } catch (err: any) {
         // If a database error occurs, return a more specific error.
