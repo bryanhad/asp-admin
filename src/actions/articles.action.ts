@@ -35,6 +35,7 @@ export async function createArticle(
     })
 
     if (!validation.success) {
+        console.log( validation.error.flatten().fieldErrors)
         return {
             success: false,
             error: validation.error.flatten().fieldErrors,
@@ -57,6 +58,66 @@ export async function createArticle(
         return {
             success: false,
             message: msg ?? "Database Error: Failed to Create Article.",
+        }
+    }
+}
+
+export async function editArticle(
+    articleId: string,
+    prevState: any,
+    formData: FormData,
+) {
+    console.log(articleId, formData)
+    const validation = ArticleFormSchema.safeParse({
+        title: formData.get("title"),
+        body: formData.get("body"),
+        image: formData.get("picture"),
+    })
+
+    if (!validation.success) {
+        return {
+            success: false,
+            error: validation.error.flatten().fieldErrors,
+            message: "Failed to Add Article",
+        }
+    }
+
+    try {
+        const newArticle = await prisma.article.update({
+            where: { id: articleId },
+            data: validation.data,
+        })
+        revalidatePath("/articles")
+        return {
+            success: true,
+            message: `Successfully edited article "${newArticle.title}"`,
+        }
+    } catch (err: any) {
+        console.log(err)
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Edit Article.",
+        }
+    }
+}
+
+export async function deleteArticle(id: string, prevState: any) {
+    try {
+        const newArticle = await prisma.article.delete({
+            where: { id },
+        })
+        revalidatePath("/articles")
+
+        return {
+            success: true,
+            message: `Successfully deleted article "${newArticle.title}"`,
+        }
+    } catch (err: any) {
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Delete Article.",
         }
     }
 }
