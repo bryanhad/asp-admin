@@ -18,7 +18,7 @@ const ArticleFormSchema = z.object({
             message: "Minimum description length is 10 characters long!",
         })
         .trim(),
-    image: z.string({ required_error: "Please select an image" }),
+    image: z.string({ required_error: "Please select a thumbnail" }).min(1, "Please select a thumbnail"),
 })
 
 export type ArticlesFormT = z.infer<typeof ArticleFormSchema>

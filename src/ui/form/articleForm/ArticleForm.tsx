@@ -16,6 +16,7 @@ import {
     EditArticleServerActionArguments,
 } from "../../../../types"
 import { Article } from "@prisma/client"
+import ErrorText from "../ErrorText"
 
 type ServerActionFunction = {
     (
@@ -63,15 +64,24 @@ export default function ArticleForm({
     return (
         // spread the form from react-hook-form's form that we created
         <form action={formAction} className="flex flex-col gap-3">
+            <div>
             <UploadPhoto picture={data?.image} defaultPic="/noimage.png" />
-            <MyInput
-                defaultValue={data?.title}
-                label="Title"
-                id="title"
-                name="title"
-                placeholder="Your Awesome Title.."
-            />
-
+            {state?.error?.image && (
+                    <ErrorText dep={state} str={state.error.image[0]} />
+                )}
+            </div>
+            <div>
+                <MyInput
+                    defaultValue={data?.title}
+                    label="Title"
+                    id="title"
+                    name="title"
+                    placeholder="Your Awesome Title.."
+                />
+                {state?.error?.title && (
+                    <ErrorText dep={state} str={state.error.title[0]} />
+                )}
+            </div>
             {/* RICH EDITOR */}
             <div className="flex flex-col gap-2">
                 <Label htmlFor="body">Article Body</Label>
@@ -82,12 +92,26 @@ export default function ArticleForm({
                     onChange={() => {}}
                     className="hidden"
                 />
-                <Tiptap
-                    maxCharacter={3000}
-                    description={body}
-                    onChange={setBody}
-                />
+                <div>
+                    <Tiptap
+                        maxCharacter={3000}
+                        description={body}
+                        onChange={setBody}
+                    />
+                    {state?.error?.body && (
+                        <ErrorText dep={state} str={state.error.body[0]} />
+                    )}
+                </div>
             </div>
+            {!state.success && state.message && (
+                <div className="w-full">
+                    <ErrorText
+                        className="text-center"
+                        dep={state}
+                        str={state.message}
+                    />
+                </div>
+            )}
             <div className="flex justify-center">
                 <Button
                     className="w-full max-w-[50%]"
