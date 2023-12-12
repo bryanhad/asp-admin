@@ -44,8 +44,10 @@ export default function MyInput({
         )
 
     return (
-        <div className={`flex items-start flex-col gap-2 ${containerClassName}`}>
-            <Label htmlFor={id}>
+        <div
+            className={`flex flex-col items-start gap-2 ${containerClassName}`}
+        >
+            <Label htmlFor={id} className="ml-1">
                 <>
                     {label}
                     {extra}

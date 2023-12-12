@@ -76,6 +76,7 @@ export default function ArticleForm({
                     id="title"
                     name="title"
                     placeholder="Your Awesome Title.."
+                    containerClassName="md:max-w-[500px]"
                 />
                 {state?.error?.title && (
                     <ErrorText dep={state} str={state.error.title[0]} />
