@@ -60,3 +60,24 @@ export async function createArticle(
         }
     }
 }
+
+
+export async function deleteArticle(id: string, prevState: any) {
+    try {
+        const newArticle = await prisma.article.delete({
+            where: { id },
+        })
+        revalidatePath("/articles")
+
+        return {
+            success: true,
+            message: `Successfully deleted article "${newArticle.title}"`,
+        }
+    } catch (err: any) {
+        const msg = getPrismaError(err)
+        return {
+            success: false,
+            message: msg ?? "Database Error: Failed to Delete Article.",
+        }
+    }
+}
