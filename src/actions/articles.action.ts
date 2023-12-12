@@ -5,7 +5,7 @@ import { getPrismaError } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 import { z } from "zod"
 
-export const ArticleFormSchema = z.object({
+const ArticleFormSchema = z.object({
     title: z
         .string()
         .min(5, { message: "Minimum title length is 5 characters long!" })
@@ -28,14 +28,12 @@ export async function createArticle(
     prevState: any,
     formData: FormData,
 ) {
-    // Validate form using Zod
     const validation = ArticleFormSchema.safeParse({
         title: formData.get("title"),
         body: formData.get("body"),
-        image: formData.get("image"),
+        image: formData.get("picture"),
     })
 
-    // If form validation fails, return errors early. Otherwise, continue.
     if (!validation.success) {
         return {
             success: false,
@@ -44,19 +42,16 @@ export async function createArticle(
         }
     }
 
-    // Insert data into the database
     try {
         const newArticle = await prisma.article.create({
             data: { ...validation.data, authorId },
         })
-        // Revalidate the cache for the invoices page and redirect the user.
         revalidatePath("/articles")
         return {
             success: true,
             message: `Successfully created article "${newArticle.title}"`,
         }
     } catch (err: any) {
-        // If a database error occurs, return a more specific error.
         console.log(err)
         const msg = getPrismaError(err)
         return {
