@@ -69,14 +69,13 @@
     @apply bg-background text-foreground;
   }
   .tiptap hr {
-    margin-top: none;
-    margin-bottom: 1rem;
+    @apply mt-0 mb-2
   }
   
-  .tiptap h1,h2 {  /* I think this bit does nothing tbh lol :D  */
-    margin: none;
-    line-height: 1;
+  .tiptap h1,h2,p { 
+    @apply leading-none mb-0
   }
+
 }
 
 @keyframes shakeCenter {

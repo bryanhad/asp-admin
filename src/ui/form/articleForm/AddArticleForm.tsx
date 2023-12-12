@@ -15,6 +15,7 @@ import { Input } from "../../shadcn/input"
 import { Button } from "../../shadcn/button"
 import Tiptap from "../../tiptap/Tiptap"
 import { ArticleFormSchema, ArticlesFormT } from "@/actions/articles.action"
+import { z } from "zod"
 
 export default function TextEditor() {
     const form = useForm<ArticlesFormT>({
@@ -27,10 +28,14 @@ export default function TextEditor() {
         },
     })
 
+    function onSubmit(values) {
+        console.log('object')
+    }
+
     return (
         // spread the form from react-hook-form's form that we created
         <Form {...form}>
-            <form className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                     control={form.control}
                     name="title"
@@ -56,11 +61,17 @@ export default function TextEditor() {
                             <FormLabel>Article Body</FormLabel>
                             <FormControl>
                                 {/* TIP TAP */}
-                                <Tiptap
+                                <>
+                                <Input
+                                    placeholder="Your Awesome Title.."
+                                    {...field}
+                                />
+                                {/* <Tiptap
                                     maxCharacter={3000}
                                     description={field.value}
                                     onChange={field.onChange}
-                                />
+                                /> */}
+                                </>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
