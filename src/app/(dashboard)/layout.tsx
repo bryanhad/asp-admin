@@ -1,4 +1,3 @@
-import "@/ui/globals.css"
 import Sidebar from "@/ui/sidebar/SideBar"
 import Header from "@/ui/header/Header"
 import Providers from "@/providers/Providers"

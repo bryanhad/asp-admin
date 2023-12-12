@@ -15,14 +15,9 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html
-            lang="en"
-            // className="light"
-            // style={{ colorScheme: "light" }}
-            suppressHydrationWarning
-        >
+        <html lang="en" suppressHydrationWarning>
             <body
-                className={`${inter.className} overflow-x-hidden  antialiased dark:bg-bg-dark dark:text-text-dark`}
+                className={`${inter.className} dark:bg-bg-dark  dark:text-text-dark overflow-x-hidden antialiased`}
             >
                 {children}
             </body>
