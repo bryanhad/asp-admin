@@ -9,7 +9,7 @@ import {
 } from "react"
 import { ButtonIcon } from "./ButtonIcon"
 import Label from "./Label"
-import { isNonEmptyArray } from "@/utils"
+import { isNonEmptyArray } from "@/lib/utils"
 import ErrorText from "./ErrorText"
 
 type GenericState = {
@@ -110,7 +110,7 @@ export default function MultiInput<T extends GenericState>({
                 </Label>
             </div>
             <div className="text-input-color">
-                <section className="group flex rounded-lg border border-focus bg-white focus-within:outline focus-within:outline-[2px] focus-within:outline-offset-4 focus-within:outline-focus dark:border-focus-dark dark:bg-bg-soft-dark dark:focus-within:outline-focus-dark">
+                <section className="group flex rounded-lg border border-focus ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
                     <input
                         size={1}
                         ref={ref}

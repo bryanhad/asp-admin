@@ -58,6 +58,64 @@ export async function fetchFilteredMembers(query: string, currentPage: number) {
     }
 }
 
+export async function fetchFilteredUsers(query: string, currentPage: number) {
+    noStore()
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE
+
+    try {
+        const users = await prisma.user.findMany({
+            skip: offset,
+            take: ITEMS_PER_PAGE,
+            where: {
+                username: {
+                    contains: query,
+                    mode: "insensitive",
+                },
+            },
+            orderBy: { id: "desc" },
+        })
+        return users
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch users")
+    }
+}
+
+export async function fetchFilteredArticles(
+    query: string,
+    currentPage: number,
+) {
+    noStore()
+
+    const offset = (currentPage - 1) * ITEMS_PER_PAGE
+
+    try {
+        const articles = await prisma.article.findMany({
+            skip: offset,
+            take: ITEMS_PER_PAGE,
+            where: {
+                OR: [
+                    { title: { contains: query, mode: "insensitive" } },
+                    {
+                        author: {
+                            username: { contains: query, mode: "insensitive" },
+                        },
+                    },
+                ],
+            },
+            include: {
+                author: { select: { username: true, profilePicture: true } },
+            },
+            orderBy: { id: "desc" },
+        })
+        return articles
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch articles")
+    }
+}
+
 export async function fetchPositionsPageAmount(query: string) {
     noStore()
     try {
@@ -102,6 +160,54 @@ export async function fetchMembersPageAmount(query: string) {
     }
 }
 
+export async function fetchUsersPageAmount(query: string) {
+    noStore()
+    try {
+        const { _all } = await prisma.user.count({
+            where: {
+                username: {
+                    contains: query,
+                    mode: "insensitive",
+                },
+            },
+            select: {
+                _all: true,
+            },
+        })
+        const totalPages = Math.ceil(Number(_all) / ITEMS_PER_PAGE)
+        return totalPages
+    } catch (error) {
+        console.error("Database Error:", error)
+        throw new Error("Failed to fetch total pages amount of Users.")
+    }
+}
+
+export async function fetchArticlesPageAmount(query: string) {
+    noStore()
+    try {
+        const { _all } = await prisma.article.count({
+            where: {
+                OR: [
+                    { title: { contains: query, mode: "insensitive" } },
+                    {
+                        author: {
+                            username: { contains: query, mode: "insensitive" },
+                        },
+                    },
+                ],
+            },
+            select: {
+                _all: true,
+            },
+        })
+        const totalPages = Math.ceil(Number(_all) / ITEMS_PER_PAGE)
+        return totalPages
+    } catch (error) {
+        console.error("Database Error:", error)
+        throw new Error("Failed to fetch total pages amount of Articles.")
+    }
+}
+
 export async function fetchMemberDataAndPositions(memberId: string) {
     noStore()
     try {
@@ -115,5 +221,34 @@ export async function fetchMemberDataAndPositions(memberId: string) {
     } catch (err) {
         console.error("Database Error:", err)
         throw new Error("Failed to fetch Member.")
+    }
+}
+
+export async function fetchUserDataAndMembers(userId: string) {
+    noStore()
+    try {
+        const [userData, members] = await Promise.all([
+            prisma.user.findUnique({
+                where: { id: userId },
+            }),
+            prisma.member.findMany(),
+        ])
+        return [userData, members] as const
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch User.")
+    }
+}
+
+export async function fetchArticleData(articleId: string) {
+    noStore()
+    try {
+        const articleData = await prisma.article.findUnique({
+            where: { id: articleId },
+        })
+        return articleData
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch Article.")
     }
 }

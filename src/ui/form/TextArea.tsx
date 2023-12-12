@@ -23,7 +23,7 @@ export default function TextArea({
     ...props
 }: TextAreaType) {
     const customClassName = clsx(
-        "rounded-lg border border-focus bg-white focus:outline focus:outline-[2px] focus:outline-offset-4 focus:outline-focus dark:border-focus-dark dark:bg-bg-soft-dark dark:focus:outline-focus-dark",
+        "rounded-lg border border-focus ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus:outline-none bg-background",
         {
             "p-2": isForTable === true,
             "p-4": isForTable === undefined,
