@@ -2,6 +2,7 @@ import DashboardCards from "@/ui/dashboard/DashboardCards"
 import { getServerSession } from "next-auth"
 import { authOptions } from "../api/auth/[...nextauth]/route"
 import UserClient from "@/ui/UserClient"
+import SignInButton from "@/ui/SignInButton"
 
 export default async function DashboardPage() {
     const session = await getServerSession(authOptions) // MAKE SURE TO AWAIT!
@@ -10,6 +11,7 @@ export default async function DashboardPage() {
     // this makes sure that things will be consistant.
     return (
         <>
+            <SignInButton />
             <DashboardCards />
             <h1 className="font-bold">SERVER SESSION</h1>
             <pre>{JSON.stringify(session)}</pre>

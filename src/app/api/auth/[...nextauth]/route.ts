@@ -1,3 +1,5 @@
+import { prisma } from "@/lib/db/prisma"
+import { compare } from "bcrypt"
 import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
@@ -21,8 +23,25 @@ export const authOptions:NextAuthOptions ={
             },
 
             async authorize(credentials, req) {
-                const user = {id: '1', name: 'Bryan', email: 'bryan@gmail.com'}
-                return user
+                if (!credentials?.email || !credentials.password) {
+                    return null //returning null just means the credentials that the user provided, simply is not correct.
+                }
+
+                const user = await prisma.user.findUnique({where: {email: credentials.email}})
+                if (!user) {
+                    return null
+                }
+                const isValidPassword = await compare(credentials.password, user.password)
+                if (!isValidPassword) {
+                    return null
+                }
+
+                return {
+                    id: user.id.toString(),
+                    username: user.username,
+                    profilePicture: user.profilePicture,
+                    email: user.email,
+                }
             },
         }),
     ],
