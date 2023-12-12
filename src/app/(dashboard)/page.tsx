@@ -14,6 +14,7 @@ export default async function DashboardPage() {
             <SignInButton />
             <DashboardCards />
             <h1 className="font-bold">SERVER SESSION</h1>
+            <p>YOUR ROLE: {session?.user.role}</p>
             <pre>{JSON.stringify(session)}</pre>
             <h1 className="font-bold">CLIENT SESSION</h1>
             <UserClient />

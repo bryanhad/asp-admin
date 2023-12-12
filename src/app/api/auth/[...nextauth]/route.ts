@@ -42,12 +42,13 @@ export const authOptions: NextAuthOptions = {
                     return null
                 }
 
-                return {    // all of this return object will be returned and will
+                return {
+                    // all of this return object will be returned and will
                     id: user.id.toString(),
                     username: user.username,
                     profilePicture: user.profilePicture,
                     email: user.email,
-                    randomKey: "cooool",
+                    role: user.role,
                 }
             },
         }),
@@ -57,18 +58,17 @@ export const authOptions: NextAuthOptions = {
             //the user param, is only passed into this func, the first time the user logs in. maybe from Oauth, or from credential login!
             // so the user token will not always be present! only on the first time they login
 
-            console.log("JWT Callback", { token, user })
+            // console.log("JWT Callback", { token, user })
             if (user) {
-                const myUser = user as User
                 return {
                     ...token,
-                    ...myUser,
+                    ...user,
                 }
             }
             return token
         },
         session: ({ session, token }) => {
-            console.log("Session Callback", { session, token })
+            // console.log("Session Callback", { session, token })
             return {
                 ...session,
                 user: {
@@ -76,7 +76,9 @@ export const authOptions: NextAuthOptions = {
                     id: token.id,
                     username: token.username,
                     profilePicture: token.profilePicture,
-                }
+                    email: token.email,
+                    role: token.role,
+                },
             }
         },
 
