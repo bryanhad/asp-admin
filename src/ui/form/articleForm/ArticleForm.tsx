@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react"
 import { Button } from "../../shadcn/button"
 import Tiptap from "../../tiptap/Tiptap"
-import { createArticle } from "@/actions/articles.action"
 import Label from "../Label"
 import { useFormState } from "react-dom"
 import MyInput from "../MyInput"
