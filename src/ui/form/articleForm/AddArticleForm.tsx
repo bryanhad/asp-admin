@@ -1,84 +1,65 @@
 "use client"
 
-import React from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "../../shadcn/form"
-import { Input } from "../../shadcn/input"
+import React, { useEffect, useState } from "react"
 import { Button } from "../../shadcn/button"
 import Tiptap from "../../tiptap/Tiptap"
-import { ArticleFormSchema, ArticlesFormT } from "@/actions/articles.action"
-import { z } from "zod"
+import { createArticle } from "@/actions/articles.action"
+import Label from "../Label"
+import { useFormState } from "react-dom"
+import MyInput from "../MyInput"
+import UploadPhoto from "../UploadPhoto"
+import { toast } from "react-toastify"
+import { redirect } from "next/navigation"
 
-export default function TextEditor() {
-    const form = useForm<ArticlesFormT>({
-        resolver: zodResolver(ArticleFormSchema),
-        mode: "onChange",
-        defaultValues: {
-            title: "",
-            body: "",
-            image: "",
-        },
+export default function AddArticleForm({ userId }: { userId: string }) {
+    const [body, setBody] = useState("")
+
+    const createArticleWithId = createArticle.bind(null, userId)
+    const [state, formAction] = useFormState(createArticleWithId, {
+        success: false,
+        message: "",
+        error: {},
     })
 
-    function onSubmit(values) {
-        console.log('object')
-    }
+    useEffect(() => {
+        if (state.success) {
+            toast.success(state.message)
+            redirect("/articles")
+        }
+    }, [state.success, state.message])
 
     return (
         // spread the form from react-hook-form's form that we created
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
-                    control={form.control}
-                    name="title"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Title</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="Your Awesome Title.."
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                {/* RICH EDITOR */}
-                <FormField
-                    control={form.control}
+        <form action={formAction} className="flex flex-col gap-3">
+            <UploadPhoto defaultPic="/noimage.png" />
+            <MyInput
+                label="Title"
+                id="title"
+                name="title"
+                placeholder="Your Awesome Title.."
+            />
+
+            {/* RICH EDITOR */}
+            <div className="flex flex-col gap-2">
+                <Label htmlFor="body">Article Body</Label>
+                <input
+                    type="text"
                     name="body"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Article Body</FormLabel>
-                            <FormControl>
-                                {/* TIP TAP */}
-                                <>
-                                <Input
-                                    placeholder="Your Awesome Title.."
-                                    {...field}
-                                />
-                                {/* <Tiptap
-                                    maxCharacter={3000}
-                                    description={field.value}
-                                    onChange={field.onChange}
-                                /> */}
-                                </>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
+                    value={body}
+                    onChange={() => {}}
+                    className="hidden"
                 />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
+                <Tiptap
+                    maxCharacter={3000}
+                    description={body}
+                    onChange={setBody}
+                />
+            </div>
+            <div className="flex justify-center">
+                <Button className="w-full max-w-[50%]" type="submit" variant="success">
+                    Publish Article
+                </Button>
+            </div>
+        </form>
     )
 }
