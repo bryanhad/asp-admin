@@ -105,7 +105,7 @@ export async function fetchFilteredArticles(
                 ],
             },
             include: {
-                author: {select: {username: true, profilePicture: true}}
+                author: { select: { username: true, profilePicture: true } },
             },
             orderBy: { id: "desc" },
         })
@@ -237,5 +237,18 @@ export async function fetchUserDataAndMembers(userId: string) {
     } catch (err) {
         console.error("Database Error:", err)
         throw new Error("Failed to fetch User.")
+    }
+}
+
+export async function fetchArticleData(articleId: string) {
+    noStore()
+    try {
+        const articleData = await prisma.article.findUnique({
+            where: { id: articleId },
+        })
+        return articleData
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch Article.")
     }
 }

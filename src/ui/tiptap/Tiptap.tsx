@@ -23,7 +23,7 @@ export default function Tiptap({
                 limit: maxCharacter,
             }),
         ],
-        content: "",
+        content: description,
         editorProps: {
             attributes: {
                 class: "rounded-b-md min-h-[300px] max-w-none bg-background p-4 focus:outline-none prose dark:prose-invert w-full",

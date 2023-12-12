@@ -10,12 +10,45 @@ import MyInput from "../MyInput"
 import UploadPhoto from "../UploadPhoto"
 import { toast } from "react-toastify"
 import { redirect } from "next/navigation"
+import {
+    AddArticleServerActionArguments,
+    ArticleServerActionFunctionReturn,
+    EditArticleServerActionArguments,
+} from "../../../../types"
+import { Article } from "@prisma/client"
 
-export default function AddArticleForm({ userId }: { userId: string }) {
-    const [body, setBody] = useState("")
+type ServerActionFunction = {
+    (
+        ...args: EditArticleServerActionArguments
+    ): Promise<ArticleServerActionFunctionReturn>
+    (
+        ...args: AddArticleServerActionArguments
+    ): Promise<ArticleServerActionFunctionReturn>
+}
 
-    const createArticleWithId = createArticle.bind(null, userId)
-    const [state, formAction] = useFormState(createArticleWithId, {
+//honestly type definition below is from chat GPT, I dunno how it works.. but hey! it works for now lol :D
+type ServerActionType = CallableFunction & {
+    (
+        ...args: Parameters<ServerActionFunction> //Paremeters extracts the parameter types from ServerActionFunction.
+    ): ReturnType<ServerActionFunction> //ReturnType extracts the return type from ServerActionFunction. neat stuff.
+}
+
+export default function ArticleForm({
+    id,
+    serverAction,
+    buttonText,
+    data,
+}: {
+    buttonText: string
+    data?: Article
+    id: string
+    serverAction: ServerActionType
+}) {
+    const [body, setBody] = useState(data?.body || "")
+    console.log(id)
+
+    const serverActionWithId = serverAction.bind(null, id)
+    const [state, formAction] = useFormState(serverActionWithId, {
         success: false,
         message: "",
         error: {},
@@ -31,8 +64,9 @@ export default function AddArticleForm({ userId }: { userId: string }) {
     return (
         // spread the form from react-hook-form's form that we created
         <form action={formAction} className="flex flex-col gap-3">
-            <UploadPhoto defaultPic="/noimage.png" />
+            <UploadPhoto picture={data?.image} defaultPic="/noimage.png" />
             <MyInput
+                defaultValue={data?.title}
                 label="Title"
                 id="title"
                 name="title"
@@ -56,8 +90,12 @@ export default function AddArticleForm({ userId }: { userId: string }) {
                 />
             </div>
             <div className="flex justify-center">
-                <Button className="w-full max-w-[50%]" type="submit" variant="success">
-                    Publish Article
+                <Button
+                    className="w-full max-w-[50%]"
+                    type="submit"
+                    variant="success"
+                >
+                    {buttonText}
                 </Button>
             </div>
         </form>
