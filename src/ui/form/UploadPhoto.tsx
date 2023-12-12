@@ -62,7 +62,6 @@ export default function UploadPhoto({
                                             url: res[0].url,
                                         })
                                     }
-                                    console.log("Files: ", res)
                                 }}
                                 onUploadProgress={() => setLoading(true)}
                                 onUploadError={(error: Error) => {

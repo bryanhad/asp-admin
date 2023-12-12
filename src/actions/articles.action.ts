@@ -18,7 +18,7 @@ const ArticleFormSchema = z.object({
             message: "Minimum description length is 10 characters long!",
         })
         .trim(),
-    image: z.string({ required_error: "Please select an image" }),
+    image: z.string({ required_error: "Please select a thumbnail" }).min(1, "Please select a thumbnail"),
 })
 
 export type ArticlesFormT = z.infer<typeof ArticleFormSchema>
@@ -35,7 +35,6 @@ export async function createArticle(
     })
 
     if (!validation.success) {
-        console.log( validation.error.flatten().fieldErrors)
         return {
             success: false,
             error: validation.error.flatten().fieldErrors,
@@ -67,7 +66,6 @@ export async function editArticle(
     prevState: any,
     formData: FormData,
 ) {
-    console.log(articleId, formData)
     const validation = ArticleFormSchema.safeParse({
         title: formData.get("title"),
         body: formData.get("body"),

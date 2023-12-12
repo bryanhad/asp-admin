@@ -45,7 +45,6 @@ export default function ToolBar({ editor }: ToolBarProps) {
                     size="sm"
                     pressed={editor.isActive("italic")}
                     onPressedChange={() => {
-                        console.log("clicked! italic")
                         editor.chain().focus().toggleItalic().run()
                     }}
                 >

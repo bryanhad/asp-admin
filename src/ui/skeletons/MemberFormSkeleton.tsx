@@ -1,5 +1,6 @@
 import React from "react"
 import { InputSkeleton, TextSkeleton } from "./Skeleton"
+import UploadPhotoSkeleton from "./UploadPhotoSkeleton"
 
 export default function MemberFormSkeleton() {
     return (
@@ -38,22 +39,3 @@ export default function MemberFormSkeleton() {
     )
 }
 
-function UploadPhotoSkeleton() {
-    return (
-        <div className="flex max-w-[542px] gap-5 max-sm:max-w-[400px]">
-            <div>
-                <TextSkeleton circle className="mx-auto h-[130px] w-[130px]" />
-            </div>
-            <div className="flex flex-[1] flex-col items-center gap-5 sm:flex-row">
-                <TextSkeleton
-                    circle
-                    className="h-[50px] w-full min-w-[180px]"
-                />
-                <TextSkeleton
-                    circle
-                    className="h-[50px] w-full min-w-[180px]"
-                />
-            </div>
-        </div>
-    )
-}
