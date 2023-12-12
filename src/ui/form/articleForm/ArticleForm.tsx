@@ -45,7 +45,6 @@ export default function ArticleForm({
     serverAction: ServerActionType
 }) {
     const [body, setBody] = useState(data?.body || "")
-    console.log(id)
 
     const serverActionWithId = serverAction.bind(null, id)
     const [state, formAction] = useFormState(serverActionWithId, {

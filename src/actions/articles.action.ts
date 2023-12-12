@@ -35,7 +35,6 @@ export async function createArticle(
     })
 
     if (!validation.success) {
-        console.log( validation.error.flatten().fieldErrors)
         return {
             success: false,
             error: validation.error.flatten().fieldErrors,
@@ -67,7 +66,6 @@ export async function editArticle(
     prevState: any,
     formData: FormData,
 ) {
-    console.log(articleId, formData)
     const validation = ArticleFormSchema.safeParse({
         title: formData.get("title"),
         body: formData.get("body"),

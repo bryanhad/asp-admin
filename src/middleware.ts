@@ -10,8 +10,8 @@ export default withAuth(
     // `withAuth` augments (add) your `Request` with the user's token!
     function middleware(req: NextRequestWithAuth) {
         // it is accessible on the req.nextauth prop
-        console.log(req.nextUrl.pathname)
-        console.log(req.nextauth.token)
+        // console.log(req.nextUrl.pathname) 
+        // console.log(req.nextauth.token)
         if (
             req.nextUrl.pathname.startsWith("/users") &&
             req.nextauth.token?.role !== "ADMIN"
