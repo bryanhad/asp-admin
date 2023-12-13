@@ -1,6 +1,20 @@
 import { unstable_noStore as noStore } from "next/cache"
 import { prisma } from "./db/prisma"
 
+export async function fetchDashboardInfo() {
+    try {
+        const [memberCount, positionCount, articleCount] = await Promise.all([
+            prisma.member.count(),
+            prisma.position.count(),
+            prisma.article.count()
+        ])
+        return {memberCount, positionCount, articleCount}
+    } catch (err) {
+        console.error("Database Error:", err)
+        throw new Error("Failed to fetch dashborad infos.")
+    }
+}
+
 const ITEMS_PER_PAGE = 6
 export async function fetchFilteredPositions(
     query: string,

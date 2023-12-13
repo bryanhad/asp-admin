@@ -4,15 +4,17 @@ import { LuUsers } from "react-icons/lu"
 import { HiNewspaper } from "react-icons/hi2"
 
 import React from "react"
+import { fetchDashboardInfo } from "@/lib/data"
 
-export default function DashboardCards() {
+export default async function DashboardCards() {
+    const {memberCount, positionCount, articleCount} = await fetchDashboardInfo()
     return (
         <div className="flex flex-col gap-5 md:flex-row">
             <DashboardCard
                 item={{
                     title: "Members",
                     change: 200,
-                    number: 29,
+                    number: memberCount,
                     icon: <IoIosBriefcase />,
                 }}
             />
@@ -20,7 +22,7 @@ export default function DashboardCards() {
                 item={{
                     title: "Positions",
                     change: 200,
-                    number: 12,
+                    number: positionCount,
                     icon: <LuUsers />,
                 }}
             />
@@ -28,7 +30,7 @@ export default function DashboardCards() {
                 item={{
                     title: "Articles",
                     change: 200,
-                    number: 13,
+                    number: articleCount,
                     icon: <HiNewspaper />,
                 }}
             />
