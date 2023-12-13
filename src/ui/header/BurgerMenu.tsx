@@ -15,6 +15,19 @@ export default function BurgerMenu({ user }: { user: User }) {
 
     useEffect(() => {}, [isNavOpen])
 
+    const filteredSideBarLinks =
+        user.role === "ADMIN"
+            ? sidebarLinks
+            : sidebarLinks.map((section) => {
+                  //if the user is not of role 'ADMIN'
+                  if (section.title === "Pages") {
+                      section.list = section.list.filter(
+                          (link) => link.title !== "Users",
+                      )
+                  }
+                  return section
+              })
+
     return (
         <>
             {isNavOpen && (
@@ -36,7 +49,7 @@ export default function BurgerMenu({ user }: { user: User }) {
                 </div>
                 {/* MENU */}
                 <ul className="border-t md:px-8">
-                    {sidebarLinks.map((item) => (
+                    {filteredSideBarLinks.map((item) => (
                         <li key={item.title}>
                             <p className="dark:text-text-soft-dark text-text-soft my-2 text-[13px] font-bold max-lg:mb-2">
                                 {item.title}
