@@ -25,7 +25,7 @@ export default function MembersTableRow({ member }: { member: Member }) {
                 {member.createdAt
                     .toLocaleDateString("id-ID")
                     .split("/")
-                    .join(" / ")}
+                    .join("/")}
             </TableCell>
             <TableCell>
                 <MembersActionCell memberId={member.id} />
