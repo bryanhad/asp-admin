@@ -9,14 +9,14 @@ import {
 } from "@/ui/shadcn/table"
 import SearchNotFound from "../SearchNotFound"
 import NoDataFound from "../NoDataFound"
-import ShadcnPositionsTableCells from "./ShadcnPositionsTableCells"
+import PositionsTableCells from "./PositionsTableCells"
 
 type PositionTableProps = {
     query: string
     currentPage: number
 }
 
-export default async function ShadcnPositionsTable({
+export default async function PositionsTable({
     query,
     currentPage,
 }: PositionTableProps) {
@@ -47,7 +47,7 @@ export default async function ShadcnPositionsTable({
             <TableBody>
                 {positions.map((position, i) => (
                     <TableRow key={position.id}>
-                        <ShadcnPositionsTableCells position={position} />
+                        <PositionsTableCells position={position} />
                     </TableRow>
                 ))}
             </TableBody>

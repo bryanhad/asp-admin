@@ -9,14 +9,14 @@ import {
 } from "@/ui/shadcn/table"
 import SearchNotFound from "../SearchNotFound"
 import NoDataFound from "../NoDataFound"
-import ShadcnMembersTableRow from "./ShadcnMembersRow"
+import MembersTableRow from "./MembersTableRow"
 
 type MemberTableProps = {
     query: string
     currentPage: number
 }
 
-export default async function ShadcnMembersTable({
+export default async function MembersTable({
     query,
     currentPage,
 }: MemberTableProps) {
@@ -47,7 +47,7 @@ export default async function ShadcnMembersTable({
             </TableHeader>
             <TableBody>
                 {members.map((member) => (
-                    <ShadcnMembersTableRow member={member} key={member.id} />
+                    <MembersTableRow member={member} key={member.id} />
                 ))}
             </TableBody>
         </Table>

@@ -4,9 +4,9 @@ import { useNavbarContext } from "@/contexts/navbar.context"
 import { useEffect } from "react"
 import { sidebarLinks } from "../sidebar/sidebarLinks"
 import SideBarLink from "../sidebar/SideBarLink"
-import ThemeButton from "./ThemeButton"
 import MiniUser from "./MiniUser"
 import { ThemeToggle } from "./ThemeToggle"
+import SignOutButton from "../SignOutButton"
 
 export default function BurgerMenu({ navHeight }: { navHeight: number }) {
     const { isNavOpen, setIsNavOpen } = useNavbarContext()
@@ -25,7 +25,7 @@ export default function BurgerMenu({ navHeight }: { navHeight: number }) {
             )}
             <section
                 style={{ top: `${navHeight}px` }}
-                className={`fixed z-[21] h-full w-[80%] bg-background p-6 border-l border-l-active flex flex-col gap-4 duration-300 lg:hidden ${
+                className={`fixed z-[21] flex h-full w-[80%] flex-col gap-4 border-l border-l-active bg-background p-6 duration-300 lg:hidden ${
                     isNavOpen ? "right-[0%]" : "-right-[100%]"
                 }`}
             >
@@ -45,10 +45,13 @@ export default function BurgerMenu({ navHeight }: { navHeight: number }) {
                         </li>
                     ))}
                 </ul>
-                    <div className="flex justify-end">
-                        <ThemeToggle />
-                        {/* <ThemeButton /> */}
+                <div className="flex items-center gap-2">
+                    <SignOutButton />
+                    <div>
+                    <ThemeToggle />
+
                     </div>
+                </div>
             </section>
         </>
     )
