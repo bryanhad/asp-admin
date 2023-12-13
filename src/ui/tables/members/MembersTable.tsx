@@ -10,6 +10,7 @@ import {
 import SearchNotFound from "../SearchNotFound"
 import NoDataFound from "../NoDataFound"
 import MembersTableRow from "./MembersTableRow"
+import MembersListMobile from "./MembersListMobile"
 
 type MemberTableProps = {
     query: string
@@ -35,21 +36,28 @@ export default async function MembersTable({
         }
     }
     return (
-        <Table>
-            <TableCaption>A list of recent members.</TableCaption>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Member</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>CreatedAt</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {members.map((member) => (
-                    <MembersTableRow member={member} key={member.id} />
-                ))}
-            </TableBody>
-        </Table>
+        <>
+        <div className="hidden md:block">
+            <Table >
+                <TableCaption>A list of recent members.</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Member</TableHead>
+                        <TableHead>Email</TableHead>
+                        <TableHead>CreatedAt</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {members.map((member) => (
+                        <MembersTableRow member={member} key={member.id} />
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
+        <div className="md:hidden">
+            <MembersListMobile members={members} />
+        </div>
+        </>
     )
 }
