@@ -44,5 +44,5 @@ export default withAuth(
 )
 
 export const config = {
-    matcher: ["/users", "/articles"],
+    matcher: ["/((?!auth/login))"],
 }
