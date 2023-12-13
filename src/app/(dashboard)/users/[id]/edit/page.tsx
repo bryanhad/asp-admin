@@ -1,6 +1,6 @@
-import React, { Suspense } from "react"
+import { Suspense } from "react"
 import EditUserForm from "./EditUserForm"
-import MemberFormSkeleton from "@/ui/skeletons/form/MemberFormSkeleton"
+import UserFormSkeleton from "@/ui/skeletons/form/UserFormSkeleton"
 
 export default async function EditUserPage({
     params,
@@ -9,7 +9,7 @@ export default async function EditUserPage({
 }) {
     return (
         <div>
-            <Suspense fallback={<MemberFormSkeleton />}>
+            <Suspense fallback={<UserFormSkeleton />}>
                 <EditUserForm id={params.id} />
             </Suspense>
         </div>

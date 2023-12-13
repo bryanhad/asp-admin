@@ -7,7 +7,7 @@ export default function UploadPhotoSkeleton() {
                 <div>
                     <TextSkeleton circle className="mx-auto h-[130px] w-[130px]" />
                 </div>
-                <div className="flex flex-[1] flex-col items-center gap-5 sm:flex-row">
+                <div className="flex flex-[1] flex-col justify-center items-center gap-5 sm:flex-row sm:min-w-[196px] lg:min-w-[230px]">
                     <TextSkeleton
                         circle
                         className="h-[45px] w-full"

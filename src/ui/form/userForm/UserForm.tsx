@@ -36,6 +36,7 @@ import {
     EditUserServerActionArguments,
     UserServerActionFunctionReturn,
 } from "../../../../types"
+import FormButton from "../FormButton"
 
 type ServerActionFunction = {
     (
@@ -145,7 +146,7 @@ export default function UserForm({
                         </FormItem>
                     )}
                 />
-                {!pathname.includes('/edit') && (
+                {!pathname.includes("/edit") && (
                     <FormField
                         control={form.control}
                         name="password"
@@ -174,7 +175,9 @@ export default function UserForm({
                     name="memberId"
                     render={({ field }) => (
                         <FormItem>
-                                <FormLabel htmlFor="memberId">Select Member</FormLabel>
+                            <FormLabel htmlFor="memberId">
+                                Select Member
+                            </FormLabel>
 
                             <Select
                                 defaultValue={
@@ -194,7 +197,7 @@ export default function UserForm({
                                     />
                                 </SelectTrigger>
                                 <SelectContent className="max-h-[12rem] overflow-y-auto">
-                                    <SelectGroup >
+                                    <SelectGroup>
                                         <SelectLabel>
                                             Registered Members
                                         </SelectLabel>
@@ -224,7 +227,7 @@ export default function UserForm({
                             <FormControl>
                                 <RadioGroup
                                     name="role"
-                                    className="flex gap-4"
+                                    className="flex items-center gap-4"
                                     onValueChange={field.onChange}
                                     defaultValue={data?.role || "USER"}
                                 >
@@ -266,9 +269,7 @@ export default function UserForm({
                 {!state.success && state.message && (
                     <ErrorText dep={state} str={state.message} />
                 )}
-                <Button variant="success" type="submit">
-                    {buttonText}
-                </Button>
+                <FormButton text={buttonText} />
             </form>
         </Form>
     )
