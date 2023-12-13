@@ -65,7 +65,11 @@ export default function ArticleForm({
         // spread the form from react-hook-form's form that we created
         <form action={formAction} className="flex flex-col gap-6">
             <div>
-                <UploadPhoto picture={data?.image} defaultPic="/noimage.png" />
+                <UploadPhoto
+                    notProfile
+                    picture={data?.image}
+                    defaultPic="/noimage.png"
+                />
                 {state?.error?.image && (
                     <ErrorText dep={state} str={state.error.image[0]} />
                 )}
