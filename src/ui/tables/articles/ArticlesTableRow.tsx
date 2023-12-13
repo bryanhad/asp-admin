@@ -19,16 +19,16 @@ export default function ArticlesTableRow({
         <TableRow>
             <TableCell>
                 <div className="flex items-center gap-4">
-                    <div className="dark:bg-active-dark grid h-[38px] w-[38px] place-content-center overflow-hidden rounded-full bg-active">
+                    <div className="dark:bg-active-dark grid h-[38px] w-[38px] place-content-center overflow-hidden rounded-lg bg-active">
                         <Image
-                            className="rounded-full object-cover"
+                            className="object-cover"
                             src={article.image || "/noimage.png"}
                             alt={`${article.title}'s thumbnail`}
                             width={38}
                             height={38}
                         />
                     </div>
-                    <p>{article.title}</p>
+                    <p className="maximum-1-line">{article.title}</p>
                 </div>
             </TableCell>
             <TableCell>

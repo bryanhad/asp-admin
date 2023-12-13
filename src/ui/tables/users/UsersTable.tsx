@@ -37,28 +37,30 @@ export default async function UsersTable({
     }
     return (
         <>
-        <div className="hidden md:block">
-        <Table>
-            <TableCaption>A list of recent users.</TableCaption>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>User</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Created At</TableHead>
-                    <TableHead>Member</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {users.map((user) => (
-                    <UsersTableRow user={user} key={user.id} />
-                ))}
-            </TableBody>
-        </Table>
-        </div>
-        <div className="md:hidden">
-            <UsersListMobile users={users} />
-        </div>
+            <div className="hidden md:block">
+                <Table>
+                    <TableCaption>A list of recent users.</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>User</TableHead>
+                            <TableHead>Email</TableHead>
+                            <TableHead>Created At</TableHead>
+                            <TableHead>Member</TableHead>
+                            <TableHead className="text-right">
+                                Actions
+                            </TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {users.map((user) => (
+                            <UsersTableRow user={user} key={user.id} />
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
+            <div className="md:hidden">
+                <UsersListMobile users={users} />
+            </div>
         </>
     )
 }
