@@ -20,19 +20,18 @@ const AddForm = React.memo(
         }, [success, resMessage])
 
         return (
-            <div className="rounded-lg border focus-within:outline-none focus-within:outline-offset-2 focus-within:outline-ring focus-within:ring-2">
+            <div className="rounded-lg border focus-within:outline-none focus-within:outline-offset-4 focus-within:outline-ring focus-within:ring-0">
                 <form
                     ref={formRef}
                     action={serverAction}
-                    className="flex items-center gap-1"
+                    className="flex  rounded-md"
                 >
                     <Input
                         name={inputName}
                         type="text"
-                        className="flex-1 border-none bg-transparent px-5 focus-visible:ring-transparent"
+                        className="flex-1 rounded-r-none border-none bg-transparent px-5 focus-visible:ring-transparent"
                     />
-
-                    <Button variant="success" size="lg" className="px-12 rounded-l-none">
+                    <Button variant="success" size="noHeight" className="rounded-l-none">
                         ADD
                     </Button>
                 </form>

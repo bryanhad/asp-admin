@@ -39,7 +39,7 @@ export default async function PositionsTable({
             <TableCaption>A list of recent positions.</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead>Name</TableHead>
+                    <TableHead className="w-[30%]">Name</TableHead>
                     <TableHead>Member Count</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                 </TableRow>

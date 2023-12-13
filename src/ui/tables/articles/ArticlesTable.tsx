@@ -10,6 +10,7 @@ import {
 import SearchNotFound from "../SearchNotFound"
 import NoDataFound from "../NoDataFound"
 import ArticlesTableRow from "./ArticlesTableRow"
+import ArticlesListMobile from "./ArticlesListMobile"
 
 type ArticleTableProps = {
     query: string
@@ -35,21 +36,33 @@ export default async function ArticlesTable({
         }
     }
     return (
-        <Table>
-            <TableCaption>A list of recent articles.</TableCaption>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>Article</TableHead>
-                    <TableHead>Author</TableHead>
-                    <TableHead>Created At</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {articles.map((article) => (
-                    <ArticlesTableRow article={article} key={article.id} />
-                ))}
-            </TableBody>
-        </Table>
+        <>
+            <div className="hidden md:block">
+                <Table>
+                    <TableCaption>A list of recent articles.</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead className="w-[30%]">Article</TableHead>
+                            <TableHead className="w-[20%]">Author</TableHead>
+                            <TableHead>Created At</TableHead>
+                            <TableHead className="text-right">
+                                Actions
+                            </TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {articles.map((article) => (
+                            <ArticlesTableRow
+                                article={article}
+                                key={article.id}
+                            />
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
+            <div className="md:hidden">
+                <ArticlesListMobile articles={articles} />
+            </div>
+        </>
     )
 }

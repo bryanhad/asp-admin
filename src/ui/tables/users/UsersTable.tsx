@@ -10,6 +10,7 @@ import {
 import SearchNotFound from "../SearchNotFound"
 import NoDataFound from "../NoDataFound"
 import UsersTableRow from "./UsersTableRow"
+import UsersListMobile from "./UsersListMobile"
 
 type UserTableProps = {
     query: string
@@ -35,22 +36,31 @@ export default async function UsersTable({
         }
     }
     return (
-        <Table>
-            <TableCaption>A list of recent users.</TableCaption>
-            <TableHeader>
-                <TableRow>
-                    <TableHead>User</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Created At</TableHead>
-                    <TableHead>Member</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {users.map((user) => (
-                    <UsersTableRow user={user} key={user.id} />
-                ))}
-            </TableBody>
-        </Table>
+        <>
+            <div className="hidden md:block">
+                <Table>
+                    <TableCaption>A list of recent users.</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>User</TableHead>
+                            <TableHead>Email</TableHead>
+                            <TableHead>Created At</TableHead>
+                            <TableHead>Member</TableHead>
+                            <TableHead className="text-right">
+                                Actions
+                            </TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {users.map((user) => (
+                            <UsersTableRow user={user} key={user.id} />
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
+            <div className="md:hidden">
+                <UsersListMobile users={users} />
+            </div>
+        </>
     )
 }
