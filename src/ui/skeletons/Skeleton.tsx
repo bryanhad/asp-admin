@@ -1,7 +1,7 @@
 export function TextSkeleton({
     className,
     circle,
-    small
+    small,
 }: {
     className: string
     circle?: boolean
@@ -11,7 +11,7 @@ export function TextSkeleton({
         <div
             className={`animate-pulse ${
                 circle ? "rounded-full" : "rounded-lg"
-            } ${small ? '' : 'p-3'} bg-active dark:bg-active-dark ${className}`}
+            } ${small ? "" : "p-3"} dark:bg-active-dark bg-active ${className}`}
         />
     )
 }
@@ -27,8 +27,17 @@ export function InputSkeleton({
         <div className={`flex flex-col gap-2 ${containerClassName}`}>
             <TextSkeleton className="w-[80px]" />
             <div
-                className={`animate-pulse rounded-lg bg-active p-6 dark:bg-active-dark ${className}`}
+                className={`dark:bg-active-dark animate-pulse rounded-lg bg-active p-6 ${className}`}
             />
+        </div>
+    )
+}
+
+export function MiniImageSkeleton({profile}:{profile?:boolean}) {
+    return (
+        <div className="flex items-center gap-4">
+            <TextSkeleton circle={profile} className="h-[38px] w-[38px]" />
+            <TextSkeleton small className="h-[18px] w-[60px]" />
         </div>
     )
 }

@@ -7,7 +7,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/ui/shadcn/table"
-import { TextSkeleton } from "../Skeleton"
+import { MiniImageSkeleton, TextSkeleton } from "../Skeleton"
 
 export default function ArticlesTableSkeleton() {
     const numOfDesktopRows = Array.from(Array(2).keys())
@@ -54,8 +54,7 @@ function MobileSkeleton() {
         <div className="rounded-lg bg-background p-4 ">
             <div className="border-b border-b-active pb-4">
                 <div className="flex items-center gap-3">
-                    <TextSkeleton circle className="h-[50px] w-[50px]" />
-                    <TextSkeleton small className="h-[18px] w-[130px]" />
+                    <MiniImageSkeleton />
                 </div>
                 <TextSkeleton small className="mt-2 h-[18px] w-[90px]" />
             </div>
@@ -76,16 +75,10 @@ function TableRowSkeleton() {
     return (
         <TableRow>
             <TableCell>
-                <div className="flex items-center gap-4">
-                    <TextSkeleton circle className="h-[50px] w-[50px]" />
-                    <TextSkeleton small className="h-[18px] w-[60px]" />
-                </div>
+                <MiniImageSkeleton />
             </TableCell>
             <TableCell>
-                <div className="flex items-center gap-4">
-                    <TextSkeleton circle className="h-[50px] w-[50px]" />
-                    <TextSkeleton small className="h-[18px] w-[60px]" />
-                </div>
+                <MiniImageSkeleton profile />
             </TableCell>
             <TableCell>
                 <TextSkeleton className="w-[100px]" />

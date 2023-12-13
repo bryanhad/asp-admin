@@ -7,7 +7,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/ui/shadcn/table"
-import { TextSkeleton } from "../Skeleton"
+import { MiniImageSkeleton, TextSkeleton } from "../Skeleton"
 
 export default function MembersTableSkeleton() {
     const numOfDesktopRows = Array.from(Array(6).keys())
@@ -19,7 +19,7 @@ export default function MembersTableSkeleton() {
                     <TableCaption>A list of recent members.</TableCaption>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>
+                            <TableHead className="w-[30%]">
                                 <TextSkeleton className="w-[80px]" />
                             </TableHead>
                             <TableHead>
@@ -53,15 +53,12 @@ function MobileSkeleton() {
     return (
         <div className="rounded-lg bg-background p-4 ">
             <div className="border-b border-b-active pb-4">
-                <div className="flex items-center gap-3">
-                    <TextSkeleton circle className="h-[50px] w-[50px]" />
-                    <TextSkeleton small className="h-[18px] w-[130px]" />
-                </div>
+                <MiniImageSkeleton profile />
                 <TextSkeleton small className="mt-2 h-[18px] w-[90px]" />
             </div>
             <div className="flex items-center justify-between pt-4">
                 <div className="flex flex-col gap-1 text-sm sm:flex-row">
-                    <TextSkeleton small className="h-[18px] w-[130px]" />
+                    <TextSkeleton small className="h-[18px] w-[60px]" />
                 </div>
                 <div className="flex gap-2">
                     <TextSkeleton small className="h-[30px] w-[80px]" />
@@ -75,11 +72,8 @@ function MobileSkeleton() {
 function TableRowSkeleton() {
     return (
         <TableRow>
-            <TableCell className="w-[41%]">
-                <div className="flex items-center gap-4">
-                    <TextSkeleton circle className="h-[50px] w-[50px]" />
-                    <TextSkeleton small className="h-[18px] w-[130px]" />
-                </div>
+            <TableCell>
+                <MiniImageSkeleton profile />
             </TableCell>
             <TableCell>
                 <TextSkeleton className="w-[120px]" />
