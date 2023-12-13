@@ -7,7 +7,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/ui/shadcn/table"
-import { TextSkeleton } from "./Skeleton"
+import { TextSkeleton } from "../Skeleton"
 
 export default function MembersTableSkeleton() {
     const numOfDesktopRows = Array.from(Array(6).keys())
@@ -40,7 +40,7 @@ export default function MembersTableSkeleton() {
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex flex-col gap-2 p-2 md:hidden bg-secondary">
+            <div className="flex flex-col gap-2 bg-secondary p-2 md:hidden">
                 {numOfMobileRows.map((el) => (
                     <MobileSkeleton key={el} />
                 ))}

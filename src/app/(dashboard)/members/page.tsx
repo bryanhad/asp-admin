@@ -4,7 +4,7 @@ import Pagination from "@/ui/tables/Pagination"
 import { fetchMembersPageAmount } from "@/lib/data"
 import MembersTable from "@/ui/tables/members/MembersTable"
 import { Link } from "@/ui/Link"
-import MembersTableSkeleton from "@/ui/skeletons/MembersTableSkeleton"
+import MembersTableSkeleton from "@/ui/skeletons/table/MembersTableSkeleton"
 
 type MembersPageProps = {
     searchParams?: {
@@ -31,7 +31,7 @@ export default async function MembersPage({ searchParams }: MembersPageProps) {
             </Link>
             <Suspense
                 key={query + currentPage}
-                fallback={<MembersTableSkeleton/>}
+                fallback={<MembersTableSkeleton />}
             >
                 <MembersTable query={query} currentPage={currentPage} />
             </Suspense>

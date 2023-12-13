@@ -1,7 +1,7 @@
 import React from "react"
-import TipTapSkeleton from "./TipTapSkeleton"
-import UploadPhotoSkeleton from "./UploadPhotoSkeleton"
-import { InputSkeleton, TextSkeleton } from "./Skeleton"
+import TipTapSkeleton from "../TipTapSkeleton"
+import UploadPhotoSkeleton from "../UploadPhotoSkeleton"
+import { InputSkeleton, TextSkeleton } from "../Skeleton"
 
 export default function ArticleFormSkeleton() {
     return (
@@ -15,7 +15,7 @@ export default function ArticleFormSkeleton() {
                 <TipTapSkeleton />
             </div>
             <div className="flex justify-center">
-                <TextSkeleton className="w-full max-w-[50%] h-[50px]" />
+                <TextSkeleton className="h-[50px] w-full max-w-[50%]" />
             </div>
         </div>
     )

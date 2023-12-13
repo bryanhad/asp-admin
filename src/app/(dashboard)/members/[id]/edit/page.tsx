@@ -1,6 +1,6 @@
 import React, { Suspense } from "react"
 import EditMemberForm from "./EditMemberForm"
-import MemberFormSkeleton from "@/ui/skeletons/MemberFormSkeleton"
+import MemberFormSkeleton from "@/ui/skeletons/form/MemberFormSkeleton"
 
 export default async function EditMemberPage({
     params,

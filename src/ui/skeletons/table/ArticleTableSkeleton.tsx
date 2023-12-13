@@ -7,7 +7,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/ui/shadcn/table"
-import { TextSkeleton } from "./Skeleton"
+import { TextSkeleton } from "../Skeleton"
 
 export default function ArticlesTableSkeleton() {
     const numOfDesktopRows = Array.from(Array(2).keys())

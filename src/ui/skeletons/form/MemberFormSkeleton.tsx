@@ -1,6 +1,6 @@
 import React from "react"
-import { InputSkeleton, TextSkeleton } from "./Skeleton"
-import UploadPhotoSkeleton from "./UploadPhotoSkeleton"
+import { InputSkeleton, TextSkeleton } from "../Skeleton"
+import UploadPhotoSkeleton from "../UploadPhotoSkeleton"
 
 export default function MemberFormSkeleton() {
     return (
@@ -38,4 +38,3 @@ export default function MemberFormSkeleton() {
         </div>
     )
 }
-

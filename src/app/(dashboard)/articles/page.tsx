@@ -4,7 +4,7 @@ import Pagination from "@/ui/tables/Pagination"
 import { Link } from "@/ui/Link"
 import ArticlesTable from "@/ui/tables/articles/ArticlesTable"
 import { fetchArticlesPageAmount } from "@/lib/data"
-import ArticlesTableSkeleton from "@/ui/skeletons/ArticleTableSkeleton"
+import ArticlesTableSkeleton from "@/ui/skeletons/table/ArticleTableSkeleton"
 
 type ArticlesPageProps = {
     searchParams?: {
@@ -37,7 +37,7 @@ export default async function ArticlesPage({
             >
                 <ArticlesTable query={query} currentPage={currentPage} />
             </Suspense>
-             <div className="flex justify-center">
+            <div className="flex justify-center">
                 <Pagination totalPages={totalPages} />
             </div>
         </>
