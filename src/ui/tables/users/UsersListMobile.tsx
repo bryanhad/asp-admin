@@ -1,7 +1,6 @@
 import { User } from "@prisma/client"
-import Image from "next/image"
-import React from "react"
 import UsersActionCell from "./UsersActionCell"
+import MiniImage from "../MiniImage"
 
 export default function UsersListMobile({ users }: { users: User[] }) {
     return (
@@ -11,18 +10,12 @@ export default function UsersListMobile({ users }: { users: User[] }) {
                     <div className="border-b pb-4">
                         <div className="flex items-center justify-between">
                             {/* MINI PROFILE */}
-                            <div className="flex items-center gap-3">
-                                <div className="h-[32px] w-[32px] bg-slate-200 rounded-full overflow-hidden grid place-items-center">
-                                    <Image
-                                        src={user.profilePicture || "/noavatar.png"}
-                                        alt={`${user.username}'s profile Picture`}
-                                        height={32}
-                                        width={32}
-                                        className="object-cover"
-                                    />
-                                </div>
-                                <p>{user.username}</p>
-                            </div>
+                            <MiniImage
+                                alt={`${user.username}'s Profile Picture`}
+                                src={user.profilePicture}
+                                text={user.username}
+                                profile
+                            />
                             {/* IS MEMBER? */}
                             {user.memberId && (
                                 <p className="rounded-full border px-4 py-1 text-[12px] text-secondary-foreground">
