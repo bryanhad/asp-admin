@@ -2,6 +2,9 @@ import SearchBar from "@/ui/form/SearchBar"
 import { Suspense } from "react"
 import Pagination from "@/ui/tables/Pagination"
 import { Link } from "@/ui/Link"
+import MembersTableSkeleton from "@/ui/skeletons/MembersTableSkeleton"
+import ArticlesTable from "@/ui/tables/articles/ArticlesTable"
+import { fetchArticlesPageAmount } from "@/lib/data"
 
 type ArticlesPageProps = {
     searchParams?: {
@@ -15,7 +18,7 @@ export default async function ArticlesPage({
 }: ArticlesPageProps) {
     const query = searchParams?.q || ""
     const currentPage = Number(searchParams?.page) || 1
-    // const totalPages = await ArticlesPageAmount(query)
+    const totalPages = await fetchArticlesPageAmount(query)
 
     return (
         <>
@@ -28,15 +31,15 @@ export default async function ArticlesPage({
             >
                 Add Article
             </Link>
-            {/* <Suspense
+            <Suspense
                 key={query + currentPage}
-                fallback={<ArticlesTableSkeleton />}
+                fallback={<MembersTableSkeleton />}
             >
                 <ArticlesTable query={query} currentPage={currentPage} />
-            </Suspense> */}
-            {/* <div className="flex justify-center">
+            </Suspense>
+             <div className="flex justify-center">
                 <Pagination totalPages={totalPages} />
-            </div> */}
+            </div>
         </>
     )
 }

@@ -184,7 +184,6 @@ export default function UserForm({
                                 }
                                 onValueChange={(value) => {
                                     field.value = value === "none" ? "" : value
-                                    console.log(field.value)
                                 }}
                                 name="memberId"
                                 // defaultValue={data?.positionId.toString()}

@@ -91,3 +91,27 @@ export type EditUserServerActionArguments = [
     prevState: any,
     formData: FormData,
 ]
+
+export type ArticleServerActionFunctionReturn = {
+    success: boolean
+    error?:
+        | {
+              title?: string[] | undefined
+              body?: string[] | undefined
+              image?: string[] | undefined
+          }
+        | undefined
+    message: string
+}
+
+export type AddArticleServerActionArguments = [
+    authorId: string,
+    prevState: any,
+    formData: FormData,
+]
+
+export type EditArticleServerActionArguments = [
+    articleId: string,
+    prevState: any,
+    formData: FormData,
+]
