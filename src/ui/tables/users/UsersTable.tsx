@@ -10,6 +10,7 @@ import {
 import SearchNotFound from "../SearchNotFound"
 import NoDataFound from "../NoDataFound"
 import UsersTableRow from "./UsersTableRow"
+import UsersListMobile from "./UsersListMobile"
 
 type UserTableProps = {
     query: string
@@ -35,6 +36,8 @@ export default async function UsersTable({
         }
     }
     return (
+        <>
+        <div className="hidden md:block">
         <Table>
             <TableCaption>A list of recent users.</TableCaption>
             <TableHeader>
@@ -52,5 +55,10 @@ export default async function UsersTable({
                 ))}
             </TableBody>
         </Table>
+        </div>
+        <div className="md:hidden">
+            <UsersListMobile users={users} />
+        </div>
+        </>
     )
 }
