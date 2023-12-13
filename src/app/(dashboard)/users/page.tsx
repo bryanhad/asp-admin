@@ -1,7 +1,6 @@
 import { fetchUsersPageAmount } from "@/lib/data"
 import { Link } from "@/ui/Link"
 import SearchBar from "@/ui/form/SearchBar"
-import MembersTableSkeleton from "@/ui/skeletons/MembersTableSkeleton"
 import UsersTableSkeleton from "@/ui/skeletons/UserTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
 import UsersTable from "@/ui/tables/users/UsersTable"
