@@ -8,7 +8,6 @@ export default function UserFormSkeleton() {
             <UploadPhotoSkeleton />
             <InputSkeleton containerClassName="w-full" />
             <InputSkeleton containerClassName="w-full" />
-            <InputSkeleton containerClassName="w-full" />
             <div>
                 <TextSkeleton className="w-[50px] mb-2"/>
                 <div className="flex flex-row gap-2">

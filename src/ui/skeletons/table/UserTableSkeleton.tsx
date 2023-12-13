@@ -22,14 +22,11 @@ export default function UsersTableSkeleton() {
                             <TableHead className="w-[17%]">
                                 <TextSkeleton className="w-[60px]" />
                             </TableHead>
-                            <TableHead>
+                            <TableHead className="w-[25%]">
                                 <TextSkeleton className="w-[60px]" />
                             </TableHead>
                             <TableHead>
                                 <TextSkeleton className="w-[90px]" />
-                            </TableHead>
-                            <TableHead>
-                                <TextSkeleton className="w-[80px]" />
                             </TableHead>
                             <TableHead className="flex items-center justify-end">
                                 <TextSkeleton className="w-[80px]" />
@@ -83,9 +80,6 @@ function TableRowSkeleton() {
             </TableCell>
             <TableCell>
                 <TextSkeleton className="w-[90px]" />
-            </TableCell>
-            <TableCell>
-                <TextSkeleton className="w-[60px]" />
             </TableCell>
             <TableCell>
                 <div className="ml-auto flex max-w-max gap-4">

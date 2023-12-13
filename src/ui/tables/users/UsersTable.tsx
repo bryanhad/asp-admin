@@ -42,10 +42,9 @@ export default async function UsersTable({
                     <TableCaption>A list of recent users.</TableCaption>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>User</TableHead>
-                            <TableHead>Email</TableHead>
+                            <TableHead className="w-[17%]">User</TableHead>
+                            <TableHead className="w-[25%]">Email</TableHead>
                             <TableHead>Created At</TableHead>
-                            <TableHead>Member</TableHead>
                             <TableHead className="text-right">
                                 Actions
                             </TableHead>

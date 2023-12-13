@@ -21,7 +21,6 @@ export default function UsersTableRow({ user }: { user: User }) {
                     .split("/")
                     .join(" / ")}
             </TableCell>
-            <TableCell>{user.memberId ? "True" : "False"}</TableCell>
             <TableCell>
                 <UsersActionCell userId={user.id} />
             </TableCell>
