@@ -42,8 +42,8 @@ export default async function ArticlesTable({
                     <TableCaption>A list of recent articles.</TableCaption>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Article</TableHead>
-                            <TableHead>Author</TableHead>
+                            <TableHead className="w-[30%]">Article</TableHead>
+                            <TableHead className="w-[20%]">Author</TableHead>
                             <TableHead>Created At</TableHead>
                             <TableHead className="text-right">
                                 Actions
