@@ -1,8 +1,7 @@
-import Image from "next/image"
 import { sidebarLinks } from "./sidebarLinks"
 import SideBarLink from "./SideBarLink"
-import { MdLogout } from "react-icons/md"
 import Logo from "../Logo"
+import SignOutButton from "../SignOutButton"
 
 export default function Sidebar() {
     return (
@@ -25,17 +24,7 @@ export default function Sidebar() {
                 ))}
             </ul>
             {/* LOGOUT */}
-            <form
-                action={async () => {
-                    "use server"
-                    //   await signOut();
-                }}
-            >
-                <button className="bg-active  my-1 flex w-full items-center gap-3 rounded-lg p-5">
-                    <MdLogout />
-                    Logout
-                </button>
-            </form>
+            <SignOutButton />
         </nav>
     )
 }
