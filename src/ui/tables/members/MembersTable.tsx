@@ -42,7 +42,7 @@ export default async function MembersTable({
                 <TableCaption>A list of recent members.</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead>Member</TableHead>
+                        <TableHead className="w-[30%]">Member</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>CreatedAt</TableHead>
                         <TableHead className="text-right">Actions</TableHead>
