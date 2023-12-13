@@ -14,10 +14,12 @@ export default function MiniImage({ text, src, alt, profile }: MiniImageProps) {
     return (
         <div className="flex items-center gap-4">
             <div
-                className={`flex items-center justify-center h-[38px] w-[38px] min-w-[38px] overflow-hidden ${profile ? "rounded-full" : 'rounded-lg'} bg-active`}
+                className={`flex h-[38px] w-[38px] min-w-[38px] items-center justify-center overflow-hidden ${
+                    profile ? "rounded-full" : "rounded-lg"
+                } bg-active`}
             >
                 <Image
-                    className="w-[38px] object-cover"
+                    className="w-[38px] h-[38px] object-cover"
                     src={src || defaultImage}
                     alt={alt}
                     height={38}

@@ -49,7 +49,7 @@ export async function createUser(prevState: any, formData: FormData) {
         revalidatePath("/users")
         return {
             success: true,
-            message: `Successfully created user ${user.username}`,
+            message: `Successfully created user "${user.username}"`,
         }
     } catch (err: any) {
         const msg = getPrismaError(err)
@@ -94,7 +94,7 @@ export async function editUser(id: string, prevState: any, formData: FormData) {
         revalidatePath("/users")
         return {
             success: true,
-            message: `Successfully edited user ${user.username}`,
+            message: `Successfully edited user "${user.username}"`,
         }
     } catch (err: any) {
         const msg = getPrismaError(err)
