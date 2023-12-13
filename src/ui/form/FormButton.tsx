@@ -7,7 +7,7 @@ export default function FormButton({
 }: {
     text: string
     onClick?():void
-    variant?: 'outline'
+    variant?: 'outline' | 'edit' | 'default'
 }) {
     return (
         <div className="flex justify-center">
@@ -15,7 +15,7 @@ export default function FormButton({
                 <Button
                 onClick={onClick}
                     size="lg"
-                    className="w-full max-w-[50%]"
+                    className="w-full md:max-w-[50%]"
                     type="button"
                     variant={variant}
                 >
@@ -24,7 +24,7 @@ export default function FormButton({
             ) : (
                 <Button
                     size="lg"
-                    className="w-full max-w-[50%]"
+                    className="w-full md:max-w-[50%]"
                     type="submit"
                     variant="success"
                 >

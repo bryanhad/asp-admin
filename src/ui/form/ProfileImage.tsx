@@ -14,9 +14,9 @@ export default function ProfileImage({
 }: ProfileImageProps) {
     return (
         <Image
-            className={`h-[130px] w-[130px] rounded-full object-cover ${
-                loading ? "brightness-75" : ""
-            }`}
+            className={`h-[130px] w-[130px] ${
+                defaultPic ? "rounded-lg" : "rounded-full"
+            } object-cover ${loading ? "brightness-75" : ""}`}
             src={src || defaultPic || "/noavatar.png"}
             alt="profilePicture"
             width={100}

@@ -9,7 +9,6 @@ export default async function EditUserPage({
 }) {
     return (
         <div>
-            <UserFormSkeleton />
             <Suspense fallback={<UserFormSkeleton />}>
                 <EditUserForm id={params.id} />
             </Suspense>

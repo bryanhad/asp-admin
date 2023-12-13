@@ -7,9 +7,15 @@ import { z } from "zod"
 import { hash } from "bcrypt"
 
 const UserFormSchema = z.object({
-    username: z.string().min(2).max(50),
-    email: z.string().min(2).max(50),
-    password: z.string().min(2).max(50),
+    username: z
+        .string()
+        .min(3, "Username must be atleast 3 characters")
+        .max(10, "Username cannot exceed more than 10 characters"),
+    email: z.string().email("Please use correct email format"),
+    password: z
+        .string()
+        .min(5, "Password must be atleast 5 characters")
+        .max(50, "Password cannot exceed more than 50 characters"),
     role: z.enum(["ADMIN", "USER"]),
     profilePicture: z.string().nullable(),
 })
@@ -122,14 +128,34 @@ export async function updateProfile(
     prevState: any,
     formData: FormData,
 ) {
-    const validation = UserFormSchema.omit({
-        password: true,
-        role: true,
-    }).safeParse({
-        username: formData.get("username"),
-        email: formData.get("email"),
-        profilePicture: formData.get("picture"),
-    })
+    const username = formData.get("username")
+    const profilePicture = formData.get("picture")
+    const password = formData.get("password")
+
+    const validation:
+        | z.SafeParseSuccess<{
+              profilePicture: string | null
+              username: string
+              password?: string
+          }>
+        | z.SafeParseError<{
+              profilePicture: string | null
+              username: string
+              password?: string
+          }> =
+        password === null
+            ? UserFormSchema.pick({
+                  username: true,
+                  profilePicture: true,
+              }).safeParse({
+                  username,
+                  profilePicture,
+              })
+            : UserFormSchema.pick({
+                  username: true,
+                  profilePicture: true,
+                  password: true,
+              }).safeParse({ username, profilePicture, password })
 
     if (!validation.success) {
         return {
@@ -139,14 +165,14 @@ export async function updateProfile(
         }
     }
 
+    if (validation.data.password) {
+        validation.data.password = await hash(validation.data.password, 10)
+    }
+
     try {
-        const user = await prisma.user.update({
+        await prisma.user.update({
             where: { id },
-            data: {
-                email: validation.data.email,
-                username: validation.data.username,
-                profilePicture: validation.data.profilePicture,
-            },
+            data: { ...validation.data },
         })
         revalidatePath("/users")
         return {

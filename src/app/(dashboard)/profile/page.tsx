@@ -7,7 +7,7 @@ export default async function ProfilePage() {
     const session = await getServerSession(authOptions)
     if (!session) return <p>bruh</p>
     return (
-        <div>
+        <div className="flex flex-col gap-4">
             <UpdateProfileForm id={session.user.id} user={session.user} />
             <ProfileInfo id={session.user.id} />
         </div>
