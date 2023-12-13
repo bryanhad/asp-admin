@@ -15,7 +15,6 @@ export default async function RootLayout({
     children: React.ReactNode
 }) {
     const session = await getServerSession(authOptions)
-    if (!session) return <p>no session</p>
 
     return (
         <Providers>
@@ -33,7 +32,7 @@ export default async function RootLayout({
                     <Sidebar />
                 </div>
                 <main className="flex flex-[4] flex-col gap-5 lg:p-5">
-                    <Header user={session.user}/>
+                    <Header user={session?.user}/>
                     <div
                         style={{ marginTop: `${HEADER_HEIGHT}px` }}
                         className="lg:hidden"

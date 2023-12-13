@@ -7,7 +7,8 @@ import { ThemeToggle } from "./ThemeToggle"
 import { User } from "next-auth"
 import HeaderTitle from "./HeaderTitle"
 
-export default function Header({ user }: { user: User }) {
+export default function Header({ user }: { user: User | undefined }) {
+    if (!user) return <p>bruh</p>
     return (
         <>
             <div

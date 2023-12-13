@@ -10,7 +10,7 @@ export default withAuth(
     // `withAuth` augments (add) your `Request` with the user's token!
     function middleware(req: NextRequestWithAuth) {
         // it is accessible on the req.nextauth prop
-        // console.log(req.nextUrl.pathname) 
+        // console.log(req.nextUrl.pathname)
         // console.log(req.nextauth.token)
         if (
             req.nextUrl.pathname.startsWith("/users") &&
@@ -19,13 +19,13 @@ export default withAuth(
             return NextResponse.rewrite(new URL("/access-denied", req.url)) //we will rewrite the page with access-denied page, but still show the original protected URL.
             // so the url will still be '/users' but, with it's content to be access-denied.
         }
-        if (
-            req.nextUrl.pathname.startsWith("/articles") &&
-            req.nextauth.token?.role !== "ADMIN" &&
-            req.nextauth.token?.role !== "USER"
-        ) {
-            return NextResponse.rewrite(new URL("/access-denied", req.url))
-        }
+        // if (
+        //     req.nextUrl.pathname.startsWith("/articles") &&
+        //     req.nextauth.token?.role !== "ADMIN" &&
+        //     req.nextauth.token?.role !== "USER"
+        // ) {
+        //     return NextResponse.rewrite(new URL("/access-denied", req.url))
+        // }
     },
     {
         callbacks: {
@@ -44,5 +44,13 @@ export default withAuth(
 )
 
 export const config = {
-    matcher: ["/((?!auth/login))"],
+    matcher: [
+        "/",
+        "/articles/:path*",
+        "/members/:path*",
+        "/positions/:path*",
+        "/profile/:path*",
+        '/users/:path*',
+        "/access-denied",
+    ],
 }
