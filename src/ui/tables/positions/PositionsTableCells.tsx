@@ -16,7 +16,7 @@ export type FetchedPositionType = {
     }
 } & Position
 
-export default function ShadcnPositionsTableCells({
+export default function PositionsTableCells({
     position,
 }: {
     position: FetchedPositionType

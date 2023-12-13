@@ -3,7 +3,7 @@ import Image from "next/image"
 import { TableCell, TableRow } from "@/ui/shadcn/table"
 import MembersActionCell from "./MembersActionCell"
 
-export default function ShadcnMembersTableRow({ member }: { member: Member }) {
+export default function MembersTableRow({ member }: { member: Member }) {
     return (
         <TableRow>
             <TableCell>

@@ -3,7 +3,7 @@ import MembersTableSkeleton from "@/ui/skeletons/MembersTableSkeleton"
 import { Suspense } from "react"
 import Pagination from "@/ui/tables/Pagination"
 import { fetchMembersPageAmount } from "@/lib/data"
-import ShadcnMembersTable from "@/ui/tables/members/ShadcnMembersTable"
+import MembersTable from "@/ui/tables/members/MembersTable"
 import { Link } from "@/ui/Link"
 
 type MembersPageProps = {
@@ -33,7 +33,7 @@ export default async function MembersPage({ searchParams }: MembersPageProps) {
                 key={query + currentPage}
                 fallback={<MembersTableSkeleton />}
             >
-                <ShadcnMembersTable query={query} currentPage={currentPage} />
+                <MembersTable query={query} currentPage={currentPage} />
             </Suspense>
             <div className="flex justify-center">
                 <Pagination totalPages={totalPages} />

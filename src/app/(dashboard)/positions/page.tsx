@@ -3,7 +3,7 @@ import AddPositionForm from "@/ui/form/positionForm/AddPositionForm"
 import SearchBar from "@/ui/form/SearchBar"
 import PositionsTableSkeleton from "@/ui/skeletons/PositionsTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
-import ShadcnPositionsTable from "@/ui/tables/positions/ShadcnPositionsTable"
+import ShadcnPositionsTable from "@/ui/tables/positions/PositionsTable"
 import { Suspense } from "react"
 
 type PositionPageProps = {
