@@ -10,7 +10,7 @@ import {
 import { MiniImageSkeleton, TextSkeleton } from "../Skeleton"
 
 export default function ArticlesTableSkeleton() {
-    const numOfDesktopRows = Array.from(Array(2).keys())
+    const numOfDesktopRows = Array.from(Array(6).keys())
     const numOfMobileRows = Array.from(Array(6).keys())
     return (
         <>

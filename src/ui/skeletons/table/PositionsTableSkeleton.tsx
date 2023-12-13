@@ -10,7 +10,7 @@ import {
 import { TextSkeleton } from "../Skeleton"
 
 export default function PositionsTableSkeleton() {
-    const numOfDesktopRows = Array.from(Array(2).keys())
+    const numOfDesktopRows = Array.from(Array(6).keys())
     return (
         <Table>
             <TableCaption>A list of recent positions.</TableCaption>
