@@ -10,9 +10,7 @@ export default async function DashboardPage() {
     // this makes sure that things will be consistant.
     return (
         <>
-            <Suspense fallback={<p>loadg...</p>}>
-                <DashboardCards />
-            </Suspense>
+            <DashboardCards />
         </>
     )
 }
