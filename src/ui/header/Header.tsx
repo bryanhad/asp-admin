@@ -1,33 +1,29 @@
-"use client"
-
-import { usePathname } from "next/navigation"
 import React from "react"
 import BurgerButton from "./BurgerButton"
 import BurgerMenu from "./BurgerMenu"
 import MiniUser from "./MiniUser"
 import { HEADER_HEIGHT } from "@/constants"
 import { ThemeToggle } from "./ThemeToggle"
+import { User } from "next-auth"
+import HeaderTitle from "./HeaderTitle"
 
-export default function Header() {
-    const pathname = usePathname()
+export default function Header({ user }: { user: User }) {
     return (
         <>
             <div
                 style={{ height: `${HEADER_HEIGHT}px` }}
-                className="bg-secondary lg:rounded-lg text-secondary-foreground border-b-active flex w-full items-center justify-between p-5 max-lg:fixed max-lg:z-30 max-lg:border-b"
+                className="flex w-full items-center justify-between border-b-active bg-secondary p-5 text-secondary-foreground max-lg:fixed max-lg:z-30 max-lg:border-b lg:rounded-lg"
             >
-                <div className="dark:text-text-soft-dark text-text-soft font-bold capitalize">
-                    {pathname.split("/").pop() || "Dashboard"}
-                </div>
+                <HeaderTitle />
                 <div className="flex gap-5">
                     <div className="hidden gap-5 lg:flex lg:items-center">
-                        <MiniUser />
-                        <ThemeToggle/>
+                        <MiniUser user={user} />
+                        <ThemeToggle />
                     </div>
                     <BurgerButton />
                 </div>
             </div>
-            <BurgerMenu navHeight={HEADER_HEIGHT} />
+            <BurgerMenu user={user} />
         </>
     )
 }

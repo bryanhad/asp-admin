@@ -7,8 +7,10 @@ import SideBarLink from "../sidebar/SideBarLink"
 import MiniUser from "./MiniUser"
 import { ThemeToggle } from "./ThemeToggle"
 import SignOutButton from "../SignOutButton"
+import { User } from "next-auth"
+import { HEADER_HEIGHT } from "@/constants"
 
-export default function BurgerMenu({ navHeight }: { navHeight: number }) {
+export default function BurgerMenu({ user }: { user: User }) {
     const { isNavOpen, setIsNavOpen } = useNavbarContext()
 
     useEffect(() => {}, [isNavOpen])
@@ -24,13 +26,13 @@ export default function BurgerMenu({ navHeight }: { navHeight: number }) {
                 />
             )}
             <section
-                style={{ top: `${navHeight}px` }}
+                style={{ top: `${HEADER_HEIGHT}px` }}
                 className={`fixed z-[21] flex h-full w-[80%] flex-col gap-4 border-l border-l-active bg-background p-6 duration-300 lg:hidden ${
                     isNavOpen ? "right-[0%]" : "-right-[100%]"
                 }`}
             >
                 <div className="flex justify-end">
-                    <MiniUser />
+                    <MiniUser user={user} />
                 </div>
                 {/* MENU */}
                 <ul className="border-t md:px-8">
@@ -48,8 +50,7 @@ export default function BurgerMenu({ navHeight }: { navHeight: number }) {
                 <div className="flex items-center gap-2">
                     <SignOutButton />
                     <div>
-                    <ThemeToggle />
-
+                        <ThemeToggle />
                     </div>
                 </div>
             </section>

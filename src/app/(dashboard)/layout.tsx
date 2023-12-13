@@ -6,12 +6,17 @@ import ToastContainerListensTheme from "@/lib/ToastContainerWithTheme"
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin"
 import { extractRouterConfig } from "uploadthing/server"
 import { ourFileRouter } from "../api/uploadthing/core"
+import { getServerSession } from "next-auth"
+import { authOptions } from "../api/auth/[...nextauth]/route"
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode
 }) {
+    const session = await getServerSession(authOptions)
+    if (!session) return <p>no session</p>
+
     return (
         <Providers>
             <NextSSRPlugin //uploadthing package
@@ -28,7 +33,7 @@ export default function RootLayout({
                     <Sidebar />
                 </div>
                 <main className="flex flex-[4] flex-col gap-5 lg:p-5">
-                    <Header />
+                    <Header user={session.user}/>
                     <div
                         style={{ marginTop: `${HEADER_HEIGHT}px` }}
                         className="lg:hidden"
