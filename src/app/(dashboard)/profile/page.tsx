@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOption"
 import UpdateProfileForm from "@/ui/form/profileForm/UpdateProfileForm"
 import { getServerSession } from "next-auth"
 import ProfileInfo from "./ProfileInfo"

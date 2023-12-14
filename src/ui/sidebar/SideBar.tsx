@@ -3,7 +3,7 @@ import SideBarLink from "./SideBarLink"
 import Logo from "../Logo"
 import SignOutButton from "../SignOutButton"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOption"
 
 export default async function Sidebar() {
     const session = await getServerSession(authOptions)

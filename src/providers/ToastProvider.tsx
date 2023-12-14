@@ -25,7 +25,6 @@ export default function ToastProvider({
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-                theme={resolvedTheme as Theme}
             />
         </>
     )
