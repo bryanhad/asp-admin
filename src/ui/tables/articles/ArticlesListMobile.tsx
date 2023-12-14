@@ -1,4 +1,4 @@
-import { Article } from "@prisma/client"
+import { Article, Role } from "@prisma/client"
 import ArticlesActionCell from "./ArticlesActionCell"
 import MiniImage from "../MiniImage"
 
@@ -11,8 +11,10 @@ type ArticleWithAuthor = {
 
 export default function ArticlesListMobile({
     articles,
+    userInfo
 }: {
     articles: ArticleWithAuthor[]
+    userInfo: { role: Role; id: string }
 }) {
     return (
         <div className="flex flex-col gap-2 rounded-lg bg-secondary p-2">
@@ -41,7 +43,7 @@ export default function ArticlesListMobile({
                                     .join("/")}
                             </p>
                         </div>
-                        <ArticlesActionCell articleId={article.id} />
+                        <ArticlesActionCell articleInfo={article} />
                     </div>
                 </div>
             ))}
