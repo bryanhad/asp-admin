@@ -11,7 +11,7 @@ type ArticleWithAuthor = {
 
 export default function ArticlesListMobile({
     articles,
-    userInfo
+    userInfo,
 }: {
     articles: ArticleWithAuthor[]
     userInfo: { role: Role; id: string }
@@ -43,7 +43,10 @@ export default function ArticlesListMobile({
                                     .join("/")}
                             </p>
                         </div>
-                        <ArticlesActionCell articleInfo={article} />
+                        {(userInfo.role === "ADMIN" ||
+                            userInfo.id === article.authorId) && (
+                            <ArticlesActionCell articleInfo={article} />
+                        )}
                     </div>
                 </div>
             ))}
