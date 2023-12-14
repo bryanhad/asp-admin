@@ -5,6 +5,11 @@ import { Link } from "@/ui/Link"
 import ArticlesTable from "@/ui/tables/articles/ArticlesTable"
 import { fetchArticlesPageAmount } from "@/lib/data"
 import ArticlesTableSkeleton from "@/ui/skeletons/table/ArticleTableSkeleton"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'Articles',
+}
 
 type ArticlesPageProps = {
     searchParams?: {

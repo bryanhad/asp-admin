@@ -1,16 +1,16 @@
 "use client"
 
 import { UploadButton } from "@/lib/uploadthing"
-import Image from "next/image"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import Loading from "../Loading"
 import { Button } from "../shadcn/button"
+import ProfileImage from "./ProfileImage"
 
 export default function UploadPhoto({
     picture,
     defaultPic,
-    notProfile
+    notProfile,
 }: {
     notProfile?: boolean
     picture?: string | null
@@ -34,14 +34,10 @@ export default function UploadPhoto({
                     notProfile ? "rounded-lg" : "rounded-full"
                 } bg-secondary`}
             >
-                <Image
-                    className={`h-[130px] w-[130px] object-cover ${
-                        loading ? "brightness-75" : ""
-                    }`}
-                    src={image.url || defaultPic || "/noavatar.png"}
-                    alt="profilePicture"
-                    width={100}
-                    height={100}
+                <ProfileImage
+                    src={image.url}
+                    defaultPic={defaultPic}
+                    loading={loading}
                 />
                 {loading && (
                     <Loading

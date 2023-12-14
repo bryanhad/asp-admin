@@ -16,12 +16,6 @@ export default function UsersListMobile({ users }: { users: User[] }) {
                                 text={user.username}
                                 profile
                             />
-                            {/* IS MEMBER? */}
-                            {user.memberId && (
-                                <p className="rounded-full border px-4 py-1 text-[12px] text-secondary-foreground">
-                                    Member
-                                </p>
-                            )}
                         </div>
                         <p className="mt-2 text-sm text-slate-400">
                             {user.email}

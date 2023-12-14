@@ -10,6 +10,8 @@ import {
 import SearchNotFound from "../SearchNotFound"
 import NoDataFound from "../NoDataFound"
 import PositionsTableCells from "./PositionsTableCells"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOption"
 
 type PositionTableProps = {
     query: string
@@ -20,7 +22,10 @@ export default async function PositionsTable({
     query,
     currentPage,
 }: PositionTableProps) {
+    const session = await getServerSession(authOptions)
     const positions = await fetchFilteredPositions(query, currentPage)
+
+    if (!session) return <p>kok ga ada session?</p>
 
     if (positions.length < 1) {
         if (query) {
@@ -41,13 +46,15 @@ export default async function PositionsTable({
                 <TableRow>
                     <TableHead className="w-[30%]">Name</TableHead>
                     <TableHead>Member Count</TableHead>
-                    <TableHead className="text-right">Actions</TableHead>
+                    {session.user.role === 'ADMIN' && (
+                        <TableHead className="text-right">Actions</TableHead>
+                    )}
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {positions.map((position, i) => (
                     <TableRow key={position.id}>
-                        <PositionsTableCells position={position} />
+                        <PositionsTableCells userRole={session.user.role} position={position} />
                     </TableRow>
                 ))}
             </TableBody>

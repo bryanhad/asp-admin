@@ -7,7 +7,7 @@ import { Link } from "@/ui/Link"
 import { useSession } from "next-auth/react"
 
 export default function UsersActionCell({ userId }: { userId: string }) {
-    const {data:session} = useSession()
+    const { data: session } = useSession()
     const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
     if (showConfirmDelete)
@@ -24,14 +24,14 @@ export default function UsersActionCell({ userId }: { userId: string }) {
             <Link variant="edit" size="sm" href={`/users/${userId}/edit`}>
                 Edit
             </Link>
-            {(session && session.user.id !== userId) && (
-            <Button
-                variant="destructive"
-                size="sm"
-                onClick={() => setShowConfirmDelete(true)}
-            >
-                Delete
-            </Button>
+            {session && session.user.id !== userId && (
+                <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={() => setShowConfirmDelete(true)}
+                >
+                    Delete
+                </Button>
             )}
         </div>
     )

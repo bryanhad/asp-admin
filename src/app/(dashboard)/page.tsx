@@ -1,7 +1,6 @@
 import DashboardCards from "@/ui/dashboard/DashboardCards"
 import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]/route"
-import { Suspense } from "react"
+import { authOptions } from "../api/auth/[...nextauth]/authOption"
 
 export default async function DashboardPage() {
     const session = await getServerSession(authOptions) // MAKE SURE TO AWAIT!

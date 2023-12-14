@@ -20,9 +20,6 @@ model User {
   role           Role
   articles       Article[]
 
-  memberId String? @unique @db.ObjectId
-  member   Member? @relation(fields: [memberId], references: [id])
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -41,8 +38,6 @@ model Member {
   practices    String[]
   positionId   String   @db.ObjectId
   position     Position @relation(fields: [positionId], references: [id])
-
-  User   User?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

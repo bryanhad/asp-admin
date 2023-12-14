@@ -4,7 +4,12 @@ import SearchBar from "@/ui/form/SearchBar"
 import PositionsTableSkeleton from "@/ui/skeletons/table/PositionsTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
 import ShadcnPositionsTable from "@/ui/tables/positions/PositionsTable"
+import { Metadata } from "next"
 import { Suspense } from "react"
+
+export const metadata: Metadata = {
+    title: 'Positions',
+}
 
 type PositionPageProps = {
     searchParams?: {

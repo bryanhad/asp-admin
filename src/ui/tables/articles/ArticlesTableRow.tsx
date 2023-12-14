@@ -1,4 +1,4 @@
-import { Article } from "@prisma/client"
+import { Article, Role } from "@prisma/client"
 import Image from "next/image"
 import { TableCell, TableRow } from "@/ui/shadcn/table"
 import ArticlesActionCell from "./ArticlesActionCell"
@@ -13,8 +13,10 @@ type ArticleWithAuthor = {
 
 export default function ArticlesTableRow({
     article,
+    userInfo,
 }: {
     article: ArticleWithAuthor
+    userInfo: { role: Role; id: string }
 }) {
     return (
         <TableRow>
@@ -47,9 +49,14 @@ export default function ArticlesTableRow({
                     .split("/")
                     .join(" / ")}
             </TableCell>
-            <TableCell>
-                <ArticlesActionCell articleId={article.id} />
-            </TableCell>
+            {(userInfo.role === "ADMIN" ||
+                userInfo.id === article.authorId) && (
+                <TableCell>
+                    <ArticlesActionCell
+                        articleInfo={article}
+                    />
+                </TableCell>
+            )}
         </TableRow>
     )
 }

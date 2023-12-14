@@ -4,7 +4,12 @@ import SearchBar from "@/ui/form/SearchBar"
 import UsersTableSkeleton from "@/ui/skeletons/table/UserTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
 import UsersTable from "@/ui/tables/users/UsersTable"
+import { Metadata } from "next"
 import { Suspense } from "react"
+
+export const metadata: Metadata = {
+    title: 'Users',
+}
 
 type UsersPageProps = {
     searchParams?: {

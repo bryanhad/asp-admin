@@ -3,8 +3,6 @@
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-
-import { Button } from "@/ui/shadcn/button"
 import {
     Form,
     FormControl,
@@ -66,7 +64,6 @@ const UserFormSchema = z.object({
     email: z.string().min(2).max(50),
     password: z.string().min(2).max(50),
     role: z.enum(["ADMIN", "USER"]),
-    memberId: z.string().nullable(),
 })
 
 export default function UserForm({
@@ -85,7 +82,6 @@ export default function UserForm({
             email: data?.email || "",
             password: "",
             role: "USER",
-            memberId: data?.memberId || "",
         },
     })
 
@@ -170,7 +166,7 @@ export default function UserForm({
                         )}
                     />
                 )}
-                <FormField
+                {/* <FormField
                     control={form.control}
                     name="memberId"
                     render={({ field }) => (
@@ -183,7 +179,7 @@ export default function UserForm({
                                 defaultValue={
                                     data?.memberId
                                         ? data?.memberId.toString()
-                                        : ""
+                                        : "none"
                                 }
                                 onValueChange={(value) => {
                                     field.value = value === "none" ? "" : value
@@ -217,7 +213,7 @@ export default function UserForm({
                             </Select>
                         </FormItem>
                     )}
-                />
+                /> */}
                 <FormField
                     control={form.control}
                     name="role"

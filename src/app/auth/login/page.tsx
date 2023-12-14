@@ -2,7 +2,7 @@ import React from "react"
 import LoginForm from "./LoginForm"
 import "@/ui/globals.css"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOption"
 import { redirect } from "next/navigation"
 import Logo from "@/ui/Logo"
 
