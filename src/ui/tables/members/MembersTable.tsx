@@ -11,6 +11,8 @@ import SearchNotFound from "../SearchNotFound"
 import NoDataFound from "../NoDataFound"
 import MembersTableRow from "./MembersTableRow"
 import MembersListMobile from "./MembersListMobile"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOption"
 
 type MemberTableProps = {
     query: string
@@ -21,7 +23,10 @@ export default async function MembersTable({
     query,
     currentPage,
 }: MemberTableProps) {
+    const session = await getServerSession(authOptions)
     const members = await fetchFilteredMembers(query, currentPage)
+
+    if (!session) return <p>loh..kok sesion ga ada?</p>
 
     if (members.length < 1) {
         if (query) {
@@ -45,18 +50,20 @@ export default async function MembersTable({
                         <TableHead className="w-[30%]">Member</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>CreatedAt</TableHead>
-                        <TableHead className="text-right">Actions</TableHead>
+                        {session.user.role === 'ADMIN' && (
+                            <TableHead className="text-right">Actions</TableHead>
+                        )}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {members.map((member) => (
-                        <MembersTableRow member={member} key={member.id} />
+                        <MembersTableRow userRole={session.user.role} member={member} key={member.id} />
                     ))}
                 </TableBody>
             </Table>
         </div>
         <div className="md:hidden">
-            <MembersListMobile members={members} />
+            <MembersListMobile userRole={session.user.role} members={members} />
         </div>
         </>
     )

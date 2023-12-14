@@ -1,9 +1,15 @@
-import { Member } from "@prisma/client"
+import { Member, Role } from "@prisma/client"
 import { TableCell, TableRow } from "@/ui/shadcn/table"
 import MembersActionCell from "./MembersActionCell"
 import MiniImage from "../MiniImage"
 
-export default function MembersTableRow({ member }: { member: Member }) {
+export default function MembersTableRow({
+    member,
+    userRole,
+}: {
+    member: Member
+    userRole: Role
+}) {
     return (
         <TableRow>
             <TableCell>
@@ -21,9 +27,11 @@ export default function MembersTableRow({ member }: { member: Member }) {
                     .split("/")
                     .join("/")}
             </TableCell>
-            <TableCell>
-                <MembersActionCell memberId={member.id} />
-            </TableCell>
+            {userRole === "ADMIN" && (
+                <TableCell>
+                    <MembersActionCell memberId={member.id} />
+                </TableCell>
+            )}
         </TableRow>
     )
 }

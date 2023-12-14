@@ -1,8 +1,14 @@
-import { Member } from "@prisma/client"
+import { Member, Role } from "@prisma/client"
 import MembersActionCell from "./MembersActionCell"
 import MiniImage from "../MiniImage"
 
-export default function MembersListMobile({ members }: { members: Member[] }) {
+export default function MembersListMobile({
+    members,
+    userRole,
+}: {
+    members: Member[]
+    userRole: Role
+}) {
     return (
         <div className="flex flex-col gap-2 rounded-lg bg-secondary p-2">
             {members.map((member) => (
@@ -28,7 +34,9 @@ export default function MembersListMobile({ members }: { members: Member[] }) {
                                     .join("/")}
                             </p>
                         </div>
-                        <MembersActionCell memberId={member.id} />
+                        {userRole === "ADMIN" && (
+                            <MembersActionCell memberId={member.id} />
+                        )}
                     </div>
                 </div>
             ))}
