@@ -10,7 +10,7 @@ const UserFormSchema = z.object({
     username: z
         .string()
         .min(3, "Username must be atleast 3 characters")
-        .max(10, "Username cannot exceed more than 10 characters"),
+        .max(20, "Username cannot exceed more than 20 characters"),
     email: z.string().email("Please use correct email format"),
     password: z
         .string()

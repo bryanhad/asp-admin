@@ -61,11 +61,11 @@ export default function LoginForm() {
                     <input
                         id="password"
                         name="password"
-                        placeholder="bambang@gmail.com"
+                        placeholder="rahasia dong.."
                         className="flex h-14 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-600 ring-offset-0  placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-300 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        type="text"
+                        type="password"
                     />
                 </div>
                 <div className="mt-4 h-8">
