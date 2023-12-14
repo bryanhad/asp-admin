@@ -2,6 +2,11 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 import UpdateProfileForm from "@/ui/form/profileForm/UpdateProfileForm"
 import { getServerSession } from "next-auth"
 import ProfileInfo from "./ProfileInfo"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'Profile',
+}
 
 export default async function ProfilePage() {
     const session = await getServerSession(authOptions)

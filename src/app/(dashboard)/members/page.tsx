@@ -5,6 +5,11 @@ import { fetchMembersPageAmount } from "@/lib/data"
 import MembersTable from "@/ui/tables/members/MembersTable"
 import { Link } from "@/ui/Link"
 import MembersTableSkeleton from "@/ui/skeletons/table/MembersTableSkeleton"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'Members',
+}
 
 type MembersPageProps = {
     searchParams?: {
