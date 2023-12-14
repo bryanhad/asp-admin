@@ -4,6 +4,11 @@ import MemberFormSkeleton from "@/ui/skeletons/form/MemberFormSkeleton"
 import { Metadata } from "next"
 import { prisma } from "@/lib/db/prisma"
 
+// export async function generateStaticParams() { // so that nextjs will cache all the now currently available members! we must get the members array id
+//     const members = await prisma.member.findMany({select: {id:true}})
+//     return members.map(({id}) => id.toString())
+// }
+
 export async function generateMetadata({
     params,
 }: {
