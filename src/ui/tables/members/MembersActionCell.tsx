@@ -18,7 +18,7 @@ export default function MembersActionCell({ memberId }: { memberId: string }) {
         )
 
     return (
-        <div className="flex justify-end gap-3">
+        <div className="flex flex-row justify-end gap-3">
             <Link variant="edit" size="sm" href={`/members/${memberId}/edit`}>
                 Edit
             </Link>

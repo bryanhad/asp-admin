@@ -1,10 +1,15 @@
 import SearchBar from "@/ui/form/SearchBar"
-import MembersTableSkeleton from "@/ui/skeletons/MembersTableSkeleton"
 import { Suspense } from "react"
 import Pagination from "@/ui/tables/Pagination"
 import { fetchMembersPageAmount } from "@/lib/data"
-import ShadcnMembersTable from "@/ui/tables/members/ShadcnMembersTable"
+import MembersTable from "@/ui/tables/members/MembersTable"
 import { Link } from "@/ui/Link"
+import MembersTableSkeleton from "@/ui/skeletons/table/MembersTableSkeleton"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'Members',
+}
 
 type MembersPageProps = {
     searchParams?: {
@@ -33,7 +38,7 @@ export default async function MembersPage({ searchParams }: MembersPageProps) {
                 key={query + currentPage}
                 fallback={<MembersTableSkeleton />}
             >
-                <ShadcnMembersTable query={query} currentPage={currentPage} />
+                <MembersTable query={query} currentPage={currentPage} />
             </Suspense>
             <div className="flex justify-center">
                 <Pagination totalPages={totalPages} />

@@ -1,10 +1,15 @@
 import { fetchUsersPageAmount } from "@/lib/data"
 import { Link } from "@/ui/Link"
 import SearchBar from "@/ui/form/SearchBar"
-import MembersTableSkeleton from "@/ui/skeletons/MembersTableSkeleton"
+import UsersTableSkeleton from "@/ui/skeletons/table/UserTableSkeleton"
 import Pagination from "@/ui/tables/Pagination"
 import UsersTable from "@/ui/tables/users/UsersTable"
+import { Metadata } from "next"
 import { Suspense } from "react"
+
+export const metadata: Metadata = {
+    title: 'Users',
+}
 
 type UsersPageProps = {
     searchParams?: {
@@ -31,7 +36,7 @@ export default async function UsersPage({ searchParams }: UsersPageProps) {
             </Link>
             <Suspense
                 key={query + currentPage}
-                fallback={<MembersTableSkeleton />}
+                fallback={<UsersTableSkeleton />}
             >
                 <UsersTable query={query} currentPage={currentPage} />
             </Suspense>

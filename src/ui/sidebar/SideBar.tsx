@@ -1,10 +1,26 @@
-import Image from "next/image"
 import { sidebarLinks } from "./sidebarLinks"
 import SideBarLink from "./SideBarLink"
-import { MdLogout } from "react-icons/md"
 import Logo from "../Logo"
+import SignOutButton from "../SignOutButton"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOption"
 
-export default function Sidebar() {
+export default async function Sidebar() {
+    const session = await getServerSession(authOptions)
+    if (!session) return <p>bruh</p>
+
+    const filteredSideBarLinks =
+        session.user.role === "ADMIN"
+            ? sidebarLinks
+            : sidebarLinks.map((section) => { //if the user is not of role 'ADMIN'
+                  if (section.title === "Pages") {
+                      section.list = section.list.filter(
+                          (link) => link.title !== "Users",
+                      )
+                  }
+                  return section
+              })
+
     return (
         <nav className="sticky top-[20px] text-secondary-foreground">
             {/* LOGO */}
@@ -13,7 +29,7 @@ export default function Sidebar() {
             </div>
             {/* Menu */}
             <ul>
-                {sidebarLinks.map((item) => (
+                {filteredSideBarLinks.map((item) => (
                     <li key={item.title}>
                         <span className="my-3 text-[13px] font-bold">
                             {item.title}
@@ -25,17 +41,7 @@ export default function Sidebar() {
                 ))}
             </ul>
             {/* LOGOUT */}
-            <form
-                action={async () => {
-                    "use server"
-                    //   await signOut();
-                }}
-            >
-                <button className="bg-active  my-1 flex w-full items-center gap-3 rounded-lg p-5">
-                    <MdLogout />
-                    Logout
-                </button>
-            </form>
+            <SignOutButton />
         </nav>
     )
 }

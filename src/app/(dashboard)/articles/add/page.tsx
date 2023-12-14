@@ -1,7 +1,12 @@
 import { createArticle } from "@/actions/articles.action"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOption"
 import AddArticleForm from "@/ui/form/articleForm/ArticleForm"
+import { Metadata } from "next"
 import { getServerSession } from "next-auth"
+
+export const metadata: Metadata = {
+    title: 'Add Article',
+}
 
 export default async function AddArticlePage() {
     const session = await getServerSession(authOptions)

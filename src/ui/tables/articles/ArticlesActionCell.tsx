@@ -4,14 +4,19 @@ import DeleteConfirmation from "../DeleteConfirmation"
 import { deleteArticle } from "@/actions/articles.action"
 import { Button } from "@/ui/shadcn/button"
 import { Link } from "@/ui/Link"
+import { Role } from "@prisma/client"
 
-export default function ArticlesActionCell({ articleId }: { articleId: string }) {
+export default function ArticlesActionCell({
+    articleInfo,
+}: {
+    articleInfo: { id: string; authorId: string }
+}) {
     const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
     if (showConfirmDelete)
         return (
             <DeleteConfirmation
-                id={articleId}
+                id={articleInfo.id}
                 serverAction={deleteArticle}
                 setShowDeleteConfirmation={setShowConfirmDelete}
             />
@@ -19,7 +24,11 @@ export default function ArticlesActionCell({ articleId }: { articleId: string })
 
     return (
         <div className="flex justify-end gap-3">
-            <Link variant="edit" size="sm" href={`/articles/${articleId}/edit`}>
+            <Link
+                variant="edit"
+                size="sm"
+                href={`/articles/${articleInfo.id}/edit`}
+            >
                 Edit
             </Link>
             <Button

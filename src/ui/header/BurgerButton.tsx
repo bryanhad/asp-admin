@@ -1,3 +1,4 @@
+'use client'
 import { useNavbarContext } from "@/contexts/navbar.context"
 import { AiOutlineMenu } from "react-icons/ai"
 import { CgClose } from "react-icons/cg"

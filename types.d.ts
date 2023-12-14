@@ -9,6 +9,7 @@ declare module "next-auth" {
             role: "ADMIN" | "USER"
             profilePicture: string | null
             username: string
+            email: string
         } & DefaultSession
     }
     interface User extends DefaultUser {
@@ -17,6 +18,7 @@ declare module "next-auth" {
         role: "ADMIN" | "USER"
         profilePicture: string | null
         username: string
+        email: string
     }
 }
 
@@ -27,6 +29,7 @@ declare module "next-auth/jwt" {
         role: "ADMIN" | "USER"
         profilePicture: string | null
         username: string
+        email: string
     }
 }
 
@@ -77,7 +80,6 @@ export type UserServerActionFunctionReturn = {
               email?: string[] | undefined
               username?: string[] | undefined
               password?: string[] | undefined
-              memberId?: string[] | undefined
               profilePicture?: string[] | undefined
           }
         | undefined

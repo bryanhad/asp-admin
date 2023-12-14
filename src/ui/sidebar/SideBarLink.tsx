@@ -16,11 +16,12 @@ type SideBarLinkProps = {
 export default function SideBarLink({ link }: SideBarLinkProps) {
     const { setIsNavOpen } = useNavbarContext()
     const pathname = usePathname()
-
+    const linkName = pathname.slice(1).split('/')[0]
+    
     const className = clsx(
         "p-4 lg:p-5 flex text-sm lg:text-base items-center gap-3 mb-[3px] lg:my-[10px] rounded-md hover:bg-active",
         {
-            "bg-active text-active-foreground": pathname === link.path,
+            "bg-active text-active-foreground": linkName === link.path.slice(1),
         },
     )
 

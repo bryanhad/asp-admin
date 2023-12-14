@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Position } from "@prisma/client"
+import { Position, Role } from "@prisma/client"
 import { Input } from "@/ui/shadcn/input"
 import DeleteConfirmation from "../DeleteConfirmation"
 import { deletePosition, editPosition } from "@/actions/positions.action"
@@ -16,10 +16,12 @@ export type FetchedPositionType = {
     }
 } & Position
 
-export default function ShadcnPositionsTableCells({
+export default function PositionsTableCells({
     position,
+    userRole,
 }: {
     position: FetchedPositionType
+    userRole: Role
 }) {
     const [isEditing, setIsEditing] = useState(false)
 
@@ -32,6 +34,7 @@ export default function ShadcnPositionsTableCells({
                 />
             ) : (
                 <IsNotEditingPosition
+                    userRole={userRole}
                     position={position}
                     setIsEditing={setIsEditing}
                 />
@@ -94,9 +97,11 @@ function IsEditingPosition({
 function IsNotEditingPosition({
     position,
     setIsEditing,
+    userRole,
 }: {
     position: FetchedPositionType
     setIsEditing: React.Dispatch<React.SetStateAction<boolean>>
+    userRole: Role
 }) {
     const [showConfirmDelete, setShowConfirmDelete] = useState(false)
 
@@ -104,32 +109,34 @@ function IsNotEditingPosition({
         <>
             <TableCell className="font-medium">{position.name}</TableCell>
             <TableCell>{position._count.members}</TableCell>
-            <TableCell>
-                {showConfirmDelete ? (
-                    <DeleteConfirmation
-                        id={position.id}
-                        serverAction={deletePosition}
-                        setShowDeleteConfirmation={setShowConfirmDelete}
-                    />
-                ) : (
-                    <div className="flex flex-col justify-end gap-3 sm:flex-row">
-                        <Button
-                            size="sm"
-                            onClick={() => setIsEditing((prev) => !prev)}
-                            variant="edit"
-                        >
-                            Edit
-                        </Button>
-                        <Button
-                            size="sm"
-                            onClick={() => setShowConfirmDelete(true)}
-                            variant="destructive"
-                        >
-                            Delete
-                        </Button>
-                    </div>
-                )}
-            </TableCell>
+            {userRole === "ADMIN" && (
+                <TableCell>
+                    {showConfirmDelete ? (
+                        <DeleteConfirmation
+                            id={position.id}
+                            serverAction={deletePosition}
+                            setShowDeleteConfirmation={setShowConfirmDelete}
+                        />
+                    ) : (
+                        <div className="flex flex-col justify-end gap-3 sm:flex-row">
+                            <Button
+                                size="sm"
+                                onClick={() => setIsEditing((prev) => !prev)}
+                                variant="edit"
+                            >
+                                Edit
+                            </Button>
+                            <Button
+                                size="sm"
+                                onClick={() => setShowConfirmDelete(true)}
+                                variant="destructive"
+                            >
+                                Delete
+                            </Button>
+                        </div>
+                    )}
+                </TableCell>
+            )}
         </>
     )
 }

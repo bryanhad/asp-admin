@@ -3,8 +3,6 @@
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-
-import { Button } from "@/ui/shadcn/button"
 import {
     Form,
     FormControl,
@@ -36,6 +34,7 @@ import {
     EditUserServerActionArguments,
     UserServerActionFunctionReturn,
 } from "../../../../types"
+import FormButton from "../FormButton"
 
 type ServerActionFunction = {
     (
@@ -65,7 +64,6 @@ const UserFormSchema = z.object({
     email: z.string().min(2).max(50),
     password: z.string().min(2).max(50),
     role: z.enum(["ADMIN", "USER"]),
-    memberId: z.string().nullable(),
 })
 
 export default function UserForm({
@@ -84,7 +82,6 @@ export default function UserForm({
             email: data?.email || "",
             password: "",
             role: "USER",
-            memberId: data?.memberId || "",
         },
     })
 
@@ -145,7 +142,7 @@ export default function UserForm({
                         </FormItem>
                     )}
                 />
-                {!pathname.includes('/edit') && (
+                {!pathname.includes("/edit") && (
                     <FormField
                         control={form.control}
                         name="password"
@@ -169,18 +166,20 @@ export default function UserForm({
                         )}
                     />
                 )}
-                <FormField
+                {/* <FormField
                     control={form.control}
                     name="memberId"
                     render={({ field }) => (
                         <FormItem>
-                                <FormLabel htmlFor="memberId">Select Member</FormLabel>
+                            <FormLabel htmlFor="memberId">
+                                Select Member
+                            </FormLabel>
 
                             <Select
                                 defaultValue={
                                     data?.memberId
                                         ? data?.memberId.toString()
-                                        : ""
+                                        : "none"
                                 }
                                 onValueChange={(value) => {
                                     field.value = value === "none" ? "" : value
@@ -194,7 +193,7 @@ export default function UserForm({
                                     />
                                 </SelectTrigger>
                                 <SelectContent className="max-h-[12rem] overflow-y-auto">
-                                    <SelectGroup >
+                                    <SelectGroup>
                                         <SelectLabel>
                                             Registered Members
                                         </SelectLabel>
@@ -214,7 +213,7 @@ export default function UserForm({
                             </Select>
                         </FormItem>
                     )}
-                />
+                /> */}
                 <FormField
                     control={form.control}
                     name="role"
@@ -224,7 +223,7 @@ export default function UserForm({
                             <FormControl>
                                 <RadioGroup
                                     name="role"
-                                    className="flex gap-4"
+                                    className="flex items-center gap-4"
                                     onValueChange={field.onChange}
                                     defaultValue={data?.role || "USER"}
                                 >
@@ -266,9 +265,7 @@ export default function UserForm({
                 {!state.success && state.message && (
                     <ErrorText dep={state} str={state.message} />
                 )}
-                <Button variant="success" type="submit">
-                    {buttonText}
-                </Button>
+                <FormButton text={buttonText} />
             </form>
         </Form>
     )

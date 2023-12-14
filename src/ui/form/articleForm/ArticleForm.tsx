@@ -16,6 +16,7 @@ import {
 } from "../../../../types"
 import { Article } from "@prisma/client"
 import ErrorText from "../ErrorText"
+import FormButton from "../FormButton"
 
 type ServerActionFunction = {
     (
@@ -62,10 +63,14 @@ export default function ArticleForm({
 
     return (
         // spread the form from react-hook-form's form that we created
-        <form action={formAction} className="flex flex-col gap-3">
+        <form action={formAction} className="flex flex-col gap-6">
             <div>
-            <UploadPhoto picture={data?.image} defaultPic="/noimage.png" />
-            {state?.error?.image && (
+                <UploadPhoto
+                    notProfile
+                    picture={data?.image}
+                    defaultPic="/noimage.png"
+                />
+                {state?.error?.image && (
                     <ErrorText dep={state} str={state.error.image[0]} />
                 )}
             </div>
@@ -112,15 +117,7 @@ export default function ArticleForm({
                     />
                 </div>
             )}
-            <div className="flex justify-center">
-                <Button
-                    className="w-full max-w-[50%]"
-                    type="submit"
-                    variant="success"
-                >
-                    {buttonText}
-                </Button>
-            </div>
+            <FormButton text={buttonText} />
         </form>
     )
 }
